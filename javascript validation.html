@@ -1,0 +1,75 @@
+onload = $("#errmsg").hide();
+        $(document).ready(function(){
+
+            $("#contact").click(function(){
+                $("#errmsg").hide();
+                let passport                =   $("#passport    ").val().trim();
+                let surname                 =   $("#surname").val().trim();
+                let othernames              =   $("#othernames").val().trim();
+                let dob                     =   $("#basicFlatpickr").val().trim();
+                let age                     =   $("#age").val().trim();
+                let hometown                =   $("#hometown").val().trim();
+                let lga                     =   $("#lga").val().trim();    
+                let stateoforigin           =   $("#stateoforigin").val().trim();
+                let nationality             =   $("#nationality").val().trim();
+                let religion                =   $("#religion").val().trim();
+                let previousschool          =   $("#previousschool").val().trim();
+                let previousclass           =   $("#previousclass").val().trim();
+                let classsought             =   $("#classsought").val().trim();
+                let guardianname            =   $("#guardianname").val().trim();
+                let guardianhomeaddress     =   $("#guardianhomeaddress").val().trim();
+                let guardianofficeaddress   =   $("#guardianofficeaddress").val().trim();
+                let guardianphonenumber     =   $("#guardianphonenumber").val().trim();
+                let siblingname1            =   $("#siblingname1").val().trim();
+                let siblingclass1           =   $("#siblingclass1").val().trim();
+                let siblingname2            =   $("#siblingname2").val().trim();
+                let siblingclass2           =   $("#siblingclass2").val().trim();
+                let siblingname3            =   $("#siblingname3").val().trim();
+                let siblingclass3           =   $("#siblingclass3").val().trim();
+                if(passport==''||surname==''||othernames==''||dob==''||age==''||hometown==''||lga==''||stateoforigin==''||nationality==''||religion==''||previousschool==''||previousclass==''||classsought==''||guardianname==''||guardianhomeaddress==''||guardianofficeaddress==''||guardianphonenumber==''||siblingname1==''||siblingclass1==''||siblingname2==''||siblingclass2==''||siblingname3==''||siblingclass3==''){
+                    $("#errmsg").text('One or more fields are empty');
+                    $("#errmsg").show();
+                    window.scroll(0,0);
+                }else{
+                    if(confirm("Submit Now ?")==true){
+                        var formdata = $("form").serialize();
+                        $.post("<?php echo base_url().'applicationform'; ?>",formdata).done(function(data){
+                            if(data==1){
+                                alert('Record Successfully saved');
+                                resetinput();
+                            }else{
+                                alert(data);
+                            }
+                        });
+                    }
+                }
+            });
+
+        });
+
+        function resetinput(){
+            $("#passport").val('');
+            $("#surname").val('');
+            $("#othernames").val('');
+            $("#basicFlatpickr").val('');
+            $("#age").val('');
+            $("#hometown").val('');
+            $("#lga").val('');    
+            $("#stateoforigin").val('');
+            $("#nationality").val(''); 
+            $("#religion").val(''); 
+            $("#previousschool").val('');  
+            $("#previousclass").val(''); 
+            $("#classsought").val(''); 
+            $("#guardianname").val(''); 
+            $("#guardianhomeaddress").val(''); 
+            $("#guardianofficeaddress").val(''); 
+            $("#guardianphonenumber").val(''); 
+            $("#siblingname1").val(''); 
+            $("#siblingclass1").val(''); 
+            $("#siblingname2").val('');
+            $("#siblingclass2").val(''); 
+            $("#siblingname3").val(''); 
+            $("#siblingclass3").val('');     
+        }
+
