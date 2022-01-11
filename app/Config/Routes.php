@@ -52,6 +52,9 @@ $routes->get('/gradebooksetup', 'Home::gradebooksetup');
 $routes->get('/classsetup', 'Home::classsetup');
 $routes->get('/assignclasses', 'Home::assignclasses');
 $routes->get('/populateclass', 'Home::populateclass');
+
+$routes->get('/registrationtable', 'Home::registrationtable'); 
+$routes->post('/editregistration', 'Home::editregistration');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

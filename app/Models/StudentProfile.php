@@ -4,8 +4,8 @@ use CodeIgniter\Model;
 
 class StudentProfile extends Model
 {
-    protected $table = 'studentprofile';
+    protected $table = 'student_profile';
     protected $allowedFields = [
-        'surname', 'firstname', 'homeaddress', 'telephone', 'email', 'sex', 'dob', 'placeofborth', 'ethnicity', 'religion', 'weight', 'height', 'physicalchallenge', 'bloodtype', 'genotype', 'illnesssuffered', 'allergies', 'distancetoschool', 'guardianname', 'guardianrelationship', 'guardianoccupation', 'guardiangrade', 'guardianaddress', 'guradiantelephone', 'prevacadrecords', 'prevschool', 'leavingdate', 'grades', 'results', 'observation', 'currentgrade'
+        'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup'
     ];
 }
