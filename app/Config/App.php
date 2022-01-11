@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-    public $baseURL = 'http://futaesvr.test/';
+    public $baseURL = 'http://schoolsmart.test/';
 
 	/*
 	|--------------------------------------------------------------------------
