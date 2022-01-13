@@ -61,11 +61,11 @@ $(document).ready(function(){
         var form = document.getElementById('frmstprofile');
         var formdata = new FormData(form);
 
-        var btnvalue = $("#btntest").val();
+        var btnvalue = $("#btnsubmit").val();
         //const btnvalue;
-        if(btnvalue == 'add'){
+        if(btnvalue == 'Submit'){
             var targeturl = posturl;
-            var btntext = "Submit";
+            var btntext = "Add";
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
@@ -91,7 +91,7 @@ $(document).ready(function(){
                         //$("#current").prop('checked', false);
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val('add').text(btnsubmit);
+                        $("#btnsubmit").val('Submit').text(btnsubmit);
                         console.log('Data about to be refreshed');
                         studentprofiletable.ajax.reload();
                         console.log('Data refreshed');

@@ -517,7 +517,7 @@ class Home extends BaseController
 		$studentprofilemodel = new StudentProfile();
 		//$model->where('msgtype !=','V');
 		if($this->request->getMethod() === 'post' && $this->validate([
-			'studentid' => 'required|int',			
+			'studentid' => 'required|integer',			
 		])){
 			$studentid = $this->request->getPost('studentid');
 			$studentprofilemodel->orderBy('last_updated', 'ASC');	
@@ -525,7 +525,7 @@ class Home extends BaseController
 			$query = $studentprofilemodel->get();
 			$result = $query->getResult();
 			//echo json_encode("messagelog"=$result);
-			echo json_encode(array('registrationdata'=>$result));
+			echo json_encode(array('formarray'=>$result[0]));
 		}else{
 			//$data['errors'] = $this->validation->getErrors();
 			$data['savedmsg'] = $failed =  $this->validation->getErrors();
