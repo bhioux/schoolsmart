@@ -39,6 +39,7 @@ $routes->get('/editprofile', 'Home::editprofile');
 $routes->get('/students', 'Home::students');
 $routes->get('/addvehicles', 'Home::addvehicles');
 $routes->get('/registration', 'Home::registration');
+$routes->post('/postregistration', 'Home::postregistration');
 $routes->get('/reportcardnur', 'Home::reportcardnur');
 $routes->get('/reportcardpry', 'Home::reportcardpry');
 $routes->get('/applicationform', 'Home::applicationform');
