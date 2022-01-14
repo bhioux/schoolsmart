@@ -55,7 +55,8 @@ $routes->get('/populateclass', 'Home::populateclass');
 
 $routes->post('/postregistration', 'Home::postregistration');
 $routes->get('/registrationtable', 'Home::registrationtable'); 
-$routes->post('/editregistration', 'Home::editregistration');
+$routes->post('/editregistration', 'Home::editregistration'); //
+$routes->post('/updateregistration', 'Home::updateregistration'); //
 /**
  * --------------------------------------------------------------------
  * Additional Routing
