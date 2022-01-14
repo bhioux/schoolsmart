@@ -171,7 +171,7 @@
                     //     $("#no").prop('checked', false);
                     // }
                     //$("#btnsubmit").val();
-                    $("#btnsubmit").val('edit').text('Update')
+                    $("#btnsubmit").val('Edit').text('Update')
 
                     return false;
                 }
@@ -213,7 +213,7 @@
               <!-- START CRUD PROPERTY SETTIGS  -->
               <input type="hidden" name="studentid" id="studentid" value="">
               <input type="hidden" name="posturl" id="posturl" value="<?= site_url('/postregistration'); ?>">
-              <input type="hidden" name="editurl" id="editurl" value="<?= site_url('/postregistration'); ?>">   
+              <input type="hidden" name="editurl" id="editurl" value="<?= site_url('/updateregistration'); ?>">   
               <input type="hidden" name="regdatatableurl" id="regdatatableurl" value="<?= site_url('/registrationtable'); ?>">   
               <input type="hidden" name="recordid" id="recordid" value="">
               <!-- END CRUD PROPERTY SETTIGS  -->
@@ -583,115 +583,6 @@
                     <th class="no-content">Action</th>
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr>
-                    <td>2000/2001</td>
-                    <td>Primary 2</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2001/2002</td>
-                    <td>Primary 3</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2002/2003</td>
-                    <td>Primary 4</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2003/2004</td>
-                    <td>Primary 5</td>
-                   <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2004/2005</td>
-                    <td>Primary 6</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2000/2001</td>
-                    <td>Primary 2</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2001/2002</td>
-                    <td>Primary 3</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2002/2003</td>
-                    <td>Primary 4</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2003/2004</td>
-                    <td>Primary 5</td>
-                   <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2004/2005</td>
-                    <td>Primary 6</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2000/2001</td>
-                    <td>Primary 2</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2001/2002</td>
-                    <td>Primary 3</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2002/2003</td>
-                    <td>Primary 4</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2003/2004</td>
-                    <td>Primary 5</td>
-                   <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2004/2005</td>
-                    <td>Primary 6</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2000/2001</td>
-                    <td>Primary 2</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2001/2002</td>
-                    <td>Primary 3</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2002/2003</td>
-                    <td>Primary 4</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2003/2004</td>
-                    <td>Primary 5</td>
-                   <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>
-                  <tr>
-                    <td>2004/2005</td>
-                    <td>Primary 6</td>
-                    <td><a href="http://"><b><em>View</em></b></a></td>
-                  </tr>  
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Appln. No.</th>
-                    <th>Name</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot> -->
               </table>
             </div>
           </div>
