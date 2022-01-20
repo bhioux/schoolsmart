@@ -209,6 +209,7 @@
           <div class="col-lg-6">
             <div class="form-group">
               <!-- START CRUD PROPERTY SETTIGS  -->
+
               <input type="text" name="studentid" id="studentid" value="">
               <input type="hidden" name="posturl" id="posturl" value="<?= site_url('student/postregistration'); ?>">
               <input type="hidden" name="editurl" id="editurl" value="<?= site_url('student/updateregistration'); ?>">   

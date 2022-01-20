@@ -65,7 +65,6 @@ $routes->group('student', function($routes)
 });
 
 
-
 /**
  * --------------------------------------------------------------------
  * Additional Routing
