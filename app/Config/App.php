@@ -21,7 +21,19 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-    public $baseURL = 'http://schoolsmart.test/';
+    //public $baseURL = 'http://schoolsmart.test/';
+    public $baseURL;
+	
+	public function __construct()
+    {
+		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on"){$ssl_set = "s";} else{$ssl_set = "";}
+		//$config['base_url'] = 'http'.$ssl_set.'://'.$_SERVER['HTTP_HOST'];
+        if ($_SERVER['SERVER_NAME']== 'localhost') {
+            $this->baseURL = 'http'.$ssl_set.'://'.$_SERVER['HTTP_HOST'];
+        }else{
+            $this->baseURL = 'http'.$ssl_set.'://'.$_SERVER['HTTP_HOST'];
+        }
+    }
 
 	/*
 	|--------------------------------------------------------------------------

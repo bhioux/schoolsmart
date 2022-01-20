@@ -62,27 +62,30 @@ $(document).ready(function(){
         var formdata = new FormData(form);
 
         var btnvalue = $("#btnsubmit").val();
+        alert(btnvalue)
         //const btnvalue;
-        if(btnvalue == 'Submit'){
+        if(btnvalue == 'Add'){
             var targeturl = posturl;
-            var btntext = "Add";
+            var btntext = "Submit";
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
-                dataType: 'text', // what to expect back from the server
+                dataType: 'json', // what to expect back from the server
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    alert(data)
-                    if(data == 1){
+                    console.log(data.success)
+                    //var parsedData = JSON.parse(data);
+                    //console.log(parsedData.success)
+                    if(data.success == 1){
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
+                        $("#btnsubmit").val(btnvalue).text(btntext);
                         console.log( "Data Loaded: " + data );
                         //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
-                        $("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
+                        $("#notifier").addClass('alert alert-primary').html('success <strong>Success </strong>Record saved!')
                         
                         //$("#frmtest")[0].reset();
 
@@ -91,7 +94,7 @@ $(document).ready(function(){
                         //$("#current").prop('checked', false);
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val('Submit').text(btnsubmit);
+                        $("#btnsubmit").val(btnvalue).text(btntext);
                         console.log('Data about to be refreshed');
                         studentprofiletable.ajax.reload();
                         console.log('Data refreshed');
@@ -100,25 +103,25 @@ $(document).ready(function(){
                         console.log("Invalid file format")
                         $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
-                        console.log(data + 'Data error');
+                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        //console.log(data + 'Data error');
                         //return false;
                     
                     }else{
                         console.log("Invalid file format")
                         $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
-                        console.log(data + 'Data error');
+                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        //console.log(data + 'Data error');
                         //return false;
                     }
                     
                 },
                 error: function (data) {
                     $("#btnsubmit").removeAttr("disabled");
-                    $("#btnsubmit").html(btnsubmit);
+                    $("#btnsubmit").val(btnvalue).text(btntext);
                     console.log( "error occured: " + error.message );
-                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
                     $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
@@ -132,40 +135,47 @@ $(document).ready(function(){
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
-                dataType: 'text', // what to expect back from the server
+                dataType: 'json', // what to expect back from the server
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    if(data == 0){
-                        console.log("File upload error")
-                        //notify.update({ type: 'danger', message: '<strong>Error </strong>Update failed!' });
+                    console.log(data.success + 'DATA')
+                    //var parsedData = JSON.parse(data);
+                    //console.log(data.success + 'PARSEDDATA')
+
+                    if(data.success == 1){
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
-                        //return false;
-                    }else{
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
+                        $("#btnsubmit").val(btnvalue).text(btntext);
                         console.log( "Data Loaded: " + data );
-                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record updated!' });
+                        $("#notifier").addClass('alert alert-primary').html('success <strong>Success </strong>Record saved!')
                         
                         //$("#frmtest")[0].reset();
                         // $('#experiencesession').val($(this).find('option:first').val());
                         // $("#experiencesession").val('').change();
-                        $("#current").prop('checked', false);
+                        //$("#current").prop('checked', false);
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val('add').text('Save');
+                        $("#btnsubmit").val('Add').text('Submit');
                         studentprofiletable.ajax.reload();
+
+                        
+                    }else{
+                        console.log(data.message)
+                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        $("#btnsubmit").removeAttr("disabled");
+                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        //return false;
                     }
                 },
                 error: function (data) {
                     $("#btnsubmit").removeAttr("disabled");
-                    $("#btnsubmit").html(btnsubmit);
+                    $("#btnsubmit").val(btnvalue).text(btntext);
                     console.log( "error occured: " + error.message );
-                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
             });

@@ -30,6 +30,7 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
 $routes->get('/', 'Home::index');
 $routes->get('/register', 'Home::register');
 $routes->get('/passreset', 'Home::passreset');
@@ -38,7 +39,7 @@ $routes->get('/updateprofile', 'Home::updateprofile');
 $routes->get('/editprofile', 'Home::editprofile');
 $routes->get('/students', 'Home::students');
 $routes->get('/addvehicles', 'Home::addvehicles');
-$routes->get('/registration', 'Home::registration');
+
 $routes->get('/reportcardnur', 'Home::reportcardnur');
 $routes->get('/reportcardpry', 'Home::reportcardpry');
 $routes->get('/applicationform', 'Home::applicationform');
@@ -53,9 +54,18 @@ $routes->get('/classsetup', 'Home::classsetup');
 $routes->get('/assignclasses', 'Home::assignclasses');
 $routes->get('/populateclass', 'Home::populateclass');
 
-$routes->post('/postregistration', 'Home::postregistration');
-$routes->get('/registrationtable', 'Home::registrationtable'); 
-$routes->post('/editregistration', 'Home::editregistration');
+$routes->group('student', function($routes)
+{
+	$routes->add('registration', 'StudentRegistration::registration');
+	$routes->get('registration', 'StudentRegistration::registration');
+	$routes->post('postregistration', 'StudentRegistration::postregistration');
+	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
+	$routes->post('editregistration', 'StudentRegistration::editregistration');
+	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
+});
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
