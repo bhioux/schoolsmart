@@ -54,6 +54,7 @@ $routes->get('/classsetup', 'Home::classsetup');
 $routes->get('/assignclasses', 'Home::assignclasses');
 $routes->get('/populateclass', 'Home::populateclass');
 
+
 $routes->group('student', function($routes)
 {
 	$routes->add('registration', 'StudentRegistration::registration');
@@ -63,8 +64,6 @@ $routes->group('student', function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
-
-
 
 /**
  * --------------------------------------------------------------------
