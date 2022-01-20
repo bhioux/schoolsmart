@@ -21,7 +21,7 @@
             var csrfHash = '<?= csrf_hash() ?>';  
 
             $.post({
-                url:'<?php echo site_url('/editregistration'); ?>',
+                url:'<?php echo site_url('student/editregistration'); ?>',
                 data: { studentid: obj.title, [csrfName]:  csrfHash },
                 type:'POST',
                 dataType: 'json',
@@ -94,6 +94,7 @@
                     /************Load New values*******************/
                     // $("#experienceid").val(json.formarray.experienceid);
 
+                    $("#studentid").val(json.formarray.studentid);
                     $("#passport").val(json.formarray.passport);
                     $("#surname").val(json.formarray.surname);
                     $("#othernames").val(json.formarray.othernames);
@@ -103,9 +104,6 @@
                     $('#class option[value="' + json.formarray.class + '"]').prop('selected','selected').val(json.formarray.class).change();
                     $("#hometown").val(json.formarray.hometown);
 
-                    //$('#lga').val($(this).find('option:first').val(json.formarray.lga));
-                    //$('#stateoforigin').val($(this).find('option:first').val(json.formarray.stateoforigin));
-                    //$('#nationality').val($(this).find('option:first').val(json.formarray.nationality));
                     $('#lga option[value="' + json.formarray.lga + '"]').prop('selected','selected').val(json.formarray.lga).change();
                     $('#stateoforigin option[value="' + json.formarray.stateoforigin + '"]').prop('selected','selected').val(json.formarray.stateoforigin).change();
                     $('#nationality option[value="' + json.formarray.nationality + '"]').prop('selected','selected').val(json.formarray.nationality).change();
@@ -211,10 +209,12 @@
           <div class="col-lg-6">
             <div class="form-group">
               <!-- START CRUD PROPERTY SETTIGS  -->
-              <input type="hidden" name="studentid" id="studentid" value="">
-              <input type="hidden" name="posturl" id="posturl" value="<?= site_url('/postregistration'); ?>">
-              <input type="hidden" name="editurl" id="editurl" value="<?= site_url('/updateregistration'); ?>">   
-              <input type="hidden" name="regdatatableurl" id="regdatatableurl" value="<?= site_url('/registrationtable'); ?>">   
+
+              <input type="text" name="studentid" id="studentid" value="">
+              <input type="hidden" name="posturl" id="posturl" value="<?= site_url('student/postregistration'); ?>">
+              <input type="hidden" name="editurl" id="editurl" value="<?= site_url('student/updateregistration'); ?>">   
+              <input type="hidden" name="regdatatableurl" id="regdatatableurl" value="<?= site_url('student/registrationtable'); ?>">   
+
               <input type="hidden" name="recordid" id="recordid" value="">
               <!-- END CRUD PROPERTY SETTIGS  -->
               <label for="t-text">Surname: </label> &ast;
@@ -553,7 +553,8 @@
 
         <div class="row row-form1">
           <div class="col text-right">
-            <input type="submit" class="mt-4 btn btn-primary" name="btnsubmit" id="btnsubmit" value="Submit">&nbsp; &nbsp;
+            <!-- <input type="submit" class="mt-4 btn btn-primary" name="btnsubmit" id="btnsubmit" value="Submit">&nbsp; &nbsp; -->
+            <button type="submit" value="Add" class="mt-4 btn btn-secondary" name="btnsubmit" id="btnsubmit">Submit</button>
             <button class="mt-4 btn btn-secondary" name="btnreset" id="btnreset">Reset</button>
           </div>                                        
         </div>

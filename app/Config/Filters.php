@@ -16,11 +16,11 @@ class Filters extends BaseConfig
 	public $globals = [
 		'before' => [
 			//'honeypot'
-			'csrf',
+			'csrf' => ['except' => ['/student/editregistration', '/student/postregistration', '/student/updateregistration']],
 		],
 		'after'  => [
 			'toolbar',
-			//'honeypot'
+			//'honeypot' ,
 		],
 	];
 

@@ -668,7 +668,6 @@ class Home extends BaseController
 			$studentprofilemodel->where(['studentid'=>$studentid]);	
 			$query = $studentprofilemodel->get();
 			$result = $query->getResult();
-			//echo json_encode("messagelog"=$result);
 			echo json_encode(array('formarray'=>$result[0]));
 		}else{
 			//$data['errors'] = $this->validation->getErrors();
