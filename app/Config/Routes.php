@@ -56,7 +56,7 @@ $routes->get('/populateclass', 'Home::populateclass');
 
 $routes->group('student', function($routes)
 {
-	$routes->add('registration', 'StudentRegistration::registration');
+	//$routes->add('registration', 'StudentRegistration::registration');
 	$routes->get('registration', 'StudentRegistration::registration');
 	$routes->post('postregistration', 'StudentRegistration::postregistration');
 	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
