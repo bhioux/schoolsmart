@@ -19,7 +19,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?= $this->include('partials/reportcardpry') ?>
+    <?= $this->include('partials/reportcardsss') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>

@@ -42,6 +42,8 @@ $routes->get('/addvehicles', 'Home::addvehicles');
 
 $routes->get('/reportcardnur', 'Home::reportcardnur');
 $routes->get('/reportcardpry', 'Home::reportcardpry');
+$routes->get('/reportcardjss', 'Staff::reportcardjss');
+$routes->get('/reportcardsss', 'Staff::reportcardsss');
 $routes->get('/applicationform', 'Home::applicationform');
 $routes->get('/staffprofile', 'Home::staffprofile');
 $routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
@@ -64,6 +66,15 @@ $routes->group('student', function($routes)
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
 
+$routes->group('staff', function($routes)
+{
+	$routes->add('staffsetup', 'StaffSetup::staffsetup');
+	$routes->get('staffsetup', 'StaffSetup::staffsetup');
+	$routes->post('postregistration', 'StudentRegistration::postregistration');
+	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
+	$routes->post('editregistration', 'StudentRegistration::editregistration');
+	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
+});
 
 /**
  * --------------------------------------------------------------------
