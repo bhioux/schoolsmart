@@ -33,62 +33,13 @@
                     //alert(json.formarray.authorshipposition)
 
                     /************Clear All values*******************/
-                    $("#passport").val('');
-                    $("#surname").val('');
-                    $("#othernames").val('');
-                    $("#dob").val('');
-                    $("#class").val('');
-                    $('#class').val($(this).find('option:first').val());
-
-                    $("#hometown").val('');
-                    $("#lga").prop('checked', false);
-                    $("#lga").val('');
-
-                    $("#stateoforigin").prop('checked', false);
-                    $("#stateoforigin").val('');
-
-                    $("#nationality").prop('checked', false);
-                    $("#nationality").val('');
-
-                    $("#nin").val('');
-
-                    $("#gender").prop('checked', false);
-                    $("#gender").val('');
-
-                    $("#height").val('');
-                    $("#weight").val('');
-                    $("#fathername").val('');
-
-                     // 'studentid', 'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup', 'last_updated'
-
-
-                    $("#fatheroccupation").val('');
-                    $("#mothername").val('');
-                    $("#motheroccupation").val('');
-                    $("#fatherpermaddress").val('');
-                    $("#fatherphonenumber").val('');
-                    $("#motherpermaddress").val('');
-                    $("#motherphonenumber").val('');
-                    $("#guardianname").val('');
-                    $("#guardianoccupation").val('');
-                    $("#guardianoccupation").val('');
-                    $("#guardianpermaddress").val('');
-                    $("#guardianphonenumber").val('');
-                    $("#familytype").val('');
-                    $("#familysize").val('');
-                    $("#positioninfamily").val('');
-                    $("#noofbrothers").val('');
-                    $("#noofsisters").val('');
-                    $("#parentreligion").val('');
-                    $("#disability").val('');
-                    $("#bloodgroup").val('');
-                    $("#genotype").val('');
-                    $("#vision").val('');
-                    $("#hearing").val('');
-                    $("#speech").val('');
-                    $("#generalvitality").val('');
-                    $("#classgiven").val('');
-                    $("#classgroup").val('');
+                    var formw = document.querySelector('#frmstprofile')
+                    imps = formw.querySelectorAll('input[type="text"], select');
+                    imps.forEach(element => {
+                      element.value = ''
+                      $(element).prop('selected','selected').val('').change();
+                    });
+                    
 
 
                     /************Load New values*******************/
@@ -169,6 +120,9 @@
                     //     $("#no").prop('checked', false);
                     // }
                     //$("#btnsubmit").val();
+                    
+                    //$('input[type="text"], select').val('')
+                    //document.querySelector('#generalvitality').value = '';
                     $("#btnsubmit").val('Edit').text('Update')
 
                     return false;
