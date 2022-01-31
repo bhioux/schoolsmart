@@ -71,27 +71,25 @@ $routes->group('setup', function($routes)
 	$routes->get('sessiontable', 			'Setup::sessiontable'); 
 	$routes->post('editsession', 			'Setup::editsession');
 	$routes->post('updatesession', 			'Setup::updatesession');	
-});
 
-$routes->group('setup', function($routes)
-{
 	//$routes->add('class', 				'Setup::class');
 	$routes->get('class', 					'Setup::class');
 	$routes->post('postclass', 				'Setup::postclass');
 	$routes->get('classtable', 				'Setup::classtable');  
 	$routes->post('editclass', 				'Setup::editclass');
 	$routes->post('updateclass', 			'Setup::updateclass');	
-});
 
-$routes->group('setup', function($routes)
-{
 	//$routes->add('class', 				'Setup::class');
 	$routes->get('subjects', 				'Setup::subjects');
 	$routes->post('postsubjects', 			'Setup::postsubjects');
 	$routes->get('subjectstable', 			'Setup::subjectstable');  
 	$routes->post('editsubjects', 			'Setup::editsubjects');
 	$routes->post('updatesubjects', 		'Setup::updatesubjects');	
+
+
 });
+
+
 
 /**
  * --------------------------------------------------------------------
