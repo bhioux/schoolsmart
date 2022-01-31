@@ -89,9 +89,11 @@ $(document).ready(function(){
                         
                         //$("#frmtest")[0].reset();
 
-                        // $('#experiencesession').val($(this).find('option:first').val());
-                        // $("#experiencesession").val('').change();
-                        //$("#current").prop('checked', false);
+                        imps = formw.querySelectorAll('input[type="text"], select');
+                        imps.forEach(element => {
+                        element.value = ''
+                        $(element).prop('selected','selected').val('').change();
+                        });
 
                         $("#studentid").val('');
                         $("#btnsubmit").val(btnvalue).text(btntext);
@@ -152,10 +154,11 @@ $(document).ready(function(){
                         console.log( "Data Loaded: " + data );
                         $("#notifier").addClass('alert alert-primary').html('success <strong>Success </strong>Record saved!')
                         
-                        //$("#frmtest")[0].reset();
-                        // $('#experiencesession').val($(this).find('option:first').val());
-                        // $("#experiencesession").val('').change();
-                        //$("#current").prop('checked', false);
+                        imps = formw.querySelectorAll('input[type="text"], select');
+                        imps.forEach(element => {
+                        element.value = ''
+                        $(element).prop('selected','selected').val('').change();
+                        });
 
                         $("#studentid").val('');
                         $("#btnsubmit").val('Add').text('Submit');

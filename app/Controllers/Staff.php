@@ -24,11 +24,14 @@ use App\Models\GradebookSetup;
 use App\Models\Registration;
 use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
+use App\Models\ReportCardJss;
+use App\Models\ReportCardSss;
 use App\Models\ApplicationForm;
+// use App\Models\ApplicationFormSecSchool;
 //use App\Models\DateTime;
 use CodeIgniter\Controller;
 
-class StudentRegistration extends BaseController
+class Staff extends BaseController
 {
 
 	protected $request;
@@ -53,33 +56,6 @@ class StudentRegistration extends BaseController
 		//$data['adminmenu'] = $menu->asObject()->findAll();
 		return view('pages/home', $data);
 	}
-
-	public function studentprofile()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['studentprofile'] = "";
-        return view('pages/studentprofile', $data);
-    }
-
-	public function updateprofile()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['updateprofile'] = "";
-        return view('pages/updateprofile', $data);
-    }
-
-	public function registration()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['registration'] = "";
-        return view('pages/registration', $data);
-    }
 
 	public function postregistration()
     {
@@ -131,7 +107,8 @@ class StudentRegistration extends BaseController
 				'classgroup'  => 'required',
 			])){
 				
-				try{                    
+				try{
+                    
                     $recsaved = $studentprofilemodel->insert([
 						//'username' => $this->request->getPost('username'),
 						'csrf_test_name' => $this->request->getPost('csrf_test_name'),
@@ -351,24 +328,6 @@ class StudentRegistration extends BaseController
 			}
     }
 
-    public function assignclasses()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['assignclasses'] = "";
-        return view('pages/assignclasses', $data);
-    }
-
-    public function gradebooksetup()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['gradebooksetup'] = "";
-        return view('pages/gradebooksetup', $data);
-    }
-
 	public function registrationtable()
 	{
 		$session = session();
@@ -404,7 +363,201 @@ class StudentRegistration extends BaseController
 		
 	}
 
+	public function editmyexperience(){ //
+		$experienceid = $this->input->post('experienceid',true);
+		if($experienceid==0){
+			echo $experienceid;
+		}else{
+			$this->load->model('home_model');
+			$postresult = $this->home_model->editexperiencerecord($experienceid);
+			//print_r($postresult); exit;
+			echo(json_encode(array('formarray' => $postresult[0])));
+		}
+	}
 
-	//--------------------------------------------------------------------
+	public function staffsetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['staffsetup'] = "";
+        return view('pages/staffsetup', $data);
+    }
+
+	public function poststaffsetup()
+	{
+		$staffsetupmodel = new StaffSetup();
+		$allvalues = '';
+
+		if($this->request->getMethod() === 'post' && $this->validate([
+			'surname' => 'required',
+			'othernames' => 'required',
+			'basicFlatpickr' => 'required',
+			'hometown' => 'required',
+			'lga' => 'required',
+			'stateoforigin' => 'required',
+			'permanentaddress' => 'required',
+			'nin' => 'nin',
+			'email' => 'email',
+			'phonenmber' => 'required',
+			'position' => 'required',
+			'bio' => 'required',
+			'gender' => 'required',
+			'ethnicity' => 'required',
+			'religion' => 'required',
+			'weight' => 'required',
+			'height' => 'required',
+			'disability' => 'required',
+			'bloodgroup' => 'required',
+			'genotype' => 'required',
+			'vision' => 'required',
+			'hearing' => 'required',
+			'speech' => 'required',
+			'generalvitality' => 'required',
+			'nationality' => 'required',
+			'nextofkin' => 'required',
+			'nextofkinrelationship' => 'required',
+			'nextofkinnin' => 'required',
+			'nextofkinoccupation' => 'required',
+			'nextofkinaddress' => 'required',
+			'nextofkinphonenumber' => 'required',
+			'employername' => 'required',
+			'officeaddress' => 'required',
+			'country1' => 'required',
+			'jobtitle' => 'required',
+			'startedon' => 'required',
+			'stoppedon' => 'required',
+			'descriptionofduty' => 'required',
+			'country2' => 'required',
+			'nameofschool' => 'required',
+			'attendedfrom' => 'required',
+			'attendedto' => 'required',
+			'courseofstudy' => 'required',
+			'qualification' => 'required',
+			'classofaward' => 'required',
+			'dateofaward' => 'required',
+			'classesassigned' => 'required',
+			'subjectsassigned' => 'required',
+		])){
+			try{
+				$recsaved = $staffsetupmodel->insert([
+					'csrf_test_name' => $this->request->getPost('csrf_test_name'),
+					'surname' => $this->request->getPost('surname'),
+					'othernames' => $this->request->getPost('othernames'),
+					'basicFlatpickr' => $this->request->getPost('basicFlatpickr'),
+					'hometown' => $this->request->getPost('hometown'),
+					'lga' => $this->request->getPost('lga'),
+					'stateoforigin' => $this->request->getPost('stateoforigin'),
+					'permanentaddress' => $this->request->getPost('permanentaddress'),
+					'nin' => $this->request->getPost('nin'),
+					'email' => $this->request->getPost('email'),
+					'phonenmber' => $this->request->getPost('phonenmber'),
+					'position' => $this->request->getPost('position'),
+					'bio' => $this->request->getPost('bio'),
+					'gender' => $this->request->getPost('gender'),
+					'ethnicity' => $this->request->getPost('ethnicity'),
+					'religion' => $this->request->getPost('religion'),
+					'weight' => $this->request->getPost('weight'),
+					'height' => $this->request->getPost('height'),
+					'disability' => $this->request->getPost('disability'),
+					'bloodgroup' => $this->request->getPost('bloodgroup'),
+					'genotype' => $this->request->getPost('genotype'),
+					'vision' => $this->request->getPost('vision'),
+					'hearing' => $this->request->getPost('hearing'),
+					'speech' => $this->request->getPost('speech'),
+					'generalvitality' => $this->request->getPost('generalvitality'),
+					'nationality' => $this->request->getPost('nationality'),
+					'nextofkin' => $this->request->getPost('nextofkin'),
+					'nextofkinrelationship' => $this->request->getPost('nextofkinrelationship'),
+					'nextofkinnin' => $this->request->getPost('nextofkinnin'),
+					'nextofkinoccupation' => $this->request->getPost('nextofkinoccupation'),
+					'nextofkinaddress' => $this->request->getPost('nextofkinaddress'),
+					'nextofkinphonenumber' => $this->request->getPost('nextofkinphonenumber'),
+					'employername' => $this->request->getPost('employername'),
+					'officeaddress' => $this->request->getPost('officeaddress'),
+					'country1' => $this->request->getPost('country1'),
+					'jobtitle' => $this->request->getPost('jobtitle'),
+					'startedon' => $this->request->getPost('startedon'),
+					'stoppedon' => $this->request->getPost('stoppedon'),
+					'descriptionofduty' => $this->request->getPost('descriptionofduty'),
+					'country2' => $this->request->getPost('country2'),
+					'nameofschool' => $this->request->getPost('nameofschool'),
+					'attendedfrom' => $this->request->getPost('attendedfrom'),
+					'attendedto' => $this->request->getPost('attendedto'),
+					'courseofstudy' => $this->request->getPost('courseofstudy'),
+					'qualification' => $this->request->getPost('qualification'),
+					'classofaward' => $this->request->getPost('classofaward'),
+					'dateofaward' => $this->request->getPost('dateofaward'),
+					'classesassigned' => $this->request->getPost('classesassigned'),
+					'subjectsassigned' => $this->request->getPost('subjectsassigned'),
+				]);
+				$this->session->setFlashdata('savedmsg', 'Record saved successfully');
+				$data['savedmsg'] = 'Record saved successfully';
+				if($recsaved > 0){
+					echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+				}elseif($recsaved == 0){
+					echo json_encode(array("success"=>-1, "message"=>'Record saved FAILED'));
+				}else{
+					echo json_encode(array("success"=>0, "message"=>'Error saving record'));
+				}
+				exit;
+			}catch(\Exception $e){
+				echo json_encode(array("success"=>-2, "message"=>$e->getMessage()));
+				exit;
+			}
+
+		}else{
+			//$data['errors'] = $this->validation->getErrors();
+			$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			//print_r($failed);
+			echo json_encode(array("success"=>-2, "message"=>$failed));
+			exit;
+			//return view('pages/gradebooksetup', $data);
+		}
+	}
+
+	public function staffprofile()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['staffprofile'] = "";
+        return view('pages/staffprofile', $data);
+    }
+	
+	public function updatestaffprofile()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['updatestaffprofile'] = "";
+        return view('pages/updatestaffprofile', $data);
+    }
+
+	public function reportcardjss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['reportcardjss'] = "";
+        return view('pages/reportcardjss', $data);
+    }
+
+	// public function applicationformsecschool()
+	// {		
+	// 	$applicationform = new ApplicationFormSecSchool();
+	// 	$data["title"] = "School Application Form";
+	// 	return view('pages/applicationformsecschool', $data);
+	// }
+
+	public function reportcardsss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['reportcardjss'] = "";
+        return view('pages/reportcardsss', $data);
+    }
+
 
 }

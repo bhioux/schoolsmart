@@ -9,7 +9,7 @@
         <!-- Required meta tags -->
 
         <!-- Meta -->
-        <meta name="description" content="FEDERAL UNIVERSITY OF TECHNOLOGY AKURE ENHANCED STAFF VEHICLE REGISTRATION">
+        <meta name="description" content="FEDERAL UNIVERSITY OF TECHNOLOGY AKURE PRIMARY SCHOOL">
         <meta name="author" content="ADEOLU BLESSING OLANIYAN">
 
         <title>FUTA PRIMARY SCHOOL</title>
