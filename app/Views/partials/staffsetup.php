@@ -1,6 +1,196 @@
 <?php
 //var_dump($guardians); //exit;
 ?>
+
+<script type="text/javascript">
+    /****************UTILITY FUNCTIONS*****************************/
+    function confirmaction()
+    {
+        if(confirm('Continue with action?')){
+            return false;
+        }else{
+            return false;
+        }
+    }
+
+    function editaction(obj){
+        if(!confirm('Continue with action?')){
+            return false;
+        }
+
+        var csrfName = '<?= csrf_token() ?>';
+        var csrfHash = '<?= csrf_hash() ?>';  
+
+        $.post({
+            url:'<?php echo site_url('staff/editstaffsetup'); ?>',
+            data: { staffid: obj.title, [csrfName]:  csrfHash },
+            type:'POST',
+            dataType: 'json',
+            success: function( json ) {
+                console.log(json)
+
+                
+                
+                //alert(json.formarray.authorshipposition)
+
+                /************Clear All values*******************/
+                // $("#passport").val('');
+                // $("#passport").val('');
+                $("#surname").val('');
+                $("#othernames").val('');
+                $("#nin").val('');
+                $("#dob").val('');
+                $("#hometown").val('');
+                $("#lga").prop('checked', false);
+                $("#lga").val('');
+
+                // $("#lga").prop('checked', false);
+                $("#permanentaddress").val('');
+
+                $("#stateoforigin").prop('checked', false);
+                $("#stateoforigin").val('');
+                $("#email").val('');
+
+                // $("#nationality").prop('checked', false);
+                $("#phonenmber").val('');
+                $("#position").val('');
+                $("#bio").val('');
+
+                $("#gender").prop('checked', false);
+                $("#gender").val('');
+
+                $("#ethnicity").val('');
+                $("#religion").val('');
+                $("#height").val('');
+                $("#weight").val('');
+                $("#disability").val('');
+                $("#bloodgroup").val('');
+                $("#genotype").val('');
+                $("#vision").val('');
+                $("#hearing").val('');
+                $("#speech").val('');
+                $("#generalvitality").val('');
+
+                $("#nationality").prop('checked', false);
+                $("#nationality").val('');
+
+                $("#nextofkin").val('');
+                $("#nextofkinrelationship").val('');
+                $("#nextofkinnin").val('');
+                $("#nextofkinoccupation").val('');
+                $("#nextofkinaddress").val('');
+                $("#nextofkinphonenumber").val('');
+
+                $("#employername").val('');
+                $("#officeaddress").val('');
+                $("#country1").val('');
+                $("#jobtitle").val('');
+                $("#startedon").val('');
+                $("#stoppedon").val('');
+                $("#descriptionofduty").val('');
+
+                $("#country2").val('');
+                $("#nameofschool").val('');
+                $("#attendedfrom").val('');
+                $("#attendedto").val('');
+                $("#courseofstudy").val('');
+                $("#qualification").val('');
+                $("#classofaward").val('');
+                $("#dateofaward").val('');
+
+                $("#classesassigned").val('');
+                $("#subjectsassigned").val('');
+                // $("#phonenmber").val('');
+
+
+                /************Load New values*******************/
+                // $("#experienceid").val(json.formarray.experienceid);
+
+                $("#studentid").val(json.formarray.studentid);
+                $("#passport").val(json.formarray.passport);
+                $("#surname").val(json.formarray.surname);
+                $("#othernames").val(json.formarray.othernames);
+                //$("#dob").val(json.formarray.dob);
+                //$('#class').val($(this).find('option:first').val(json.formarray.class));
+                $('#dob option[value="' + json.formarray.dob + '"]').prop('selected','selected').val(json.formarray.dob).change();
+                $('#class option[value="' + json.formarray.class + '"]').prop('selected','selected').val(json.formarray.class).change();
+                $("#hometown").val(json.formarray.hometown);
+
+                $('#lga option[value="' + json.formarray.lga + '"]').prop('selected','selected').val(json.formarray.lga).change();
+                $('#stateoforigin option[value="' + json.formarray.stateoforigin + '"]').prop('selected','selected').val(json.formarray.stateoforigin).change();
+                $('#nationality option[value="' + json.formarray.nationality + '"]').prop('selected','selected').val(json.formarray.nationality).change();
+
+                $("#nin").val(json.formarray.nin);
+                $('#gender option[value="' + json.formarray.gender + '"]').prop('selected','selected').val(json.formarray.gender).change();
+
+                $("#height").val(json.formarray.height);
+                $("#weight").val(json.formarray.weight);
+                $("#fathername").val(json.formarray.fathername);
+
+                    // 'studentid', 'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup', 'last_updated'
+
+
+                $("#fatheroccupation").val(json.formarray.fatheroccupation);
+                $("#mothername").val(json.formarray.mothername);
+                $("#motheroccupation").val(json.formarray.motheroccupation);
+                $("#fatherpermaddress").val(json.formarray.fatherpermaddress);
+                $("#fatherphonenumber").val(json.formarray.fatherphonenumber);
+                $("#motherpermaddress").val(json.formarray.motherpermaddress);
+                $("#motherphonenumber").val(json.formarray.motherphonenumber);
+                $("#guardianname").val(json.formarray.guardianname);
+                $("#guardianoccupation").val(json.formarray.guardianoccupation);
+                $("#guardianpermaddress").val(json.formarray.guardianpermaddress);
+                $("#guardianphonenumber").val(json.formarray.guardianphonenumber);
+                $("#familytype").val(json.formarray.familytype);
+                $("#familysize").val(json.formarray.familysize);
+                $("#positioninfamily").val(json.formarray.positioninfamily);
+                $("#noofbrothers").val(json.formarray.noofbrothers);
+                $("#noofsisters").val(json.formarray.noofsisters);
+                $("#parentreligion").val(json.formarray.parentreligion);
+                $("#disability").val(json.formarray.disability);
+
+                $('#bloodgroup option[value="' + json.formarray.bloodgroup + '"]').prop('selected','selected').val(json.formarray.bloodgroup).change();
+                $('#genotype option[value="' + json.formarray.genotype + '"]').prop('selected','selected').val(json.formarray.genotype).change();
+
+
+                $("#vision").val(json.formarray.vision);
+                $("#hearing").val(json.formarray.hearing);
+                $("#speech").val(json.formarray.speech);
+                $("#generalvitality").val(json.formarray.generalvitality);
+                
+                $('#classgiven option[value="' + json.formarray.classgiven + '"]').prop('selected','selected').val(json.formarray.classgiven).change();
+                $('#classgroup option[value="' + json.formarray.classgroup + '"]').prop('selected','selected').val(json.formarray.classgroup).change();
+                //$("#classgroup").val(json.formarray.classgroup).change();
+
+                // $("#experienceinstitution").val(json.formarray.experienceinstitution);
+                // $("#experiencedesignation").val(json.formarray.experiencedesignation);
+                // $("#experiencedate").val(json.formarray.experiencedate);
+                // $("#experiencespecialization").val(json.formarray.experiencespecialization);
+                // $("#experienceduties").val(json.formarray.experienceduties);
+                // $('#experiencesession option[value="' + json.formarray.experiencesession + '"]').prop('selected','selected');
+                // $("#experiencesession").val(json.formarray.experiencesession).change();
+
+                // var currentjob = json.formarray.current;
+                // //alert(currentjob)
+                // if(currentjob==1){
+                //     $("#yes").prop('checked', true)
+                // }else if(currentjob==0){
+                //     $("#no").prop('checked', true);
+                // }else{
+                //     $("#yes").prop('checked', false)
+                //     $("#no").prop('checked', false);
+                // }
+                //$("#btnsubmit").val();
+                $("#btnsubmit").val('Edit').text('Update')
+
+                return false;
+            }
+        });
+        return false;
+    }
+
+</script>
+
 <div class="container-fluid">
     <div class="row row-form">
         <div id="breadcrumbBasic" class="col-xl-12 col-lg-12 layout-spacing">
@@ -346,134 +536,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-        
-    // $.validator.addMethod('filesize', function (value, element, param) {
-    //     return this.optional(element) || (element.files[0].size <= param * 1000000)
-    // }, 'File size must be less than {0} MB');
-
-    $(function() {
-        "use strict";
-        $("form[name='studentprofileform']").validate({
-            rules: {
-
-                surname: "required",
-                othernames: "required",
-                basicFlatpickr: "required",
-                hometown: "required",
-                lga: "required",
-                stateoforigin: "required",
-                permanentaddress: "required",
-                nin: {
-                    required: true,
-                    digit: true
-                },
-
-                email: {
-                    required: true,
-                    email: true
-                },
-
-                phonenmber: "required",
-                position: "required",
-                bio: "required",
-                gender: "required",
-                ethnicity: "required",
-                religion: "required",
-                weight: "required",
-                height: "required",
-                disability: "required",
-                bloodgroup: "required",
-                genotype: "required",
-                vision: "required",
-                hearing: "required",
-                speech: "required",
-                generalvitality: "required",
-                nationality: "required",
-                nextofkin: "required",
-                nextofkinrelationship: "required",
-                nextofkinnin: "required",
-                nextofkinoccupation: "required",
-                nextofkinaddress: "required",
-                nextofkinphonenumber: "required",
-                employername: "required",
-                officeaddress: "required",
-                country1: "required",
-                jobtitle: "required",
-                startedon: "required",
-                stoppedon: "required",
-                descriptionofduty: "required",
-                country2: "required",
-                nameofschool: "required",
-                attendedfrom: "required",
-                attendedto: "required",
-                courseofstudy: "required",
-                qualification: "required",
-                classofaward: "required",
-                dateofaward: "required",
-                classesassigned: "required",
-                subjectsassigned: "required"
-
-            },
-            
-            messages: {
-
-                surname:                "Please enter a value",
-                othernames:             "Please enter a value",
-                dob:                    "Please enter a value",
-                hometown:               "Please enter a value",
-                lga:                    "Please enter a value",
-                stateoforigin:          "Please enter a value",
-                permanentaddress:       "Please enter a value",
-                nin:                    "Please enter a value",
-                email:                  "Please enter a value",
-                phonenmber:             "Please enter a value",
-                position:               "Please enter a value",
-                bio:                    "Please enter a value",
-                gender:                 "Please enter a value",
-                ethnicity:              "Please enter a value",
-                religion:               "Please enter a value",
-                weight:                 "Please enter a value",
-                height:                 "Please enter a value",
-                disability:             "Please enter a value",
-                bloodgroup:             "Please enter a value",
-                genotype:               "Please enter a value",
-                vision:                 "Please enter a value",
-                hearing:                "Please enter a value",
-                speech:                 "Please enter a value",
-                generalvitality:        "Please enter a value",
-                nationality:            "Please enter a value",
-                nextofkin:              "Please enter a value",
-                nextofkinrelationship:  "Please enter a value",
-                nextofkinnin:           "Please enter a value",
-                nextofkinoccupation:    "Please enter a value",
-                nextofkinaddress:       "Please enter a value",
-                nextofkinphonenumber:   "Please enter a value",
-                employername:           "Please enter a value",
-                officeaddress:          "Please enter a value",
-                country1:               "Please enter a value",
-                jobtitle:               "Please enter a value",
-                startedon:              "Please enter a value",
-                stoppedon:              "Please enter a value",
-                descriptionofduty:      "Please enter a value",
-                country2:               "Please enter a value",
-                nameofschool:           "Please enter a value",
-                attendedfrom:           "Please enter a value",
-                attendedto:             "Please enter a value",
-                courseofstudy:          "Please enter a value",
-                qualification:          "Please enter a value",
-                classofaward:           "Please enter a value",
-                dateofaward:            "Please enter a value",
-                classesassigned:        "Please enter a value",
-                subjectsassigned:       "Please enter a value"
-            },
-        
-        submitHandler: function(form) {
-          form.submit();
-        }
-      });
-        validator.resetForm();
-    });
-
-</script>

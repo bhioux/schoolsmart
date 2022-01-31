@@ -368,7 +368,7 @@
                 
                 messages: {
 
-                    passport: "Please Upload a passport with .jpg|.jpeg format".
+                    passport: "Please Upload a passport with .jpg|.jpeg format",
                     surname: "Please enter your Surname",
                     othernames: "Please enter your othernames",
                     basicFlatpickr: "Please enter your date of birth",

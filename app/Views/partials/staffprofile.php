@@ -4,7 +4,7 @@
                 <div class="widget-content widget-content-area">
 
                 <nav class="breadcrumb-one float-left">
-                    <a href="updatestaffprofile">Edit Profile</a>
+                    <a href="<?= base_url() ?>/updatestaffprofile">Edit Profile</a>
                 </nav>
 
                 <nav class="breadcrumb-one float-right" aria-label="breadcrumb">

@@ -31,7 +31,7 @@
             <div class="widget-content widget-content-area">
 
                 <nav class="breadcrumb-one float-left">
-                    <a href="studentprofile">Back to Profile</a>
+                    <a href="<?= base_url() ?>/studentprofile">Back to Profile</a>
                 </nav>
 
                 <nav class="breadcrumb-one float-right" aria-label="breadcrumb">
@@ -259,7 +259,7 @@
             },
             
             messages: {
-                passport:               "Please Upload a passport with .jpg|.jpeg format".
+                passport:               "Please Upload a passport with .jpg|.jpeg format",
                 surname:                "Please enter your Surname",
                 othernames:             "Please enter your othernames",
                 guardianpermaddress:    "Please enter a value", 
