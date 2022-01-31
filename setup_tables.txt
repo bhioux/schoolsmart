@@ -1,0 +1,27 @@
+-- Dumping structure for table schoolmanager.class
+CREATE TABLE IF NOT EXISTS `class` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_type` varchar(150) NOT NULL,
+  `class_group` varchar(150) NOT NULL,
+  `class_fullname` varchar(150) NOT NULL,
+  PRIMARY KEY (`class_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+-- Dumping structure for table schoolmanager.session
+CREATE TABLE IF NOT EXISTS `session` (
+  `session_id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_code` varchar(150) NOT NULL,
+  `session_duration` varchar(150) NOT NULL,
+  PRIMARY KEY (`session_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+-- Dumping structure for table schoolmanager.subjects
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_name` varchar(55) NOT NULL,
+  `subject_code` varchar(50) NOT NULL DEFAULT '',
+  `subject_description` tinytext NOT NULL,
+  PRIMARY KEY (`subject_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;

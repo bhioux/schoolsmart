@@ -48,23 +48,50 @@ $routes->get('/applicationform', 'Home::applicationform');
 $routes->get('/staffprofile', 'Home::staffprofile');
 $routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
 $routes->get('/staffsetup', 'Home::staffsetup');
-$routes->get('/subjectsetup', 'Home::subjectsetup');
-$routes->get('/sessionsetup', 'Home::sessionsetup');
+//$routes->get('/subjectsetup', 'Home::subjectsetup');
 $routes->get('/termsetup', 'Home::termsetup');
-$routes->get('/gradebooksetup', 'Home::gradebooksetup');
-$routes->get('/classsetup', 'Home::classsetup');
+
+//$routes->get('/classsetup', 'Home::classsetup');
 $routes->get('/assignclasses', 'Home::assignclasses');
 $routes->get('/populateclass', 'Home::populateclass');
 
 $routes->group('student', function($routes)
 {
-	$routes->add('registration', 'StudentRegistration::registration');
+	//$routes->add('registration', 'StudentRegistration::registration');
 	$routes->get('registration', 'StudentRegistration::registration');
 	$routes->post('postregistration', 'StudentRegistration::postregistration');
-	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
+	$routes->get('registrationtable', 'StudentRegistration::registrationtable');
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+
+$routes->group('setup', function($routes)
+{
+	// $routes->add('session', 				'Setup::session');
+	$routes->get('session', 				'Setup::session');
+	$routes->post('postsession', 			'Setup::postsession');
+	$routes->get('sessiontable', 			'Setup::sessiontable'); 
+	$routes->post('editsession', 			'Setup::editsession');
+	$routes->post('updatesession', 			'Setup::updatesession');	
+
+	//$routes->add('class', 				'Setup::class');
+	$routes->get('class', 					'Setup::class');
+	$routes->post('postclass', 				'Setup::postclass');
+	$routes->get('classtable', 				'Setup::classtable');  
+	$routes->post('editclass', 				'Setup::editclass');
+	$routes->post('updateclass', 			'Setup::updateclass');	
+
+	//$routes->add('class', 				'Setup::class');
+	$routes->get('subjects', 				'Setup::subjects');
+	$routes->post('postsubjects', 			'Setup::postsubjects');
+	$routes->get('subjectstable', 			'Setup::subjectstable');  
+	$routes->post('editsubjects', 			'Setup::editsubjects');
+	$routes->post('updatesubjects', 		'Setup::updatesubjects');	
+
+
+});
+
+
 
 $routes->group('staff', function($routes)
 {
@@ -75,6 +102,15 @@ $routes->group('staff', function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+
+$routes->group('gradebook', function($routes)
+{
+	$routes->get('setup', 'Gradebook::gradebooksetup');
+});
+
+// 
+
+
 
 /**
  * --------------------------------------------------------------------
