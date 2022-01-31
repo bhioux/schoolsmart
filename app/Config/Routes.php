@@ -31,8 +31,9 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index'); //
 $routes->get('/register', 'Home::register');
+$routes->post('/refreshcsrf', 'Home::refreshcsrf');
 $routes->get('/passreset', 'Home::passreset');
 $routes->get('/studentprofile', 'Home::studentprofile');
 $routes->get('/updateprofile', 'Home::updateprofile');
@@ -95,8 +96,8 @@ $routes->group('setup', function($routes)
 
 $routes->group('staff', function($routes)
 {
-	$routes->add('staffsetup', 'StaffSetup::staffsetup');
 	$routes->get('staffsetup', 'StaffSetup::staffsetup');
+	$routes->post('poststaffsetup', 'StaffSetup::poststaffsetup');
 	$routes->post('postregistration', 'StudentRegistration::postregistration');
 	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
@@ -105,6 +106,7 @@ $routes->group('staff', function($routes)
 
 $routes->group('gradebook', function($routes)
 {
+	$routes->get('/', 'Gradebook::gradebooksetup');
 	$routes->get('setup', 'Gradebook::gradebooksetup');
 });
 

@@ -48,7 +48,11 @@ class Gradebook extends BaseController
 		//$data['header'] = "";
         //$data['mainnav'] = "";
         $data['content'] = "";
-		//$data['footer'] = "";
+		$data['hashcode'] = $this->refreshcsrf();
+		$data['sessionrecs'] = $this->sessionrecs();
+		$data['termsrecs'] = $this->termsrecs();
+		$data['classes'] = $this-> classrecs();
+		$data['subjects'] = $this-> subjectrecs();
 		//$data['adminmenu'] = $menu->asObject()->findAll();
 		return view('pages/home', $data);
 	}
@@ -60,8 +64,11 @@ class Gradebook extends BaseController
         $data['mainnav'] = "";        
         $data['gradebooksetup'] = "";
 
+		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
 		$data['termsrecs'] = $this->termsrecs();
+		$data['classes'] = $this-> classrecs();
+		$data['subjects'] = $this-> subjectrecs();
 
         return view('pages/gradebooksetup', $data);
     }
@@ -164,6 +171,12 @@ class Gradebook extends BaseController
 		
 	}
 
+	function refreshcsrf(){
+		$csrfName = csrf_token();
+    	$csrfHash = csrf_hash();  
+		return $csrfHash;
+	}
+
 	public function sessionrecs(){
 		$session = session();
 		$sessionmodel = new SessionSetup();
@@ -172,8 +185,26 @@ class Gradebook extends BaseController
 		$query = $sessionmodel->get();
 		$result = $query->getResult();
 		return @$result;
-		//$result = $query->getResult();
-		//echo json_encode(array('formarray'=>$result));
+	}
+
+	public function classrecs(){
+		$session = session();
+		$classmodel = new ClassSetup();
+		$classmodel->orderBy('classid', 'ASC');	
+		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$query = $classmodel->get();
+		$result = $query->getResult();
+		return @$result;
+	}
+
+	public function subjectrecs(){
+		$session = session();
+		$subjectmodel = new SubjectSetup();
+		$subjectmodel->orderBy('subjectid', 'ASC');	
+		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$query = $subjectmodel->get();
+		$result = $query->getResult();
+		return @$result;
 	}
 
 	public function sessionrecs1(){

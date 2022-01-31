@@ -30,8 +30,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+    <input type="text" name="hashcode" id="hashcode" value="">
     <?php
-        print_r($sessionrecs); exit;
+        // print_r($classes); exit;
     ?>
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>
@@ -49,6 +50,8 @@
     <script src="plugins/highlight/highlight.pack.js"></script> -->
     <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
+
+    <script src="<?= base_url() ?>/scripts/gradebook.js"></script>
     <script>
         $('#zero-config').DataTable({
             "oLanguage": {
