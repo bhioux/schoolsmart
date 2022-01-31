@@ -34,7 +34,7 @@ $(document).ready(function(){
                 "data": "studentid",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
-                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editaction(this)">Edit</a>&nbsp;|&nbsp;<a id="lnkdelete' + data + '" title="' + data + '" href="" class="lnkdelete" name="lnkdelete' + data + '" title="' + data + '" onclic="return deleteactionid(this)">Delete</a>';
+                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editaction(this)">Edit</a>&nbsp;|&nbsp;<a id="lnkdelete' + data + '" title="' + data + '" href="" class="lnkdelete" name="lnkdelete' + data + '" onclick="return deleteactionid(this)">Delete</a>';
                    }else{
                        data = 'Edit&nbsp;|&nbsp;Delete';
                    }
@@ -45,8 +45,6 @@ $(document).ready(function(){
 
         ]
     } );
-    
-    
     
     $("#frmstprofile").submit(function(e){
         e.preventDefault();
@@ -62,39 +60,39 @@ $(document).ready(function(){
         var formdata = new FormData(form);
 
         var btnvalue = $("#btnsubmit").val();
-        alert(btnvalue)
+        alert(btnvalue);
         //const btnvalue;
-        if(btnvalue == 'Add'){
+        if(btnvalue == 'Submit'){
             var targeturl = posturl;
-            var btntext = "Submit";
+            var btntext = "Add";
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
-                dataType: 'json', // what to expect back from the server
+                dataType: 'text', // what to expect back from the server
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    console.log(data.success)
-                    //var parsedData = JSON.parse(data);
-                    //console.log(parsedData.success)
-                    if(data.success == 1){
+                    alert(data)
+                    if(data == 1){
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        $("#btnsubmit").html(btnsubmit);
                         console.log( "Data Loaded: " + data );
                         //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
-                        $("#notifier").addClass('alert alert-primary').html('success <strong>Success </strong>Record saved!')
+                        $("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
                         
                         //$("#frmtest")[0].reset();
 
-                        // $('#experiencesession').val($(this).find('option:first').val());
-                        // $("#experiencesession").val('').change();
-                        //$("#current").prop('checked', false);
+                        imps = formw.querySelectorAll('input[type="text"], select');
+                        imps.forEach(element => {
+                        element.value = ''
+                        $(element).prop('selected','selected').val('').change();
+                        });
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        $("#btnsubmit").val('Submit').text(btnsubmit);
                         console.log('Data about to be refreshed');
                         studentprofiletable.ajax.reload();
                         console.log('Data refreshed');
@@ -103,25 +101,25 @@ $(document).ready(function(){
                         console.log("Invalid file format")
                         $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").val(btnvalue).text(btntext);
-                        //console.log(data + 'Data error');
+                        $("#btnsubmit").html(btnsubmit);
+                        console.log(data + 'Data error');
                         //return false;
                     
                     }else{
                         console.log("Invalid file format")
                         $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").val(btnvalue).text(btntext);
-                        //console.log(data + 'Data error');
+                        $("#btnsubmit").html(btnsubmit);
+                        console.log(data + 'Data error');
                         //return false;
                     }
                     
                 },
                 error: function (data) {
                     $("#btnsubmit").removeAttr("disabled");
-                    $("#btnsubmit").val(btnvalue).text(btntext);
+                    $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
-                    //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
                     $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
@@ -135,47 +133,41 @@ $(document).ready(function(){
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
-                dataType: 'json', // what to expect back from the server
+                dataType: 'text', // what to expect back from the server
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    console.log(data.success + 'DATA')
-                    //var parsedData = JSON.parse(data);
-                    //console.log(data.success + 'PARSEDDATA')
-
-                    if(data.success == 1){
+                    if(data == 0){
+                        console.log("File upload error")
+                        //notify.update({ type: 'danger', message: '<strong>Error </strong>Update failed!' });
                         $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").val(btnvalue).text(btntext);
+                        $("#btnsubmit").html(btnsubmit);
+                        //return false;
+                    }else{
+                        $("#btnsubmit").removeAttr("disabled");
+                        $("#btnsubmit").html(btnsubmit);
                         console.log( "Data Loaded: " + data );
-                        $("#notifier").addClass('alert alert-primary').html('success <strong>Success </strong>Record saved!')
+                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record updated!' });
                         
-                        //$("#frmtest")[0].reset();
-                        // $('#experiencesession').val($(this).find('option:first').val());
-                        // $("#experiencesession").val('').change();
-                        //$("#current").prop('checked', false);
+                        imps = formw.querySelectorAll('input[type="text"], select');
+                        imps.forEach(element => {
+                        element.value = ''
+                        $(element).prop('selected','selected').val('').change();
+                        });
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val('Add').text('Submit');
+                        $("#btnsubmit").val('add').text('Save');
                         studentprofiletable.ajax.reload();
-
-                        
-                    }else{
-                        console.log(data.message)
-                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").val(btnvalue).text(btntext);
-                        //return false;
                     }
                 },
                 error: function (data) {
                     $("#btnsubmit").removeAttr("disabled");
-                    $("#btnsubmit").val(btnvalue).text(btntext);
+                    $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
-                    //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
-                    $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
+                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
                     return false
                 }
             });
