@@ -49,7 +49,7 @@ $routes->get('/staffsetup', 'Home::staffsetup');
 $routes->get('/subjectsetup', 'Home::subjectsetup');
 $routes->get('/sessionsetup', 'Home::sessionsetup');
 $routes->get('/termsetup', 'Home::termsetup');
-$routes->get('/gradebooksetup', 'Home::gradebooksetup');
+
 $routes->get('/classsetup', 'Home::classsetup');
 $routes->get('/assignclasses', 'Home::assignclasses');
 $routes->get('/populateclass', 'Home::populateclass');
@@ -63,6 +63,13 @@ $routes->group('student', function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+
+$routes->group('gradebook', function($routes)
+{
+	$routes->get('setup', 'Gradebook::gradebooksetup');
+});
+
+// 
 
 
 /**
