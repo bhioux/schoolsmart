@@ -131,8 +131,7 @@ class StudentRegistration extends BaseController
 				'classgroup'  => 'required',
 			])){
 				
-				try{
-                    
+				try{                    
                     $recsaved = $studentprofilemodel->insert([
 						//'username' => $this->request->getPost('username'),
 						'csrf_test_name' => $this->request->getPost('csrf_test_name'),
@@ -405,17 +404,6 @@ class StudentRegistration extends BaseController
 		
 	}
 
-	public function editmyexperience(){ //
-		$experienceid = $this->input->post('experienceid',true);
-		if($experienceid==0){
-			echo $experienceid;
-		}else{
-			$this->load->model('home_model');
-			$postresult = $this->home_model->editexperiencerecord($experienceid);
-			//print_r($postresult); exit;
-			echo(json_encode(array('formarray' => $postresult[0])));
-		}
-	}
 
 	//--------------------------------------------------------------------
 
