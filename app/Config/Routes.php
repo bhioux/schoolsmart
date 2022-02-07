@@ -33,7 +33,6 @@ $routes->setAutoRoute(false);
 
 $routes->get('/', 'Home::index'); //
 $routes->get('/register', 'Home::register');
-$routes->post('/refreshcsrf', 'Home::refreshcsrf');
 $routes->get('/passreset', 'Home::passreset');
 $routes->get('/studentprofile', 'Home::studentprofile');
 $routes->get('/updateprofile', 'Home::updateprofile');
@@ -65,6 +64,7 @@ $routes->group('student', function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+$routes->post('/refreshcsrf', 'StudentRegistration::refreshcsrf');
 
 $routes->group('setup', function($routes)
 {
@@ -104,10 +104,13 @@ $routes->group('staff', function($routes)
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
 
+$routes->post('/refreshcsrf', 'Gradebook::refreshcsrf');
+
 $routes->group('gradebook', function($routes)
 {
 	$routes->get('/', 'Gradebook::gradebooksetup');
 	$routes->get('setup', 'Gradebook::gradebooksetup');
+	$routes->get('gradebooktable', 'Gradebook::gradebooktable');
 });
 
 // 

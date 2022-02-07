@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //refreshhash()
     //alert("888")
     console.log('preparing data insert...')
     var regdatatableurl = $("#regdatatableurl").val();

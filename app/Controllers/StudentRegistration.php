@@ -393,6 +393,7 @@ class StudentRegistration extends BaseController
 			$studentprofilemodel->where(['studentid'=>$studentid]);	
 			$query = $studentprofilemodel->get();
 			$result = $query->getResult();
+			//$result[0][] = csrf_hash();
 			echo json_encode(array('formarray'=>$result[0]));
 		}else{
 			//$data['errors'] = $this->validation->getErrors();
@@ -402,6 +403,12 @@ class StudentRegistration extends BaseController
 			return array();
 		}
 		
+	}
+
+	function refreshcsrf(){
+		$csrfName = csrf_token();
+    	$csrfHash = csrf_hash();  
+		return $csrfHash;
 	}
 
 

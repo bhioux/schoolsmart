@@ -30,9 +30,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <input type="text" name="hashcode" id="hashcode" value="">
     <?php
-        // print_r($classes); exit;
+        //print_r($sessionrecs); exit;
     ?>
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>
@@ -52,7 +51,8 @@
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
 
     <script src="<?= base_url() ?>/scripts/gradebook.js"></script>
-    <script>
+
+    <!-- <script>
         $('#zero-config').DataTable({
             "oLanguage": {
                 "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
@@ -65,7 +65,7 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 50
         });
-    </script>
+    </script> -->
 
     <script>        
         checkall('todoAll', 'todochkbox');

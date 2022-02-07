@@ -3,6 +3,19 @@
 ?>
 <script type="text/javascript">
         /****************UTILITY FUNCTIONS*****************************/
+        function refreshhash(){
+            var gethashurl = $("#hashurl").val();  
+            var csrfName =  $("#refhasname").val(); 
+            var csrfHash = $("#refhashcode").val();  
+
+
+            $.post( gethashurl, {  })
+            .done(function( data ) {
+                $("#refreshedhash").val(data)
+                alert( "Data Loaded: " + data );
+            });
+        }
+
         function confirmaction()
         {
             if(confirm('Continue with action?')){
@@ -17,8 +30,10 @@
                 return false;
             }
 
+            refreshhash()            
+
             var csrfName = '<?= csrf_token() ?>';
-            var csrfHash = '<?= csrf_hash() ?>';  
+            var csrfHash = $("#refhashcode").val() 
 
             $.post({
                 url:'<?php echo site_url('student/editregistration'); ?>',
@@ -124,7 +139,7 @@
                     //$('input[type="text"], select').val('')
                     //document.querySelector('#generalvitality').value = '';
                     $("#btnsubmit").val('Edit').text('Update')
-
+                    
                     return false;
                 }
             });
@@ -169,6 +184,10 @@
               <input type="hidden" name="editurl" id="editurl" value="<?= site_url('student/updateregistration'); ?>">   
               <input type="hidden" name="regdatatableurl" id="regdatatableurl" value="<?= site_url('student/registrationtable'); ?>">   
               <input type="hidden" name="recordid" id="recordid" value="">
+              <input type="hidden" name="hashurl" id="hashurl" value="<?= site_url('/refreshcsrf'); ?>">
+              <input type="text" name="refreshedhash" id="refreshedhash" value=""> 
+              <input type="hidden" name="refhashcode" id="refhasname" value="<?= csrf_token() ?>"> 
+              <input type="hidden" name="refhasname" id="refhashcode" value="<?= csrf_hash() ?>"> 
               <!-- END CRUD PROPERTY SETTIGS  -->
               <label for="t-text">Surname: </label> &ast;
               <input type="text" id="surname" name="surname" placeholder="Surname" class="form-control" required>

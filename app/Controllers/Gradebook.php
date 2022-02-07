@@ -20,6 +20,7 @@ use App\Models\PopulateClass;
 use App\Models\AssignClasses;
 use App\Models\ParentsProfile;
 use App\Models\GradebookSetup;
+use App\Models\Gradebooks;
 use App\Models\Registration;
 use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
@@ -50,7 +51,7 @@ class Gradebook extends BaseController
         $data['content'] = "";
 		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
-		$data['termsrecs'] = $this->termsrecs();
+		$data['termrecs'] = $this->termrecs();
 		$data['classes'] = $this-> classrecs();
 		$data['subjects'] = $this-> subjectrecs();
 		//$data['adminmenu'] = $menu->asObject()->findAll();
@@ -66,7 +67,7 @@ class Gradebook extends BaseController
 
 		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
-		$data['termsrecs'] = $this->termsrecs();
+		$data['termrecs'] = $this->termrecs();
 		$data['classes'] = $this-> classrecs();
 		$data['subjects'] = $this-> subjectrecs();
 
@@ -139,12 +140,46 @@ class Gradebook extends BaseController
 	{
 		$session = session();
 		$gradebookmodel = new GradebookSetup();
-		//$model->where('msgtype !=','V');
-		$gradebookmodel->orderBy('last_updated', 'ASC');	
-		$query = $gradebookmodel->get();
-		$result = $query->getResult();
-		//echo json_encode("messagelog"=$result);
-		echo json_encode(array('gradebookdata'=>$result));
+		//$session = $this->request->getGet('session');
+		//$term  = $this->request->getGet('term');
+
+		if($this->request->getMethod() === 'get' && $this->validate([
+			// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
+
+			// http://schoolsmart.test/gradebook/gradebooktable?subject=&class=&term=2&session=3&csrf_test_name=ec738cc0fcaadb5081e6786ca1ad2867&_=1643793937684
+
+			'class' => 'required',
+			'csrf_test_name'  => 'required',
+
+		])){
+			
+			//$subject = $this->request->getPost('subject');
+			$class = $this->request->getGet('class');
+			//$term = $this->request->getPost('term');
+			//$session = $this->request->getPost('session');
+			$csrf_test_name = $this->request->getGet('csrf_test_name');
+
+			//echo $class."- Class"; exit;
+
+			//$model->where('msgtype !=','V');
+			//$gradebookmodel->orderBy('created_at', 'ASC');	
+			$gradebookmodel->where(['studentclass'=>trim($class)]);	
+			$query = $gradebookmodel->get();
+			$result = $query->getResult();
+			//echo json_encode("messagelog"=$result);
+			echo json_encode(array('gradebookdata'=>$result));
+			
+		}else{
+			//print_r($this->validation->getErrors());
+			//$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			//print_r($failed);
+			echo json_encode(array('gradebookdata'=>array()));
+			// exit;
+			//return view('pages/gradebooksetup', $data);
+		}
+
+		
+		
 	}
 
 	public function editgradebook(){
@@ -181,10 +216,20 @@ class Gradebook extends BaseController
 		$session = session();
 		$sessionmodel = new SessionSetup();
 		$sessionmodel->orderBy('sessionid', 'ASC');	
-		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$sessionmodel->where(['activeflag'=>1]);	
 		$query = $sessionmodel->get();
 		$result = $query->getResult();
-		return @$result;
+		return @$result[0];
+	}
+
+	public function termrecs(){
+		$session = session();
+		$termmodel = new TermSetup();
+		$termmodel->orderBy('termid', 'ASC');	
+		$termmodel->where(['activeflag'=>1]);	
+		$query = $termmodel->get();
+		$result = $query->getResult();
+		return @$result[0];
 	}
 
 	public function classrecs(){
@@ -207,7 +252,7 @@ class Gradebook extends BaseController
 		return @$result;
 	}
 
-	public function sessionrecs1(){
+	public function sessionrecs2(){
 		$session = session();
 		$sessionmodel = new SessionSetup();
 		//$model->where('msgtype !=','V');
@@ -230,7 +275,7 @@ class Gradebook extends BaseController
 		}		
 	}
 
-	public function termsrecs(){
+	public function termsrecs2(){
 		$session = session();
 		$termsmodel = new TermSetup();
 		//$model->where('msgtype !=','V');

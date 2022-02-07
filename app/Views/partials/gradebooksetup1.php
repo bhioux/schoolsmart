@@ -1,20 +1,82 @@
 <script type="text/javascript">
         /****************UTILITY FUNCTIONS*****************************/
         //alert("Gradebook...")
-        function refreshhash(){
-            var gethashurl = $("#hashurl").val();
-           
-            $.post({
-                url: gethashurl,
-                data: { studentid: obj.title, [csrfName]:  csrfHash },
-                type:'POST',
-                dataType: 'json',
-                success: function( json ) {
-                    console.log(json)
-                    alert(json)
-                    $('#hashcode').val(json)
-                }
+//      function drawDatatable(){
+//             alert("Drawing DataTable...")
+//             var gradebooktableurl = $("#gradebooktableurl").val();
+//             var gSubject = $('#gSubject').val();
+//             var gClass = $('#gClass').val(); 
+//             var gterm = $('#gTerm').val();
+//             var gSession = $('#gSession').val();
+//             var csrfName = $("#refhashcode").val(); 
+//             var csrfHash = $("#refhasname").val(); 
 
+//             alert(gradebooktableurl)
+
+//             var gradebooktable = $('#gradebooktable').DataTable( {
+//                 "pageLength": 50,
+//                 "lengthMenu": [50, 100 ],
+//                 dom: 'Bfrtip',
+//                 responsive: true,
+//                 buttons: [
+//                     'copy', 'csv', 'excel', 'pdf', 'print'
+//                 ],
+//                 ajax: {
+//                     url: gradebooktableurl,
+//                     data: { subject: gSubject, class: gClass, term: gterm, session: gSession,[csrfName]:  csrfHash,  },
+//                     dataSrc: 'gradebookdata',
+//                 },
+                
+//                 // 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term', 'created_at', 'updated_at'
+
+//                 columns: [
+//                     {data: "gradebookid"},
+//                     {data: "gradebookid"},
+//                     {data: "studentid"},
+//                     // { 
+//                     //      "data": "studentid",
+//                     //      "render": function(data, type, row, meta){
+//                     //         const milliseconds = data * 1000
+//                     //         var s = new Date(milliseconds).toLocaleDateString()
+                            
+//                     //         return row['surname'] + ' - ' + row['othernames'];
+//                     //      }
+//                     // },
+//                     //{data: "gradebookid"},
+
+//                     { 
+//                         "data": "gradebookid",
+//                         "render": function(data, type, row, meta){
+//                         if(type === 'display'){
+//                             //data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editaction(this)">Edit</a>&nbsp;|&nbsp;<a id="lnkdelete' + data + '" title="' + data + '" href="" class="lnkdelete" name="lnkdelete' + data + '" onclick="return deleteactionid(this)">Delete</a>';
+                            
+//                             data = '<input type="text" id="ass1' + data + '" title="' + data + '" name="ass1' + data + '" class="form-control">'
+//                         }else{
+//                             data = 'Edit&nbsp;|&nbsp;Delete';
+//                         }
+//                         return data;
+//                         }
+//                 },
+
+//                 //{data: "surname" }
+
+//                 ]
+//             } );
+
+// }
+
+
+        function refreshhash(){
+            var gethashurl = $("#hashurl").val();  
+
+            var csrfName = $("#refhashcode").val(); 
+            var csrfHash = $("#refhasname").val();   
+
+
+            $.post( gethashurl, { [csrfName]:  csrfHash })
+            .done(function( data ) {
+                $("#refreshedhash").val(data)
+                alert( "Data Loaded: " + data );
             });
         }
 
@@ -33,7 +95,7 @@
             }
 
             var csrfName = '<?= csrf_token() ?>';
-            var csrfHash = '<?= csrf_hash() ?>';  
+            var csrfHash = $("#refhasname").val();
 
             $.post({
                 url:'<?php echo site_url('student/editregistration'); ?>',
@@ -248,7 +310,7 @@
                         
                         <div class="invoice-00001">
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
-                                <form action="" method="post" id="assessment1" name="assessment1">
+                                <form method="post" id="assessment1" name="assessment1">
                                 <div class="row inv--product-table-section">
                                     <div class="col-lg-9">
                                         <div class="row inv--head-section">
@@ -261,11 +323,15 @@
                                                     <input type="hidden" name="gradebookid" id="gradebookid" value="">
                                                     <input type="hidden" name="posturl" id="posturl" value="<?= site_url('gradebook/postgradebook'); ?>">
                                                     <input type="hidden" name="editurl" id="editurl" value="<?= site_url('gradebook/updategradebook'); ?>">   
-                                                    <input type="hidden" name="gradebookdatatableurl" id="gradebookdatatableurl" value="<?= site_url('gradebook/gradebooktable'); ?>">   
+                                                    <input type="hidden" name="gradebooktableurl" id="gradebooktableurl" value="<?= site_url('gradebook/gradebooktable'); ?>">   
                                                     <input type="hidden" name="hashurl" id="hashurl" value="<?= site_url('/refreshcsrf'); ?>">   
                                                     <input type="hidden" name="assessment1" id="assessment1" value="assessment1">
-                                                    <input type="hidden" name="term" id="term" value="">
-                                                    <input type="hidden" name="session" id="session" value="">
+                                                    <input type="hidden" name="gTerm" id="gTerm" value="<?= $termrecs->termid ?>">
+                                                    <input type="hidden" name="gSession" id="gSession" value="<?= $sessionrecs->sessionid ?>">
+                                                    <input type="text" name="refreshedhash" id="refreshedhash" value=""> 
+                                                    <input type="hidden" name="refhashcode" id="refhashcode" value="<?= csrf_token() ?>"> 
+                                                    <input type="hidden" name="refhasname" id="refhasname" value="<?= csrf_hash() ?>"> 
+                                                    <!--  -->
                                                     <div class="form-group">
 
                                                         <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
@@ -274,7 +340,7 @@
                                                             <?php
                                                                 foreach($classes as $class){
                                                             ?>
-                                                                   <option value="<?= $class->classid ?>">
+                                                                   <option value="<?= $class->classtype.$class->classname.$class->classgroup ?>">
                                                                    <?= $class->classtype.$class->classname.$class->classgroup ?>
                                                                    </option>
                                                             <?php
@@ -288,7 +354,7 @@
                                                 <div class="form-group">
                                                     <label for="t-text">Select Subject: </label> &ast;
                                                     <div class="form-group">
-                                                        <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
+                                                        <select class="selectpicker form-control" id="sybjectgroup" name="sybjectgroup" required>
                                                             <option disabled selected>--Choose One--</option>
                                                             <option value="A">Mathematics</option>
                                                             <?php
@@ -306,7 +372,7 @@
                                             </div>
                                         </div>
                                         <div class="table table-hover">
-                                            <table id="assessment1" style="width:100%">
+                                            <table id="gradebooktable" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th width="10%" scope="col">S/N</th>
@@ -315,81 +381,10 @@
                                                         <th width="15%" scope="col">Assessment 1</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Tiger Nixon Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-1-ass1" name="row-1-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Garrett Winters Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-2-ass1" name="row-2-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Ashton Cox Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-3-ass1" name="row-3-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Cedric Kelly Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-4-ass1" name="row-4-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Airi Satou Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-5-ass1" name="row-5-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Brielle Williamson Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-6-ass1" name="row-6-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Jennifer Chang Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-7-ass1" name="row-7-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Quinn Flynn Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-7-ass1" name="row-7-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Charde Marshall Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-7-ass1" name="row-7-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Haley Kennedy Garrett Tiger</td>
-                                                        <td class="text-right"><input type="text" id="row-2-ass1" name="row-7-ass1" class="form-control" value="61"></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th width="10%" scope="col">S/N</th>
-                                                        <th width="20%" scope="col">Registration No</th>
-                                                        <th width="55%" scope="col">Class List</th>
-                                                        <th width="15%" scope="col">Assessment 1</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                         <div class="col text-right">
-                                            <button class="btn btn-primary mb-4 mr-2 btn-lg">Update Table</button>
+                                            <button class="btn btn-primary mb-4 mr-2 btn-lg" id="updatetable" name="btnAssessment1">Update Table</button>
                                         </div>
 
                                         <div class="row mt-4">
@@ -491,7 +486,7 @@
                                                 <div class="form-group">
                                                     <label for="t-text">Select Class: </label> &ast;
                                                     <div class="form-group">
-                                                        <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
+                                                        <select class="selectpicker form-control" id="gClass" name="gClass" required>
                                                             <option disabled selected>--Choose One--</option>
                                                             <option value="A">Primary 4b</option>
                                                             <option value="B">Primary 2a</option>
@@ -505,7 +500,7 @@
                                                 <div class="form-group">
                                                     <label for="t-text">Select Subject: </label> &ast;
                                                     <div class="form-group">
-                                                        <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
+                                                        <select class="selectpicker form-control" id="gSubject" name="gSubject" required>
                                                             <option disabled selected>--Choose One--</option>
                                                             <option value="A">Mathematics</option>
                                                             <option value="B">Mathematics</option>

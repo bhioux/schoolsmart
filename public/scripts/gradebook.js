@@ -1,6 +1,88 @@
 $(document).ready(function(){
-    
-    refreshhash();
+    $("#updatetable").click(function(gradebooktable){
+        //e.preventDevault();
+        //console.log(e.target);
+        //gradebooktable()
+    })
+
+   
+    //refreshhash()
+ 
+    //********** * START GRADEBOOK ******************?
+// function drawDatatable(){
+    alert("Drawing DataTable...")
+    var gradebooktableurl = $("#gradebooktableurl").val();
+    var gSubject = $('#sybjectgroup').val();
+    var gClass = $('#classgroup').children("option:selected").val()
+    var gterm = $('#gTerm').val();
+    var gSession = $('#gSession').val();
+    var csrfName = $("#refhashcode").val(); 
+    var csrfHash = $("#refhasname").val(); 
+
+    //var url = "Product/GetProductByCategoryId?categoryId=" + $('#ddlCategory option:selected').val();
+
+    $('#classgroup').change(function(){
+        var url ='/gradebook/gradebooktable?class=' + $('#classgroup option:selected').text() + '&csrf_test_name=' + $("#refhasname").val() 
+        //alert( $('#classgroup').val())
+        gradebooktable.ajax.url(url).load();
+        //$('#table').DataTable().ajax.url(url).load();
+       
+    })
+
+
+
+    var gradebooktable = $('#gradebooktable').DataTable( {
+        "pageLength": 50,
+        "lengthMenu": [50, 100 ],
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        ajax: {
+            url: gradebooktableurl,
+            //data: { subject: $('#sybjectgroup').val(), class:  $("#classgroup option:selected").val(), term: gterm, session: gSession,[csrfName]:  csrfHash,  },
+            data: { },
+            dataSrc: 'gradebookdata',
+        },
+        
+        // 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term', 'created_at', 'updated_at'
+
+        columns: [
+            {data: "studentid"},
+            {data: "studentid"},
+            {data: "studentid"},
+            // { 
+            //      "data": "studentid",
+            //      "render": function(data, type, row, meta){
+            //         const milliseconds = data * 1000
+            //         var s = new Date(milliseconds).toLocaleDateString()
+                    
+            //         return row['surname'] + ' - ' + row['othernames'];
+            //      }
+            // },
+            //{data: "gradebookid"},
+
+            { 
+                "data": "studentid",
+                "render": function(data, type, row, meta){
+                   if(type === 'display'){                    
+                       data = '<input type="text" id="ass1' + data + '" title="' + data + '" name="ass1' + data + '" class="form-control">'
+                   }else{
+                       data = 'Edit&nbsp;|&nbsp;Delete';
+                   }
+                   return data;
+                }
+           },
+
+          //{data: "surname" }
+
+        ]
+    } );
+
+// }
+
+    //********** * END GRADEBOOK ******************?
 
     console.log('preparing data insert...')
     var regdatatableurl = $("#regdatatableurl").val();
