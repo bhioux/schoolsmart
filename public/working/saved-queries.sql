@@ -69,6 +69,8 @@ CREATE OR REPLACE VIEW view_gradebook AS
 
 SELECT 
 sg.studentid AS studentid,
+sg.regno AS regno,
+CONCAT(surname, ' ', othernames) AS fullname,
 (SELECT sp.class FROM student_profile AS sp WHERE sp.studentid = sg.`studentid`) AS studentclass,
 coalesce((SELECT grd.studentsubject FROM setup_gradebook AS grd WHERE grd.studentid = sg.`studentid`), '') AS studentsubject,
 coalesce((SELECT grd.assessmenttype FROM setup_gradebook AS grd WHERE grd.studentid = sg.`studentid`), '') AS assessmenttype,

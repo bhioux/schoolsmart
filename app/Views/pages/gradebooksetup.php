@@ -51,9 +51,9 @@
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
     <script src="<?= base_url() ?>/scripts/gradebook.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
 
     <!-- <script>
         $('#zero-config').DataTable({

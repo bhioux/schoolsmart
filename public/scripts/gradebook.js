@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
     $("#updatetable").click(function(gradebooktable){
         //e.preventDevault();
         //console.log(e.target);
@@ -39,6 +40,7 @@ $(document).ready(function(){
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
+        "order": [[ 1, 'asc' ]],
         ajax: {
             url: gradebooktableurl,
             //data: { subject: $('#sybjectgroup').val(), class:  $("#classgroup option:selected").val(), term: gterm, session: gSession,[csrfName]:  csrfHash,  },
@@ -49,21 +51,18 @@ $(document).ready(function(){
         // 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term', 'created_at', 'updated_at'
 
         columns: [
-            {data: "studentid"},
-            {data: "studentid"},
-            {data: "studentid"},
-            // { 
-            //      "data": "studentid",
-            //      "render": function(data, type, row, meta){
-            //         const milliseconds = data * 1000
-            //         var s = new Date(milliseconds).toLocaleDateString()
-                    
-            //         return row['surname'] + ' - ' + row['othernames'];
-            //      }
-            // },
-            //{data: "gradebookid"},
-
+            //{data: "studentid"},
+            {data: "regno"},
+            {data: "fullname"},
             { 
+                "data": "studentid",
+                "render": function(data, type, row, meta){                    
+                   //return row['surname'] + ' - ' + row['othernames'];
+                   return $('#classgroup').children("option:selected").val()
+                }
+           },
+
+           { 
                 "data": "studentid",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){    

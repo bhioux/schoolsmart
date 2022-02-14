@@ -82,14 +82,19 @@ class Gradebook extends BaseController
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
 
-				'studentid.*' => 'required|required_with[studentgrade.*]',
-				'studentgrade.*' => 'required',
+				'studentid.*' => 'required|decimal|required_with[studentgrade.*]',
+				'studentgrade.*' => 'required|decimal|required_with[studentid.*]',
 				'sybjectgroup' => 'required',
 				'classgroup' => 'required',
 				'assessment1'  => 'required',
 				'gSession'  => 'required',
 				'gTerm'  => 'required',
 			])){
+				print_r($this->request->getPost('studentid'));
+				echo '<br>';
+				print_r($this->request->getPost('studentgrade'));
+				exit;
+
 				// studentid[], studentgrade[], classgroup, subjectgroup, refhasname, refhashcode, refreshedhash, gSession, gTerm, assessment1, hashurl, gradebooktableurl, editurl, posturl, gradebookid, csrf_test_name
 				try{                    
                     $recsaved = $gradebookmodel->insert([
