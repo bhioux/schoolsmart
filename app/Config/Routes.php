@@ -110,10 +110,11 @@ $routes->group('gradebook', function($routes)
 {
 	$routes->get('/', 'Gradebook::gradebooksetup');
 	$routes->get('setup', 'Gradebook::gradebooksetup');
-	$routes->get('gradebooktable', 'Gradebook::gradebooktable');
+	$routes->get('gradebooktable', 'Gradebook::gradebooktable'); //
+	$routes->post('postgradebook', 'Gradebook::postgradebook'); 
 });
 
-// 
+// postgradebook
 
 
 

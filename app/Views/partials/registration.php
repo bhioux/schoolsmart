@@ -52,6 +52,7 @@
                     imps = formw.querySelectorAll('input[type="text"], select');
                     imps.forEach(element => {
                       element.value = ''
+                      $(element).prop('disabled', 'disabled');
                       $(element).prop('selected','selected').val('').change();
                     });
                     
@@ -61,18 +62,21 @@
                     // $("#experienceid").val(json.formarray.experienceid);
 
                     $("#studentid").val(json.formarray.studentid);
+                    $("#regno").val(json.formarray.regno);
                     $("#passport").val(json.formarray.passport);
                     $("#surname").val(json.formarray.surname);
                     $("#othernames").val(json.formarray.othernames);
-                    //$("#dob").val(json.formarray.dob);
+                    $("#basicFlatpickr").val(json.formarray.dob);
+                    //$("#dateset").val(json.formarray.dob);
                     //$('#class').val($(this).find('option:first').val(json.formarray.class));
-                    $('#dob option[value="' + json.formarray.dob + '"]').prop('selected','selected').val(json.formarray.dob).change();
+                    //$('#dob option[value="' + json.formarray.dob + '"]').prop('selected','selected').val(json.formarray.dob).change();
                     $('#class option[value="' + json.formarray.class + '"]').prop('selected','selected').val(json.formarray.class).change();
                     $("#hometown").val(json.formarray.hometown);
 
                     $('#lga option[value="' + json.formarray.lga + '"]').prop('selected','selected').val(json.formarray.lga).change();
                     $('#stateoforigin option[value="' + json.formarray.stateoforigin + '"]').prop('selected','selected').val(json.formarray.stateoforigin).change();
-                    $('#nationality option[value="' + json.formarray.nationality + '"]').prop('selected','selected').val(json.formarray.nationality).change();
+                    //$('#nationality option[value="' + json.formarray.nationality + '"]').prop('selected','selected').val(json.formarray.nationality).change();
+                    $("#nationality").val(json.formarray.nationality);
 
                     $("#nin").val(json.formarray.nin);
                     $('#gender option[value="' + json.formarray.gender + '"]').prop('selected','selected').val(json.formarray.gender).change();
@@ -95,6 +99,7 @@
                     $("#guardianoccupation").val(json.formarray.guardianoccupation);
                     $("#guardianpermaddress").val(json.formarray.guardianpermaddress);
                     $("#guardianphonenumber").val(json.formarray.guardianphonenumber);
+                    $("#email").val(json.formarray.email);
                     $("#familytype").val(json.formarray.familytype);
                     $("#familysize").val(json.formarray.familysize);
                     $("#positioninfamily").val(json.formarray.positioninfamily);
@@ -139,6 +144,12 @@
                     //$('input[type="text"], select').val('')
                     //document.querySelector('#generalvitality').value = '';
                     $("#btnsubmit").val('Edit').text('Update')
+
+                    var formw = document.querySelector('#frmstprofile')
+                    imps = formw.querySelectorAll('input[type="text"], select');
+                    imps.forEach(element => {
+                      $(element).attr('disabled', false);
+                    });
                     
                     return false;
                 }
@@ -177,15 +188,31 @@
         <div class="row row-form">
           <div class="col-lg-6">
             <div class="form-group">
+              <label for="t-text">Registration No: </label> &ast;
+              <input type="text" id="regno" name="regno" placeholder="Registration No" class="form-control" readonly required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!-- <div class="form-group">
+              <label for="t-text">Date of Birth: </label> &ast;
+              <input id="basicFlatpickr" name="dob" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+              <input type="text" id="age" age="name" placeholder="Age" class="form-control" required>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="row row-form">
+          <div class="col-lg-6">
+            <div class="form-group">
               <!-- START CRUD PROPERTY SETTIGS  -->
 
-              <input type="text" name="studentid" id="studentid" value="">
+              <input type="hidden" name="studentid" id="studentid" value="">
               <input type="hidden" name="posturl" id="posturl" value="<?= site_url('student/postregistration'); ?>">
               <input type="hidden" name="editurl" id="editurl" value="<?= site_url('student/updateregistration'); ?>">   
               <input type="hidden" name="regdatatableurl" id="regdatatableurl" value="<?= site_url('student/registrationtable'); ?>">   
               <input type="hidden" name="recordid" id="recordid" value="">
               <input type="hidden" name="hashurl" id="hashurl" value="<?= site_url('/refreshcsrf'); ?>">
-              <input type="text" name="refreshedhash" id="refreshedhash" value=""> 
+              <input type="hidden" name="refreshedhash" id="refreshedhash" value=""> 
               <input type="hidden" name="refhashcode" id="refhasname" value="<?= csrf_token() ?>"> 
               <input type="hidden" name="refhasname" id="refhashcode" value="<?= csrf_hash() ?>"> 
               <!-- END CRUD PROPERTY SETTIGS  -->
@@ -365,6 +392,15 @@
             <div class="form-group">
               <label for="t-text">Guardian's Phone Number: </label> &ast;
               <input type="text" id="guardianphonenumber" name="guardianphonenumber" placeholder="Guardian's Phone Number" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-form">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="t-text">Email Address: </label> &ast;
+              <input type="email" id="email" name="email" placeholder="Email Address" class="form-control" required>
             </div>
           </div>
         </div>
@@ -553,6 +589,7 @@
                   <tr>
                     <th>Appln. No.</th>
                     <th>Name</th>
+                    <th>Class</th>
                     <th class="no-content">Action</th>
                   </tr>
                 </thead>

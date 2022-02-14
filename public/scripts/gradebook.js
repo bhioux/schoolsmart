@@ -10,7 +10,7 @@ $(document).ready(function(){
  
     //********** * START GRADEBOOK ******************?
 // function drawDatatable(){
-    alert("Drawing DataTable...")
+    console.log("Drawing DataTable...")
     var gradebooktableurl = $("#gradebooktableurl").val();
     var gSubject = $('#sybjectgroup').val();
     var gClass = $('#classgroup').children("option:selected").val()
@@ -66,8 +66,8 @@ $(document).ready(function(){
             { 
                 "data": "studentid",
                 "render": function(data, type, row, meta){
-                   if(type === 'display'){                    
-                       data = '<input type="text" id="ass1' + data + '" title="' + data + '" name="ass1' + data + '" class="form-control">'
+                   if(type === 'display'){    
+                       data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">                     <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control">'
                    }else{
                        data = 'Edit&nbsp;|&nbsp;Delete';
                    }
@@ -129,8 +129,33 @@ $(document).ready(function(){
 
         ]
     } );
+
+
+
+
+
+// just for the demos, avoids form submit
+jQuery.validator.setDefaults({
+  debug: true,
+  success: "valid"
+});
+$( "#myform" ).validate({
+  rules: {
+    mobile_phone: {
+      require_from_group: [1, ".studentids"]
+    },
+    home_phone: {
+      require_from_group: [1, ".phone-group"]
+    },
+    work_phone: {
+      require_from_group: [1, ".phone-group"]
+    }
+  }
+});
+
+
     
-    $("#frmstprofile").submit(function(e){
+    $("#assessment1").submit(function(e){
         e.preventDefault();
         console.log('Registration Module Loaded....')
         alert("Form Submitted")
@@ -140,7 +165,7 @@ $(document).ready(function(){
         $("#btntest").attr("disabled","disabled");
         $("#btntest").html('posting data...');
         $("#notifier").addClass('alert alert-warning').html('<strong>Saving</strong> Do not close this page...');
-        var form = document.getElementById('frmstprofile');
+        var form = document.getElementById('assessment1');
         var formdata = new FormData(form);
 
         var btnvalue = $("#btnsubmit").val();

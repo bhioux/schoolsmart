@@ -311,6 +311,7 @@
                         <div class="invoice-00001">
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
                                 <form method="post" id="assessment1" name="assessment1">
+                                <?= csrf_field() ?>
                                 <div class="row inv--product-table-section">
                                     <div class="col-lg-9">
                                         <div class="row inv--head-section">
@@ -384,7 +385,7 @@
                                             </table>
                                         </div>
                                         <div class="col text-right">
-                                            <button class="btn btn-primary mb-4 mr-2 btn-lg" id="updatetable" name="btnAssessment1">Update Table</button>
+                                            <button type="submit" class="btn btn-primary mb-4 mr-2 btn-lg" id="btnsubmit" name="btnAssessment1" value="Submit">Update Table</button>
                                         </div>
 
                                         <div class="row mt-4">

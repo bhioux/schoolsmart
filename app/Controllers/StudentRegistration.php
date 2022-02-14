@@ -91,6 +91,7 @@ class StudentRegistration extends BaseController
 
 				//'passport' => 'required',
 				'surname' => 'required',
+				'regno' => 'required',
 				'othernames' => 'required',
 				'dob' => 'required',
 				'class'  => 'required',
@@ -136,6 +137,7 @@ class StudentRegistration extends BaseController
 						//'username' => $this->request->getPost('username'),
 						'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 						//'passport' => $this->request->getPost('passport'),
+						//'regno' => $this->request->getPost('regno'),
 						'surname' => $this->request->getPost('surname'),
 						'othernames' => $this->request->getPost('othernames'),
 						'dob' => $this->request->getPost('dob'),
@@ -232,6 +234,7 @@ class StudentRegistration extends BaseController
 
 				//'passport' => 'required',
 				'studentid' => 'required',
+				'regno' => 'required',
 				'surname' => 'required',
 				'othernames' => 'required',
 				'dob' => 'required',
@@ -278,6 +281,7 @@ class StudentRegistration extends BaseController
                         'studentid' => $this->request->getPost('studentid'),
                         'csrf_test_name' => $this->request->getPost('csrf_test_name'),
                         //'passport' => $this->request->getPost('passport'),
+                        //'regno' => $this->request->getPost('regno'),
                         'surname' => $this->request->getPost('surname'),
                         'othernames' => $this->request->getPost('othernames'),
                         'dob' => $this->request->getPost('dob'),
@@ -351,23 +355,6 @@ class StudentRegistration extends BaseController
 			}
     }
 
-    public function assignclasses()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['assignclasses'] = "";
-        return view('pages/assignclasses', $data);
-    }
-
-    public function gradebooksetup()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['gradebooksetup'] = "";
-        return view('pages/gradebooksetup', $data);
-    }
 
 	public function registrationtable()
 	{

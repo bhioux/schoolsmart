@@ -76,33 +76,34 @@ class Gradebook extends BaseController
 
 	public function postgradebook()
     {
-		$studentprofilemodel = new StudentProfile();
+		$gradebookmodel = new Gradebooks();
 		$allvalues = '';
 
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
 
-				'studentclass' => 'required',
-				'studentsubject' => 'required',
-				'studentid' => 'required',
-				'assessmenttype'  => 'required',
-				'assessmentgrade'  => 'required',
-				'session'  => 'required',
-				'term'  => 'required',
+				'studentid.*' => 'required|required_with[studentgrade.*]',
+				'studentgrade.*' => 'required',
+				'sybjectgroup' => 'required',
+				'classgroup' => 'required',
+				'assessment1'  => 'required',
+				'gSession'  => 'required',
+				'gTerm'  => 'required',
 			])){
-				
+				// studentid[], studentgrade[], classgroup, subjectgroup, refhasname, refhashcode, refreshedhash, gSession, gTerm, assessment1, hashurl, gradebooktableurl, editurl, posturl, gradebookid, csrf_test_name
 				try{                    
-                    $recsaved = $studentprofilemodel->insert([
+                    $recsaved = $gradebookmodel->insert([
 						//'username' => $this->request->getPost('username'),
 						'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'studentclass' => $this->request->getPost('studentclass'),
-						'studentsubject' => $this->request->getPost('studentsubject'),
 						'studentid' => $this->request->getPost('studentid'),
-						'assessmenttype'  => $this->request->getPost('assessmenttype'),
-						'assessmentgrade'  => $this->request->getPost('assessmentgrade'),
-						'session'  => $this->request->getPost('session'),
-						'term'  => $this->request->getPost('term'),
+						'studentgrade' => $this->request->getPost('studentgrade'),
+						'classgroup' => $this->request->getPost('classgroup'), //sybjectgroup
+						'sybjectgroup' => $this->request->getPost('sybjectgroup'), //sybjectgroup
+						'assessment1'  => $this->request->getPost('assessment1'),
+						'gSession'  => $this->request->getPost('gSession'),
+						'gTerm'  => $this->request->getPost('gTerm'),
 					]);
+
 					$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 					//$data['token'] = csrf_hash();	
 					$data['savedmsg'] = 'Record saved successfully';

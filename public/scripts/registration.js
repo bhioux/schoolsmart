@@ -20,7 +20,7 @@ $(document).ready(function(){
         // 'studentid', 'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup', 'last_updated'
 
         columns: [
-            {data: "studentid"},
+            {data: "regno"},
             //{data: "surname"},
             { 
                  "data": "surname",
@@ -31,6 +31,7 @@ $(document).ready(function(){
                     return row['surname'] + ' - ' + row['othernames'];
                  }
             },
+            {data: "class"},
             { 
                 "data": "studentid",
                 "render": function(data, type, row, meta){
