@@ -18,9 +18,9 @@ $(document).ready(function(){
         // 'class_id', 'class_type', 'class_group', 'class_fullname'
 
         columns: [
-            {data: "class_type"},
-            //{data: "surname"},
             {data: "class_fullname"},
+            {data: "class_group"},
+            //{data: "surname"},
             { 
                 "data": "class_id",
                 "render": function(data, type, row, meta){
@@ -146,8 +146,12 @@ $(document).ready(function(){
                                 $("#classname").val('');
                                 $("#classgroup")[0].selectedIndex = 0;
                                 //$("#btnsubmit").val('Submit').text(btnsubmit);
+                                $("#btnsubmit").val('Submit').text('Submit')
                                 classlisttable.ajax.reload();
-                           }else if(data == -1){
+                            }else if(data == 2) {
+                                alert("Record Already Exist");
+                                $("#classname").focus();
+                            }else if(data == -1){
                                 console.log("Invalid file format")                                
                                 $("#classtype")[0].selectedIndex = 0
                                 $("#classname").val('');

@@ -31,7 +31,7 @@
 
 <?= $this->section('content') ?>
     <?php
-        print_r($sessionrecs); exit;
+        //print_r($sessionrecs); exit;
     ?>
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>

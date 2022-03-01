@@ -17,9 +17,10 @@ class Filters extends BaseConfig
 		'before' => [
 				//'honeypot'
 				'csrf' => ['except' => ['/student/editregistration', '/student/postregistration', '/student/updateregistration', 
-				'/setup/editsession', '/setup/postsession', '/setup/updatesession', '/setup/sessiontable',
-				'/setup/editclass', '/setup/postclass',  '/setup/updateclass', '/setup/classtable',
-				'/setup/editsubjects', '/setup/postsubjects',  '/setup/updatesubjects', '/setup/subjectstable', '/staff/poststaffsetup'
+				// '/setup/editsession', '/setup/postsession', '/setup/updatesession', '/setup/sessiontable',
+				// '/setup/editclass', '/setup/postclass',  '/setup/updateclass', '/setup/classtable',
+				// '/setup/editsubjects', '/setup/postsubjects',  '/setup/updatesubjects', '/setup/subjectstable',
+				'/staff/poststaffsetup'
 			]],
 		],
 		'after'  => [

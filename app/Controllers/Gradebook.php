@@ -60,8 +60,10 @@ class Gradebook extends BaseController
         $data['mainnav'] = "";        
         $data['gradebooksetup'] = "";
 
-		$data['sessionrecs'] = $this->sessionrecs();
-		$data['termsrecs'] = $this->termsrecs();
+		// $data['sessionrecs'] = $this->sessionrecs();
+		// $data['termsrecs'] = $this->termsrecs();
+		$data['sessionrecs'] = [''];
+		$data['termsrecs'] = [''];
 
         return view('pages/gradebooksetup', $data);
     }
