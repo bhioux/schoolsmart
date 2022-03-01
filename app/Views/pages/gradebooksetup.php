@@ -30,9 +30,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?php
-        //print_r($sessionrecs); exit;
-    ?>
+    <div id="notifier"></div>
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>
 

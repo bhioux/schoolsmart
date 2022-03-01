@@ -252,9 +252,9 @@
                                             <div class="col-12 layout-spacing">
                                                 <h3 class="in-heading">ASSESSMENT 1</h3>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label for="t-text">Select Class: </label> &ast;
+                                                    <label for="t-text">Class: </label> &ast;
                                                     <input type="hidden" name="gradebookid" id="gradebookid" value="">
                                                     <input type="hidden" name="posturl" id="posturl" value="<?= site_url('gradebook/postgradebook'); ?>">
                                                     <input type="hidden" name="editurl" id="editurl" value="<?= site_url('gradebook/updategradebook'); ?>">   
@@ -263,14 +263,14 @@
                                                     <input type="hidden" name="assessment1" id="assessment1" value="assessment1">
                                                     <input type="hidden" name="gTerm" id="gTerm" value="<?= $termrecs->termid ?>">
                                                     <input type="hidden" name="gSession" id="gSession" value="<?= $sessionrecs->sessionid ?>">
-                                                    <input type="text" name="refreshedhash" id="refreshedhash" value=""> 
+                                                    <input type="hidden" name="refreshedhash" id="refreshedhash" value=""> 
                                                     <input type="hidden" name="refhashcode" id="refhashcode" value="<?= csrf_token() ?>"> 
                                                     <input type="hidden" name="refhasname" id="refhasname" value="<?= csrf_hash() ?>"> 
                                                     <!--  -->
                                                     <div class="form-group">
 
                                                         <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
-                                                            <option disabled selected>--Choose One--</option>
+                                                            <option value='' selected>--Choose One--</option>
                                                             <!-- <option value="A">Primary 4b</option> -->
                                                             <?php
                                                                 foreach($classes as $class){
@@ -285,17 +285,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label for="t-text">Select Subject: </label> &ast;
+                                                    <label for="t-text">Subject: </label> &ast;
                                                     <div class="form-group">
                                                         <select class="selectpicker form-control" id="sybjectgroup" name="sybjectgroup" required>
-                                                            <option disabled selected>--Choose One--</option>
+                                                            <option value='' selected>--Choose One--</option>
                                                             <option value="A">Mathematics</option>
                                                             <?php
                                                                 foreach($subjects as $subject){
                                                             ?>
-                                                                   <option value="<?= $subject->subjectid ?>">
+                                                                   <option value="<?= $subject->subjectcode ?>">
                                                                     <?= $subject->subjectname ?>
                                                                    </option>
                                                             <?php
@@ -305,6 +306,31 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="t-text">Assessment Type: </label> &ast;
+                                                    <div class="form-group">
+                                                        <select class="selectpicker form-control" id="assesstype" name="assesstype" required>
+                                                            <option value='' selected>--Choose One--</option>
+                                                            <option value="ca1">CA1</option>
+                                                            <option value="ca2">CA2</option>
+                                                            <option value="ca3">CA3</option>
+                                                            <option value="exam">EXAM</option>                                                       
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="t-text">Action: </label> &ast;
+                                                    <div class="form-group">
+                                                        <input type="button" class="btn btn-primary" id="btnSelect" name="btnSelect" value="Select" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="table table-hover">
                                             <table id="gradebooktable" style="width:100%">
