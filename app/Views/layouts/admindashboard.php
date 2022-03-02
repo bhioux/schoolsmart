@@ -12,7 +12,7 @@
         <meta name="description" content="FEDERAL UNIVERSITY OF TECHNOLOGY AKURE PRIMARY SCHOOL">
         <meta name="author" content="ADEOLU BLESSING OLANIYAN">
 
-        <title>FUTA PRIMARY SCHOOL</title>
+        <title>FUTA SECONDARY SCHOOL</title>
         
         <link rel="icon" type="image/x-icon" href="<?= base_url() ?>/assets/img/favicon.png"/>
         <link href="<?= base_url() ?>/assets/css/loader.css" rel="stylesheet" type="text/css" />

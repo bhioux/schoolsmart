@@ -114,15 +114,29 @@
       </div>
     </div>
 
-    <div class="work-experience layout-spacing ">
+    <div class="work-experience layout-spacing">
         
       <div class="widget-content widget-content-area">
 
-        <a href="gradebooksetup"><h3 class="">Gradebook Setup</h3></a>
-          
-        <div class="timeline-alter">
+        <a href="<?= base_url() ?>/gradebook/setup"><h3 class="btn btn-secondary">Gradebook Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/traitssetup"><h3 class="btn btn-secondary">Observable Traits' Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/affectiveareasetup"><h3 class="btn btn-secondary">Affective Area Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/socialhabitsetup"><h3 class="btn btn-secondary">Social Habit Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/billsetup"><h3 class="btn btn-secondary">Students Bill Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/commentssetup"><h3 class="btn btn-secondary">Comments Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/awardsetup"><h3 class="btn btn-secondary">Prizes & Awards Setup</h3></a>
+        <br>
+        <a href="<?= base_url() ?>/assessmentsetup"><h3 class="btn btn-secondary">Assessment Type Setup</h3></a>
         
-          <div class="item-timeline">
+        <!-- <div class="timeline-alter"> -->
+        
+          <!-- <div class="item-timeline">
             <div class="t-meta-date">
               <p class="">Assessment 1</p>
             </div>
@@ -130,12 +144,12 @@
             </div>
             <div class="t-text">
               <a href="gradebooksetup">Setup CA 1</a>
-              <!-- <p>Netfilx Inc.</p>
-              <p>Designer Illustrator</p> -->
+              <p>Netfilx Inc.</p>
+              <p>Designer Illustrator</p>
             </div>
-          </div>
+          </div> -->
 
-          <div class="item-timeline">
+          <!-- <div class="item-timeline">
             <div class="t-meta-date">
               <p class="">Assessment 2</p>
             </div>
@@ -143,12 +157,12 @@
             </div>
             <div class="t-text">
               <a href="gradebooksetup">Setup CA 2</a>
-              <!-- <p>Google Inc.</p>
-              <p>Designer Illustrator</p> -->
+              <p>Google Inc.</p>
+              <p>Designer Illustrator</p>
             </div>
-          </div>
+          </div> -->
 
-          <div class="item-timeline">
+          <!-- <div class="item-timeline">
             <div class="t-meta-date">
               <p class="">Examination</p>
             </div>
@@ -156,12 +170,12 @@
             </div>
             <div class="t-text">
               <a href="gradebooksetup">Setup Exam</a>
-              <!-- <p>Design Reset Inc.</p>
-              <p>Designer Illustrator</p> -->
+              <p>Design Reset Inc.</p>
+              <p>Designer Illustrator</p>
             </div>
-          </div>
+          </div> -->
 
-        </div>
+        <!-- </div> -->
       </div>
 
     </div>

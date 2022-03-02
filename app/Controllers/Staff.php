@@ -16,11 +16,18 @@ use App\Models\StaffSetup;
 use App\Models\SubjectSetup;
 use App\Models\SessionSetup;
 use App\Models\TermSetup;
+use App\Models\AssessmentSetup;
 use App\Models\ClassSetup;
 use App\Models\PopulateClass;
 use App\Models\AssignClasses;
 use App\Models\ParentsProfile;
 use App\Models\GradebookSetup;
+use App\Models\TraitsSetup;
+use App\Models\AffectiveAreaSetup;
+use App\Models\SocialHabitSetup;
+use App\Models\CommentsSetup;
+use App\Models\BillSetup;
+use App\Models\AwardSetup;
 use App\Models\Registration;
 use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
@@ -214,6 +221,69 @@ class Staff extends BaseController
         $data['mainnav'] = "";        
         $data['updatestaffprofile'] = "";
         return view('pages/updatestaffprofile', $data);
+    }
+
+	public function commentssetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['commentssetup'] = "";
+        return view('pages/commentssetup', $data);
+    }
+
+	public function traitssetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['traitssetup'] = "";
+        return view('pages/traitssetup', $data);
+    }
+
+	public function affectiveareasetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['affectiveareasetup'] = "";
+        return view('pages/affectiveareasetup', $data);
+    }
+
+	public function socialhabitsetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['socialhabitsetup'] = "";
+        return view('pages/socialhabitsetup', $data);
+    }
+
+	public function billsetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['billsetup'] = "";
+        return view('pages/billsetup', $data);
+    }
+
+	public function awardsetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['awardsetup'] = "";
+        return view('pages/awardsetup', $data);
+    }
+
+	public function assessmentsetup()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['assessmentsetup'] = "";
+        return view('pages/assessmentsetup', $data);
     }
 
 	public function reportcardjss()

@@ -38,7 +38,7 @@ $routes->get('/studentprofile', 'Home::studentprofile');
 $routes->get('/updateprofile', 'Home::updateprofile');
 $routes->get('/editprofile', 'Home::editprofile');
 $routes->get('/students', 'Home::students');
-$routes->get('/addvehicles', 'Home::addvehicles');
+//$routes->get('/addvehicles', 'Home::addvehicles');
 
 $routes->get('/reportcardnur', 'Home::reportcardnur');
 $routes->get('/reportcardpry', 'Home::reportcardpry');
@@ -48,6 +48,13 @@ $routes->get('/applicationform', 'Home::applicationform');
 $routes->get('/staffprofile', 'Home::staffprofile');
 $routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
 $routes->get('/staffsetup', 'Home::staffsetup');
+$routes->get('/assessmentsetup', 'Staff::assessmentsetup');
+$routes->get('/billsetup', 'Staff::billsetup');
+$routes->get('/awardsetup', 'Staff::awardsetup');
+$routes->get('/traitssetup', 'Staff::traitssetup');
+$routes->get('/affectiveareasetup', 'Staff::affectiveareasetup');
+$routes->get('/socialhabitsetup', 'Staff::socialhabitsetup');
+$routes->get('/commentssetup', 'Staff::commentssetup');
 //$routes->get('/subjectsetup', 'Home::subjectsetup');
 $routes->get('/termsetup', 'Home::termsetup');
 
@@ -96,7 +103,7 @@ $routes->group('setup', function($routes)
 $routes->group('staff', function($routes)
 {
 	$routes->add('staffsetup', 'StaffSetup::staffsetup');
-	$routes->get('staffsetup', 'StaffSetup::staffsetup');
+	$routes->post('poststaffsetup', 'StaffSetup::poststaffsetup');
 	$routes->post('postregistration', 'StudentRegistration::postregistration');
 	$routes->get('registrationtable', 'StudentRegistration::registrationtable');  //
 	$routes->post('editregistration', 'StudentRegistration::editregistration');

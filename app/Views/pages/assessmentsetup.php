@@ -1,11 +1,20 @@
+
 <?= $this->extend('layouts/admindashboard') ?>
 
 <?= $this->section('styles') ?>
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/datatables.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/dt-global_style.css">
+   
+    <link href="<?= base_url() ?>/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.css">
+    <link href="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/dt-global_style.css">
     <!-- END PAGE LEVEL STYLES -->
 <?= $this->endSection() ?>
 
@@ -18,11 +27,26 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?= $this->include('partials/studentprofile') ?>
+    <?= $this->include('partials/assessmentsetup') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
+    <script src="<?= base_url() ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
+
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="<?= base_url() ?>/assets/js/scrollspyNav.js"></script>
+    <script src="<?= base_url() ?>/plugins/flatpickr/flatpickr.js"></script>
+    <script src="<?= base_url() ?>/plugins/noUiSlider/nouislider.min.js"></script>
+    <script src="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.js"></script>
+    <script>
+        var f3 = flatpickr(document.getElementById('rangeCalendarFlatpickr'), {
+            mode: "range"
+        });
+    </script>
+    <script src="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.js"></script>
+    <script src="<?= base_url() ?>/plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
+    <script src="<?= base_url() ?>/plugins/highlight/highlight.pack.js"></script>
+    <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
     <script>
         $('#zero-config').DataTable({
@@ -35,8 +59,13 @@
             },
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7 
+            "pageLength": 10 
         });
+    </script>
+
+    <script>        
+        checkall('todoAll', 'todochkbox');
+        $('[data-toggle="tooltip"]').tooltip()
     </script>
     <!-- END PAGE LEVEL SCRIPTS -->
 <?= $this->endSection() ?>
