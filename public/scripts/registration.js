@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //refreshhash()
     //alert("888")
     console.log('preparing data insert...')
     var regdatatableurl = $("#regdatatableurl").val();
@@ -19,7 +20,7 @@ $(document).ready(function(){
         // 'studentid', 'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup', 'last_updated'
 
         columns: [
-            {data: "studentid"},
+            {data: "regno"},
             //{data: "surname"},
             { 
                  "data": "surname",
@@ -30,6 +31,7 @@ $(document).ready(function(){
                     return row['surname'] + ' - ' + row['othernames'];
                  }
             },
+            {data: "class"},
             { 
                 "data": "studentid",
                 "render": function(data, type, row, meta){
@@ -75,15 +77,12 @@ $(document).ready(function(){
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    alert(data)
+                    console.log(data)
                     if(data == 1){
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log( "Data Loaded: " + data );
-                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
-                        $("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
-                        
-                        //$("#frmtest")[0].reset();
+                        $("#notifier").removeClass('alert').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
 
                         imps = formw.querySelectorAll('input[type="text"], select');
                         imps.forEach(element => {
@@ -98,8 +97,8 @@ $(document).ready(function(){
                         console.log('Data refreshed');
 
                     }else if(data == '-1'){
-                        console.log("Invalid file format")
-                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        //console.log("Invalid file format")
+                        $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log(data + 'Data error');
@@ -107,7 +106,7 @@ $(document).ready(function(){
                     
                     }else{
                         console.log("Invalid file format")
-                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log(data + 'Data error');
@@ -120,7 +119,7 @@ $(document).ready(function(){
                     $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
                     notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
-                    $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
+                    $("#notifier").removeClass('alert').addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
             });

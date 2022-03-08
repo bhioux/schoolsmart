@@ -67,8 +67,8 @@
             </div>
             <br>  
             <div class="row">
-              <div class="table-responsive">
-                <table class="table table-bordered mb-4">
+              <div clas="table-responsive">
+                <table class="table table-bordered mb-4" style="width:100%">
                   <thead>
                     <tr>
                       <th rowspan="2">SUBJECTS</th>
@@ -81,7 +81,7 @@
                       <th rowspan="2"><p class="uptab"> CUMULATIVE<br>AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">CLASS AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">POSITION GRADE<br>IN SUBJECT</p></th>
-                      <th rowspan="2"><p>SUBJECTS<br>TEACHERS<br>REMARK</p></th>
+                      <th rowspan="2"><p class="uptab">SUBJECTS<br>TEACHERS<br>REMARK</p></th>
                       <th rowspan="2"><p class="uptab">SUBJECT<br>TEACHER<br>SIGNATURE</p></th>
                     </tr>
                   </thead>    

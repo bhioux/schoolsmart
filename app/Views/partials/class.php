@@ -123,8 +123,8 @@ function editAction(obj){
               <table id="classlisttable" name="classlisttable" class="table table-hover" style="width:100%">
                 <thead>
                   <tr>
-                    <th>Class Type</th>
                     <th>Full Class Name</th>
+                    <th>Class Group</th>
                     <th class="no-content">Action</th>
                   </tr>
                 </thead>

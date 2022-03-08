@@ -120,9 +120,11 @@ $(document).ready(function(){
                         alert("Record Updated Successfully");
                         //$("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
                         $("#subjectname").val(''); $("#subjectname").focus();
-                        $("#subjectcode").val('');
+                        $("#subjectcode").val(''); 
+                        $("#subjectcode").attr('disabled', false);        
                         $("#subjectdescription").val('');
                         //$("#btnsubmit").val('Submit').text(btnsubmit);
+                        $("#btnsubmit").val('Submit').text('Submit')
                         subjectlisttable.ajax.reload();
                    }else if(data == -1){
                         $("#subjectname").val('');

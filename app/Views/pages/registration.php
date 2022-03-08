@@ -51,6 +51,11 @@
     <script>        
         checkall('todoAll', 'todochkbox');
         $('[data-toggle="tooltip"]').tooltip()
+
+        var f1 = flatpickr(document.getElementById('basicFlatpickr'), {
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
     </script>
     <!-- END PAGE LEVEL SCRIPTS -->
 
