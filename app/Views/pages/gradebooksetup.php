@@ -30,7 +30,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
     <div id="notifier"></div>
+
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>
 

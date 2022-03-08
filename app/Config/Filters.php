@@ -16,11 +16,6 @@ class Filters extends BaseConfig
 	public $globals = [
 		'before' => [
 				//'honeypot'
-				'csrf' => ['except' => ['/refreshcsrf', '/student/updateregistration', 
-				'/setup/editsession', '/setup/postsession', '/setup/updatesession', '/setup/sessiontable',
-				'/setup/editclass', '/setup/postclass',  '/setup/updateclass', '/setup/classtable',
-				'/setup/editsubjects', '/setup/postsubjects',  '/setup/updatesubjects', '/setup/subjectstable', '/staff/poststaffsetup'
-			]],
 		],
 		'after'  => [
 			'toolbar',
