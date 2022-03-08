@@ -1,14 +1,16 @@
 <style>
-   .uptab{
+  .uptab{
+    writing-mode: vertical-rl;
     writing-mode: sideways-lr; 
-    text-orientation: upright;
+    text-orientation: mixed;
     padding-left: 0px;
     margin: 0px;
   }
 
   #reportcard {
     background: #fff;
-    text-orientation:upright;
+    writing-mode: vertical-rl;
+    text-orientation:mixed;
   }
   p{
     margin: 0px;
