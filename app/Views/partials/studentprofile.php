@@ -1,25 +1,8 @@
-<!-- <style>
-   .uptab{
-        writing-mode: sideways-lr; 
-        text-orientation: upright;
+<?php
+    if(isset($_SESSION['username'])){
+        //echo $_SESSION['username']; 
     }
-
-    #reportcard {
-        background: #fff;
-        text-orientation:upright;
-    }
-
-    .row-form {
-        margin: 0;
-        padding: 0;
-    }
-
-    .row-form1 {
-        margin: 0 0 30px 0;
-        padding: 0;
-    }
-
-</style> -->
+?>
 <div class="row row-form">
     <div id="breadcrumbBasic" class="col-xl-12 col-lg-12 layout-spacing">
         <div class="statbox widget box box-shadow">
@@ -31,7 +14,7 @@
 
                 <nav class="breadcrumb-one float-right" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="logout">Logout</a></li>
+                        <li class="breadcrumb-item"><a href="<?= site_url('/logout') ?>">Logout</a></li>
                         <!-- <li class="breadcrumb-item active" aria-current="page"><span>UI Kit</span></li> -->
                     </ol>
                 </nav>
@@ -54,7 +37,13 @@
                 </div>
                 <div class="text-center user-info">
                     <img src="assets/img/90x90.jpg" alt="avatar">
-                    <p class="">Kayode Ayodele</p>
+                    <p class="">
+                        <?php
+                        if(isset($_SESSION['username'])){
+                            echo $_SESSION['username']; 
+                        }
+                        ?>
+                    </p>
                 </div>
                 <div class="user-info-list">
 

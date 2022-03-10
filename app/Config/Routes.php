@@ -32,6 +32,9 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Home::index'); //
+$routes->get('/login', 'Home::login'); //
+$routes->get('/logout', 'Home::logout'); //
+$routes->post('/dologin', 'Home::dologin'); //
 $routes->get('/register', 'Home::register');
 $routes->get('/passreset', 'Home::passreset');
 $routes->get('/studentprofile', 'Home::studentprofile');
@@ -40,10 +43,7 @@ $routes->get('/editprofile', 'Home::editprofile');
 $routes->get('/students', 'Home::students');
 $routes->get('/addvehicles', 'Home::addvehicles');
 
-$routes->get('/reportcardnur', 'Home::reportcardnur');
-$routes->get('/reportcardpry', 'Home::reportcardpry');
-$routes->get('/reportcardjss', 'Staff::reportcardjss');
-$routes->get('/reportcardsss', 'Staff::reportcardsss');
+
 $routes->get('/applicationform', 'Home::applicationform');
 $routes->get('/staffprofile', 'Home::staffprofile');
 $routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
@@ -64,6 +64,7 @@ $routes->group('student', function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+
 $routes->post('/refreshcsrf', 'StudentRegistration::refreshcsrf');
 
 $routes->group('setup', function($routes)
@@ -112,6 +113,14 @@ $routes->group('gradebook', function($routes)
 	$routes->get('setup', 'Gradebook::gradebooksetup');
 	$routes->get('gradebooktable', 'Gradebook::gradebooktable'); //
 	$routes->post('postgradebook', 'Gradebook::postgradebook'); 
+});
+
+$routes->group('report', function($routes)
+{
+	$routes->get('reportcardjss', 'Reports::reportcardjss');
+	$routes->get('reportcardsss', 'Reports::reportcardsss');
+	$routes->get('reportcardnur', 'Reports::reportcardnur');
+	$routes->get('reportcardpry', 'Reports::reportcardpry');
 });
 
 // postgradebook
