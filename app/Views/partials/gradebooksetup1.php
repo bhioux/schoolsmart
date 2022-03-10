@@ -190,7 +190,7 @@
                                 </div>
                             </li>
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <div class="nav-link list-actions" id="invoice-00002" data-invoice-id="00002">
                                     <div class="f-m-body">
                                         <div class="f-head">
@@ -203,9 +203,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <div class="nav-link list-actions" id="invoice-00003" data-invoice-id="00003">
                                     <div class="f-m-body">
                                         <div class="f-head">
@@ -218,7 +218,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -292,7 +292,6 @@
                                                     <div class="form-group">
                                                         <select class="selectpicker form-control" id="sybjectgroup" name="sybjectgroup" required>
                                                             <option value='' selected>--Choose One--</option>
-                                                            <option value="A">Mathematics</option>
                                                             <?php
                                                                 foreach($subjects as $subject){
                                                             ?>

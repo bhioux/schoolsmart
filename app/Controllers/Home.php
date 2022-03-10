@@ -300,7 +300,7 @@ class Home extends BaseController
 						echo 0;
 					}
 					exit;
-				}catch(exception $e){
+				}catch(\Exception $e){
 					print_r($e->getMessage());
 					exit;
 				}

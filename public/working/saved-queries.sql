@@ -398,11 +398,14 @@ coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessme
 
 coalesce(
            NULLIF (
-                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject =  sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0), 0
-             ),      ss.termsummary, NULL
+               coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca1, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca2, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject =  sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca3, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.exam, 0), 0
+             ),      ss.termsummary, 'NULL'
         ) AS termsummary,
     
 ss.lasttermcum AS lasttermcum,
@@ -415,10 +418,13 @@ ss.cumavg AS cumavg,
 (
 coalesce(
     NULLIF (
-        coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-        coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-        coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-        coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0), 0
+            coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca1, 0) +
+
+            coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca2, 0) +
+
+            coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject =  sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca3, 0) +
+
+            coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.exam, 0), 0
         ),      ss.termsummary, ''
 )
 
@@ -433,6 +439,7 @@ AS cumavg2,
 
 ss.classavg AS classavg,
 ss.position AS position,
+
 ss.remark AS remark,
 ss.sign AS signs,
 
@@ -440,15 +447,7 @@ ss.sign AS signs,
 (SELECT session FROM session_setup WHERE activeflag=1) AS sessionname,
 
 (SELECT termid FROM term_setup WHERE activeflag=1) AS schoolterm,
-(SELECT term FROM term_setup WHERE activeflag=1) AS termname,
-
-
-(SELECT 
-    coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-    coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-    coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0) +
-    coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), 0)
-)  AS summary
+(SELECT term FROM term_setup WHERE activeflag=1) AS termname
 
 FROM 
 
@@ -521,8 +520,119 @@ FROM
 
 -- AUTHENTICATITION VIEW QUERIES
 
+CREATE VIEW userlogin AS
 SELECT 
 TRIM(sp.`regno`) AS username,
-md5(UPPER(TRIM(sp.`surname`))) AS password,
-TRIM(sp.`email`) AS email
+COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = sp.regno),
+    md5(UPPER(TRIM(sp.`surname`)))) AS password,
+TRIM(sp.`email`) AS email,
+'student' AS category
 FROM `student_profile` AS sp
+
+
+
+-- pgportal
+
+SELECT 
+
+p.`application_no` AS formno,
+ 
+(SELECT CONCAT(acc.`sname`,' ', acc.`onames`) FROM `accountholder` AS acc WHERE acc.`refNum`= p.`application_no`) AS candidatename,
+
+(SELECT dept.shortcode FROM department AS dept WHERE dept.deptid = p.progcourse) AS dept,
+
+(SELECT sch.shortcode FROM school AS sch WHERE  sch.schoolid = p.progschool) AS school,
+
+(SELECT acc.paytype FROM accountholder AS acc WHERE acc.refNum = p.`application_no`) AS category,
+
+(SELECT dept.deptname FROM department AS dept WHERE dept.deptid = p.progcourse) AS department,
+
+(SELECT co.`degree` FROM `new_courseoption` AS co, accountholder AS acc WHERE co.`programme` = acc.paytype AND acc.refNum = p.`application_no` AND co.`session` = p.`progsession`) AS degree,
+
+MID(`progsession`,4) AS batch,
+
+0  printstatus,
+
+(SELECT co.`coursename` FROM `new_courseoption` AS co WHERE co.courseid = p.`progoption1`) AS programme
+
+
+FROM `program` AS p WHERE p.`pgcleared`=1 AND p.`deptclear`=1
+
+
+----
+
+
+SELECT co.`degree` FROM `new_courseoption` AS co, accountholder AS acc, program AS p WHERE co.`programme` = acc.paytype AND acc.refNum = p.`application_no` AND co.`session` = p.`progsession`
+
+
+
+
+
+
+---------------------
+CREATE OR REPLACE VIEW view_summary AS
+
+ SELECT 
+ STUDENTNO, 
+  coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca1, 0) AS CA1,
+  
+  
+coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca2, 0) as CA2,
+
+coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject =  sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca3, 0) AS CA3,
+
+coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.exam, 0) AS EXAM,
+
+
+ coalesce(
+           NULLIF (
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca1' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca1, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca2' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca2, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'ca3' AND ss.subject =  sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.ca3, 0) +
+
+                coalesce((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.assessmenttype = 'exam' AND ss.subject = sg.studentsubject AND sg.studentid = ss.studentno AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND ssession = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1)), ss.exam, 0), 0
+             ),      ss.termsummary, 'NULL'
+        ) 
+        
+ AS SUMMARY FROM scoresheet AS SS
+
+
+
+ ------------------POSITION QUERY
+
+
+ -- SELECT * FROM `view_scoresheet` WHERE 1
+
+SELECT
+`studentno`,
+`fullname`,
+-- (SELECT count(*) FROM view_scoresheet AS sh WHERE sh.`scoresheetid`< ss.scoresheetid ORDER BY sh.scoresheetid) AS position,
+
+(SELECT count(*) FROM view_scoresheet AS sh WHERE sh.`cumavg2`< ss.cumavg2 AND term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND session = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1 AND sh.class=ss.class AND sh.subjects=ss.subjects  ORDER BY sh.`cumavg2`)) AS position,
+
+`studentno`
+FROM `view_scoresheet` AS ss ORDER BY ss.scoresheetid
+
+
+
+-----------------
+
+
+-- SELECT * FROM `view_scoresheet` WHERE 1
+CREATE OR REPLACE VIEW view_position AS
+SELECT
+ss.`studentno`,
+ss.`fullname`,
+ss.`subjects`,
+ss.`cumavg2`,
+-- (SELECT count(*) FROM view_scoresheet AS sh WHERE sh.`scoresheetid`< ss.scoresheetid ORDER BY sh.scoresheetid) AS position,
+
+(SELECT count(*) FROM view_scoresheet AS sh WHERE sh.`cumavg2`> ss.cumavg2 AND schoolterm = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND `schoolsession` = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1 AND sh.class=ss.class AND sh.subjects=ss.subjects  ORDER BY sh.`cumavg2`)) +1 AS position,
+
+ss.`sessionname`,
+ss.schoolsession,
+ss.schoolterm
+ss.`termname`
+FROM `view_scoresheet` AS ss ORDER BY ss.`subjects`, `cumavg2` DESC
