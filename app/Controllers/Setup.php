@@ -191,13 +191,14 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classtype' => 'required',
 				'classgroup' => 'required',
 				'classname' => 'required'
 			])){
 				$classname = $this->request->getPost('classname');
 				$classgroup = $this->request->getPost('classgroup');
-				$classmodel->where(array('class_fullname'=>$classname, 'class_group'=>$classgroup));	
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
 				$query = $classmodel->get();
 				$result = $query->getRow();
 				if(!(is_object($result))){
@@ -205,8 +206,8 @@ class Setup extends BaseController
 						$recsaved = $classmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 							'class_type' => $this->request->getPost('classtype'),
-							'class_group' => $this->request->getPost('classgroup'),
-							'class_fullname' => $this->request->getPost('classname')	
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -239,7 +240,7 @@ class Setup extends BaseController
 			'class_id' => 'required',			
 		])){
 			$class_id = $this->request->getPost('class_id');
-			$classmodel->where(['class_id'=>$class_id]);	
+			$classmodel->where(['classid'=>$class_id]);	
 			$query = $classmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -254,6 +255,7 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classid' => 'required',
 				'classtype' => 'required',
 				'classgroup' => 'required',
@@ -261,7 +263,7 @@ class Setup extends BaseController
 			])){
 				$classname = $this->request->getPost('classname');
 				$classgroup = $this->request->getPost('classgroup');
-				$classmodel->where(array('class_fullname'=>$classname, 'class_group'=>$classgroup));	
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
 				$query = $classmodel->get();
 				$result = $query->getRow();
 				if(!(is_object($result))){
@@ -270,8 +272,8 @@ class Setup extends BaseController
 	                        //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 							//'class_id' => $this->request->getPost('classid'),
 							'class_type' => $this->request->getPost('classtype'),
-							'class_group' => $this->request->getPost('classgroup'),
-							'class_fullname' => $this->request->getPost('classname')	
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
 	                    ]);				
 	                    $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
 	                    $data['savedmsg'] = 'Record saved successfully';

@@ -5,7 +5,8 @@ use CodeIgniter\API\ResponseTrait;
 use App\Models\MenuModel;
 use App\Models\Register;
 use App\Models\PassReset;
-use App\Models\UserProfile;
+use App\Models\UserProfile; 
+use App\Models\StudentProfileView; 
 // use App\Models\EditProfile;
 use App\Models\Students;
 use App\Models\StaffProfile;
@@ -34,47 +35,119 @@ class Reports extends BaseController
 {
 
 	protected $request;
+    protected $menu;
+    protected $currentuser = null;
+    protected $class = null;
+    protected $studentview;
+
 
 	use ResponseTrait;
     public function __construct(){
-        $this->session = $session = session();
-		helper(['form', 'string']);
+        // if(!isset($_SESSION['islogin'])){
+		// 	return redirect()->to('/login');
+		// }
+        helper(['form', 'string', 'array']);
+        $menu = new MenuModel();
+        $this->session = $session = session();		
 		$this->request = $request = \Config\Services::request();
 		$uri = $request->uri;
 		$this->requestMethod = $request->getMethod(TRUE);
 		$this->validation =  \Config\Services::validation();
+        //$this->menu = $menu->asObject()->findAll();\
+		if(isset($_SESSION['username'])){
+			$this->currentuser = $_SESSION['username'];
+			$studentprofile = new StudentProfileView();
+			$studentprofile->where(['regno'=>$this->currentuser]);	
+			$query = $studentprofile->get();
+			$result = $query->getResult();
+			$this->studentview = $student = $result[0];
+			$this->class = $student->class;
+		}
+        
     }
 
 	public function index()
-	{
-		$menu = new MenuModel();        
-		//$data['header'] = "";
-        //$data['mainnav'] = "";
-        $data['content'] = "";
-		//$data['footer'] = "";
-		//$data['adminmenu'] = $menu->asObject()->findAll();
+	{      
+        $data['menu'] = $this->menu;
 		return view('pages/home', $data);
 	}
 
 	
-	public function reportcardjss()
+	public function reportcard()
     {
-        $menu = new MenuModel();
+		//echo $_SESSION['username']; exit;
+		if(!isset($_SESSION['username'])){
+			return redirect()->to('/login');
+		}
+
+        $gradebook = new GradebookSetup();
+        $gradebook->where(['studentno'=>$this->currentuser]);	
+        $query = $gradebook->get();
+        $result = $query->getResultArray();
+        $data['gradebook'] = $result;
+        $data['studentview'] = $this->studentview;
+
+        //var_dump($result);
+
 		$data['header'] = "";
         $data['mainnav'] = "";        
         $data['reportcardjss'] = "";
-        return view('pages/reportcardjss', $data);
+
+        switch(strtoupper(substr(trim($this->class),0,1))){
+            case 'J':
+                $data['title'] = "JUNIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
+                return view('pages/reportcardjss', $data);
+            case 'S':
+                $data['title'] = "SENIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
+                return view('pages/reportcardsss', $data);
+            default:
+                return redirect()->to('/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
+        }
+        
     }
 
-	// public function applicationformsecschool()
-	// {		
-	// 	$applicationform = new ApplicationFormSecSchool();
-	// 	$data["title"] = "School Application Form";
-	// 	return view('pages/applicationformsecschool', $data);
-	// }
+	public function observables()
+    {
+		//echo $_SESSION['username']; exit;
+		if(!isset($_SESSION['username'])){
+			return redirect()->to('/login');
+		}
+
+        $gradebook = new GradebookSetup();
+        $gradebook->where(['studentno'=>$this->currentuser]);	
+        $query = $gradebook->get();
+        $result = $query->getResultArray();
+        $data['gradebook'] = $result;
+        $data['studentview'] = $this->studentview;
+
+        //var_dump($result);
+
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['reportcardjss'] = "";
+
+		$data['title'] = "OBSERVABLES REPORT - ".$this->currentuser;
+        return view('pages/reportobservables', $data);
+
+        // switch(strtoupper(substr(trim($this->class),0,1))){
+        //     case 'J':
+        //         $data['title'] = "JUNIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
+        //         return view('pages/reportcardjss', $data);
+        //     case 'S':
+        //         $data['title'] = "SENIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
+        //         return view('pages/reportobservables', $data);
+        //     default:
+        //         return redirect()->to('/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
+        // }
+        
+    }
+
 
 	public function reportcardsss()
     {
+		if(!isset($_SESSION['islogin'])){
+			//return redirect()->to('/login');
+		}
         $menu = new MenuModel();
 		$data['header'] = "";
         $data['mainnav'] = "";        
@@ -85,6 +158,9 @@ class Reports extends BaseController
     
 	public function reportcardnur()
 	{		
+		if(!isset($_SESSION['islogin'])){
+			//return redirect()->to('/login');
+		}
 		$menu = new MenuModel();
 		// $staffprofile = new StaffProfile();
 		// $studentprofile = new StudentProfile();
@@ -112,6 +188,9 @@ class Reports extends BaseController
 
 	public function reportcardpry()
 	{		
+		if(!isset($_SESSION['islogin'])){
+			//return redirect()->to('/login');
+		}
 		$menu = new MenuModel();
 		// $staffprofile = new StaffProfile();
 		// $studentprofile = new StudentProfile();

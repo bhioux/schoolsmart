@@ -4,9 +4,11 @@ use CodeIgniter\Model;
 
 class ClassModel extends Model
 {
-    protected $table = 'class';
+    // `classid`, `classtype`, `classname`, `classgroup`
+   // protected $table = 'class'; //
+    protected $table = 'setup_classes'; //setup_classes
     protected $primaryKey = 'class_id';
     protected $allowedFields = [
-        'class_type', 'class_group', 'class_fullname'
+        'classtype', 'classname', 'classgroup'
     ];
 }

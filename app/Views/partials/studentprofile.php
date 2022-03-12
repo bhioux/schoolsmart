@@ -22,7 +22,16 @@
         </div>
     </div>
 </div>
-
+<?php
+    if(isset($_SESSION['message'])){
+    ?>
+        <div class="alert alert-info">
+            <?php //print_r($_SESSION['message']); ?>
+            sdfdsfdsfds
+        </div>
+    <?php
+    }
+?>
 
 <div class="row row-form">
 

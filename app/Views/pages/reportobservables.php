@@ -23,7 +23,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?= $this->include('partials/reportcardsss') ?>
+    <?= $this->include('partials/reportcardobservables') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>

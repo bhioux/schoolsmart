@@ -18,11 +18,12 @@ $(document).ready(function(){
         // 'class_id', 'class_type', 'class_group', 'class_fullname'
 
         columns: [
-            {data: "class_fullname"},
-            {data: "class_group"},
+            {data: "classtype"},
+            {data: "classname"},
+            {data: "classgroup"},
             //{data: "surname"},
             { 
-                "data": "class_id",
+                "data": "classid",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
                        data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editAction(this)">Edit</a>';

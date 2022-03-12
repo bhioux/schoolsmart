@@ -636,3 +636,57 @@ ss.schoolsession,
 ss.schoolterm
 ss.`termname`
 FROM `view_scoresheet` AS ss ORDER BY ss.`subjects`, `cumavg2` DESC
+
+
+
+------------------------------
+CREATE OR REPLACE VIEW view_studentprofile AS
+
+select 
+`sp`.`studentid` AS `studentid`,
+`sp`.`regno` AS `regno`,
+concat(`sp`.`surname`,' ',`sp`.`othernames`) AS `fullname`,
+`sp`.`dob` AS `dob`,
+`sp`.`class` AS `class`,
+`sp`.`hometown` AS `hometown`,
+`sp`.`lga` AS `lga`,
+`sp`.`stateoforigin` AS `stateoforigin`,
+`sp`.`nationality` AS `nationality`,
+`sp`.`nin` AS `nin`,
+`sp`.`gender` AS `gender`,
+`sp`.`height` AS `height`,
+`sp`.`weight` AS `weight`,
+`sp`.`fathername` AS `fathername`,
+`sp`.`fatheroccupation` AS `fatheroccupation`,
+`sp`.`mothername` AS `mothername`,
+`sp`.`motheroccupation` AS `motheroccupation`,
+`sp`.`fatherpermaddress` AS `fatherpermaddress`,
+`sp`.`fatherphonenumber` AS `fatherphonenumber`,
+`sp`.`motherpermaddress` AS `motherpermaddress`,
+`sp`.`motherphonenumber` AS `motherphonenumber`,
+`sp`.`guardianname` AS `guardianname`,
+`sp`.`guardianoccupation` AS `guardianoccupation`,
+`sp`.`guardianpermaddress` AS `guardianpermaddress`,
+`sp`.`guardianphonenumber` AS `guardianphonenumber`,
+`sp`.`email` AS `email`,
+`sp`.`familytype` AS `familytype`,
+`sp`.`familysize` AS `familysize`,
+`sp`.`positioninfamily` AS `positioninfamily`,
+`sp`.`noofbrothers` AS `noofbrothers`,
+`sp`.`noofsisters` AS `noofsisters`,
+`sp`.`parentreligion` AS `parentreligion`,
+`sp`.`disability` AS `disability`,
+`sp`.`bloodgroup` AS `bloodgroup`,
+`sp`.`genotype` AS `genotype`,
+`sp`.`vision` AS `vision`,
+`sp`.`hearing` AS `hearing`,
+`sp`.`speech` AS `speech`,
+`sp`.`generalvitality` AS `generalvitality`,
+`sp`.`classgiven` AS `classgiven`,
+`sp`.`classgroup` AS `classgroup`,
+`sp`.`last_updated` AS `last_updated`,
+(select `futaprysch`.`session_setup`.`sessionid` from `futaprysch`.`session_setup` where (`futaprysch`.`session_setup`.`activeflag` = 1)) AS `schoolsession`,
+(select `futaprysch`.`session_setup`.`session` from `futaprysch`.`session_setup` where (`futaprysch`.`session_setup`.`activeflag` = 1)) AS `sessionname`,
+(select `futaprysch`.`term_setup`.`termid` from `futaprysch`.`term_setup` where (`futaprysch`.`term_setup`.`activeflag` = 1)) AS `schoolterm`,
+(select `futaprysch`.`term_setup`.`term` from `futaprysch`.`term_setup` where (`futaprysch`.`term_setup`.`activeflag` = 1)) AS `termname` 
+from `futaprysch`.`student_profile` `sp`

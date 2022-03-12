@@ -117,10 +117,12 @@ $routes->group('gradebook', function($routes)
 
 $routes->group('report', function($routes)
 {
+	$routes->get('reportcard', 'Reports::reportcard');
 	$routes->get('reportcardjss', 'Reports::reportcardjss');
 	$routes->get('reportcardsss', 'Reports::reportcardsss');
 	$routes->get('reportcardnur', 'Reports::reportcardnur');
 	$routes->get('reportcardpry', 'Reports::reportcardpry');
+	$routes->get('reportobservables', 'Reports::observables');
 });
 
 // postgradebook
