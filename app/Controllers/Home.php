@@ -110,10 +110,10 @@ class Home extends BaseController
 
 				switch(strtolower($category)){
 					case "student":
-						return redirect()->to("/studentprofile");
+						return redirect()->to("student/studentprofile");
 						break;
 					case "staff":
-						return redirect()->to("/staffprofile");
+						return redirect()->to("staff/staffprofile");
 						break;
 					default:
 						return redirect()->to("/");

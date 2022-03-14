@@ -323,7 +323,7 @@ class Setup extends BaseController
 			}
     }	
 
-	//subjects
+	//-------------subjects
 	public function subjects() {
         $menu = new MenuModel();
 		$data['header'] = "";
@@ -345,6 +345,7 @@ class Setup extends BaseController
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				 //`subjectid`, `subjectname`, `subjectcode`, `subjectdescription`
 				'subjectname' => 'required',
 				'subjectcode' => 'required',
 				'subjectdescription' => 'required'
@@ -357,9 +358,9 @@ class Setup extends BaseController
 					try{
 						$recsaved = $subjectsmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-							'subject_name' => $this->request->getPost('subjectname'),
-							'subject_code' => $this->request->getPost('subjectcode'),
-							'subject_description' => $this->request->getPost('subjectdescription')	
+							'subjectname' => $this->request->getPost('subjectname'),
+							'subjectcode' => $this->request->getPost('subjectcode'),
+							'subjectdescription' => $this->request->getPost('subjectdescription')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -389,10 +390,10 @@ class Setup extends BaseController
 		$session = session();
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
-			'subjects_id' => 'required',			
+			'subjectsid' => 'required',			
 		])){
-			$subjects_id = $this->request->getPost('subjects_id');
-			$subjectsmodel->where(['subject_id'=>$subjects_id]);	
+			$subjects_id = $this->request->getPost('subjectsid');
+			$subjectsmodel->where(['subjectid'=>$subjects_id]);	
 			$query = $subjectsmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -415,10 +416,10 @@ class Setup extends BaseController
                 try{	
                     $recsaved = $subjectsmodel->save([
                         //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'subject_id' => $this->request->getPost('subjectsid'),
-						'subject_name' => $this->request->getPost('subjectname'),
+						'subjectid' => $this->request->getPost('subjectsid'),
+						'subjectname' => $this->request->getPost('subjectname'),
 						//'subject_code' => $this->request->getPost('subjectcode'),
-						'subject_description' => $this->request->getPost('subjectdescription')	
+						'subjectdescription' => $this->request->getPost('subjectdescription')	
                     ]);				
                     $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
                     $data['savedmsg'] = 'Record saved successfully';
@@ -436,7 +437,7 @@ class Setup extends BaseController
                 }
 			}else{
 				$data['savedmsg'] = $failed =  $this->validation->getErrors();
-				print_r($failed);
+				//print_r($failed);
                 echo json_encode(array("success"=>-2, "message"=>$failed));
 				exit;
 			}

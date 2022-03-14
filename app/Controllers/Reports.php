@@ -101,7 +101,7 @@ class Reports extends BaseController
                 $data['title'] = "SENIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
                 return view('pages/reportcardsss', $data);
             default:
-                return redirect()->to('/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
+                return redirect()->to('student/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
         }
         
     }

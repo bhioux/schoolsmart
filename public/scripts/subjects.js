@@ -14,11 +14,11 @@ $(document).ready(function(){
             dataSrc: 'subjectstabledata'
         },
         columns: [
-            {data: "subject_name"},
-            {data: "subject_code"},
-            {data: "subject_description"},
+            {data: "subjectname"},
+            {data: "subjectcode"},
+            {data: "subjectdescription"},
             { 
-                "data": "subject_id",
+                "data": "subjectid",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
                        data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editAction(this)">Edit</a>';
