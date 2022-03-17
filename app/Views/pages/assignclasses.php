@@ -8,8 +8,8 @@
     <link href="<?= base_url() ?>/assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.css">
-    <!-- <link href="<?= //base_url() ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="<?= //base_url() ?>/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">-->
+    <!-- <link href="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/dt-global_style.css">
     <!-- END PAGE LEVEL STYLES -->

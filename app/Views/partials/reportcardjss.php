@@ -461,43 +461,6 @@
                 </div><!-- table-responsive -->                  
               </div>
             </div>
-<!-- 
-            <br>
-            <div class="row">
-              <div class="col-lg-12">
-                <p>Award Prize Won: <span></span></p>
-                <p>Date of Vacation: <span></span></p>
-                <p>Date of Resumption: <span></span></p>
-                <p>Class Teacher's Comment: <span></span></p>
-                <div class="row">
-                  <div class="col-lg-7">
-                    <p>HEAD TEACHER'S NAME:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date:</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>PARENT'S/GUARDIAN'S NAME:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>Class Teacher's Comments:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>Next Semester Begins:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Next Semester Ends</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-     -->
           </div>
         </div>
       </div>

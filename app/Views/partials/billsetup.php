@@ -166,7 +166,7 @@
                                                     <tr>
                                                         <td>Date of Vacation</td>
                                                         <td class="text-right">
-                                                            <input id="basicFlatpickr" name="vacationdate" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                                                            <input id="basicFlatpickr4" name="vacationdate" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
                                                         </td>
                                                     </tr>
                                                     <tr>

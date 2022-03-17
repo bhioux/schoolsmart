@@ -28,7 +28,7 @@
         <div class="widget-header">
           <div class="row">
             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-              <h4>SENIOR SECONDARY SCHOOL, TERMINAL REPORT</h4>
+              <h4>SENIOR SECONDARY SCHOOL, OBSERVABLE TRAITS' RATING</h4>
             </div>                 
           </div>
         </div>
@@ -66,363 +66,8 @@
               </div>
             </div>
             <br>  
-            <div class="row">
-              <div class="table-responsive">
-                <table class="table table-bordered mb-4">
-                  <thead>
-                    <tr>
-                      <th rowspan="2">SUBJECTS</th>
-                      <th><p class="uptab">1ST TEST</p></th>
-                      <th><p class="uptab">2ND TEST</p></th>
-                      <th><p class="uptab">3RD TEST</p></th>
-                      <th><p class="uptab">TEST'S EXAM</p></th>
-                      <th><p class="uptab">SUMMARY OF <br>TERM'S WORK</p></th>
-                      <th rowspan="2"><p class="uptab">LAST TERM<br>CUMULATIVE</p></th>
-                      <th rowspan="2"><p class="uptab"> CUMULATIVE<br>AVERAGE</p></th>
-                      <th rowspan="2"><p class="uptab">CLASS AVERAGE</p></th>
-                      <th rowspan="2"><p class="uptab">POSITION GRADE<br>IN SUBJECT</p></th>
-                      <th rowspan="2"><p>SUBJECTS<br>TEACHERS<br>REMARK</p></th>
-                      <th rowspan="2"><p class="uptab">SUBJECT<br>TEACHER<br>SIGNATURE</p></th>
-                    </tr>
-                  </thead>    
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td colspan="5">MARKS OBTAINABLE</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>10</td>
-                      <td>20</td>
-                      <td>20</td>
-                      <td>50</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>YORUBA</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr> 
-                      <td>FRENCH</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>GENERAL MATHEMATICS</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>FURTHER MATHEMATICS</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>PHYSICS</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>CHEMISTRY</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>BIOLOGY</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>TECHNICAL DRAWING</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>GEOGRAPHY</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>ECONOMICS</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>AGRICULTURAL SCIENCE</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>FOOD AND NUTRITION</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>FINE ARTS</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>CHRISTIAN RELIGION KNOWLEDGE</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>GOVERNMENT</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>COMMERCE</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>FINANCIAL ACCOUNTING</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>CIVIC EDUCATION</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>COMPUTER</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>ANIMAL HUSBANDARY</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>CATERING CRAFT PRACTICE</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>                
-                </table>
-              </div>
-            </div>
-            <div class="row">
+
+            <!-- <div class="row">
               <div class="col-lg-6">
                 <p>Guidance Counsellor's Remarks:</p>
                 <br>
@@ -444,7 +89,7 @@
                 <br>
                 <p><i>Date:</i></p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="widget-content widget-content-area">
@@ -730,6 +375,30 @@
                     </table>
                   </div><!-- table-responsive -->  
                 </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Guidance Counsellor's Remarks:</p>
+                <br>
+                <p>Class Teacher's Remarks:</p>
+                <br>
+                <p>Principal's Remarks:</p>
+              </div>
+              <div class="col-lg-3">
+                <p><i>Signature</i></p>
+                <br> 
+                <p><i>Signature</i></p>
+                <br> 
+                <p><i>Signature</i></p>
+              </div>
+              <div class="col-lg-3">
+                <p><i>Date:</i></p>
+                <br>
+                <p><i>Date:</i></p>
+                <br>
+                <p><i>Date:</i></p>
               </div>
             </div>    
           </div>
