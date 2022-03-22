@@ -63,7 +63,7 @@
                     <a href="<?= base_url() ?>/updatestaffprofile"> Update Staff Profile </a>
                 </li>
                 <li>
-                    <a href="<?= site_url('gradebook/gradebooksetup') ?>"> Gradebook Setup </a>
+                    <a href="<?= site_url('gradebook/setup') ?>"> Gradebook Setup </a>
                 </li>
             </ul>
         </li>
@@ -188,7 +188,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/sessionsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= base_url() ?>/setup/session" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Session Setup</span>
@@ -204,7 +204,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/classsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= base_url() ?>/setup/class" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Class Setup</span>
@@ -212,7 +212,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/subjectsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= base_url() ?>/setup/subjects" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Subject Setup</span>
@@ -228,7 +228,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/assignclasses" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= base_url() ?>/setup/assignclasses" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Assign Classes</span>
@@ -236,10 +236,66 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= site_url('gradebook/gradebooksetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url('gradebook/setup') ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Gradebook Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('traitssetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Traits' Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('affectiveareasetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Affective Area Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('socialhabitsetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Social Habit Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('billsetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Bills Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('commentssetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Gradebook Comments Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('awardsetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Awards Setup</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<?= site_url('assessmentsetup') ?>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Assessment Type Setup</span>
                         </div>
                     </a>
                 </li>

@@ -4,9 +4,11 @@ use CodeIgniter\Model;
 
 class SubjectModel extends Model
 {
-    protected $table = 'subjects';
-    protected $primaryKey = 'subject_id';
+   // protected $table = 'subjects';
+   //`subjectid`, `subjectname`, `subjectcode`, `subjectdescription`
+    protected $table = 'setup_subjects';
+    protected $primaryKey = 'subjectid';
     protected $allowedFields = [
-        'subject_name', 'subject_code',  'subject_description'
+        'subjectname', 'subjectcode',  'subjectdescription'
     ];
 }

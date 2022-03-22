@@ -20,7 +20,11 @@ class Filters extends BaseConfig
 				// '/setup/editsession', '/setup/postsession', '/setup/updatesession', '/setup/sessiontable',
 				// '/setup/editclass', '/setup/postclass',  '/setup/updateclass', '/setup/classtable',
 				// '/setup/editsubjects', '/setup/postsubjects',  '/setup/updatesubjects', '/setup/subjectstable',
-				'/staff/poststaffsetup'
+				'/staff/poststaffsetup',
+				'setup/fetchaffectivearea',
+				//'/setup/studentbyclass', //get post is permitted from being in the filters
+				//, '/setup/affectivearea',//get post is permitted from being in the filters
+				'/setup/updateaffectivearea'
 			]],
 		],
 		'after'  => [

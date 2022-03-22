@@ -45,7 +45,7 @@ class Home extends BaseController
 
 	public function index()
 	{
-		$menu = new MenuModel();        
+		$menu = new MenuModel();  
 		//$data['header'] = "";
         //$data['mainnav'] = "";
         $data['content'] = "";

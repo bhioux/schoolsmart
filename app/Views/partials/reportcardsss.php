@@ -1,14 +1,16 @@
 <style>
    .uptab{
+    writing-mode: vertical-rl;
     writing-mode: sideways-lr; 
-    text-orientation: upright;
+    text-orientation: mixed;
     padding-left: 0px;
     margin: 0px;
   }
 
   #reportcard {
     background: #fff;
-    text-orientation:upright;
+    writing-mode: vertical-rl;
+    text-orientation:mixed;
   }
   p{
     margin: 0px;
@@ -17,6 +19,7 @@
 
 
 </style>
+
 
 <div class="container">
   <div class="row">
@@ -64,8 +67,8 @@
             </div>
             <br>  
             <div class="row">
-              <div class="table-responsive">
-                <table class="table table-bordered mb-4">
+              <div clas="table-responsive">
+                <table class="table table-bordered mb-4" style="width:100%">
                   <thead>
                     <tr>
                       <th rowspan="2">SUBJECTS</th>
@@ -78,7 +81,7 @@
                       <th rowspan="2"><p class="uptab"> CUMULATIVE<br>AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">CLASS AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">POSITION GRADE<br>IN SUBJECT</p></th>
-                      <th rowspan="2"><p>SUBJECTS<br>TEACHERS<br>REMARK</p></th>
+                      <th rowspan="2"><p class="uptab">SUBJECTS<br>TEACHERS<br>REMARK</p></th>
                       <th rowspan="2"><p class="uptab">SUBJECT<br>TEACHER<br>SIGNATURE</p></th>
                     </tr>
                   </thead>    
@@ -487,7 +490,7 @@
                 <!-- <div class="row mg-b-5 justify-content-center"><h4>AFFECTIVE AREAS</h4></div> -->
                 <div class="widget-content widget-content-area">
                   <div class="table-responsive">
-                    <table id="reportcard" class="table table-bordered mg-b-0">
+                    <table class="table table-bordered mg-b-0">
                       <tbody>
                       <tr>
                           <th scope="row"></th>
@@ -682,7 +685,7 @@
                 </div>
                 <!-- <div class="row mg-b-1">&nbsp; &nbsp; &nbsp;<h5>GRADE</h5></div> -->
                 <div class="table-responsive">
-                  <table id="reportcard" class="table mg-b-0">
+                  <table class="table mg-b-0">
                     <tbody>
                       <tr>
                         <th scope="row">5 &nbsp;Maintain an excellent degree of observable traits</th>
@@ -713,7 +716,7 @@
                     <h4>GRADE</h4>
                   </div> 
                   <div class="table-responsive">
-                    <table id="reportcard" class="table mg-b-0">
+                    <table class="table mg-b-0">
                       <tbody>
                         <tr>
                           <th scope="row">0 - 39</th>
@@ -756,44 +759,7 @@
                   </div><!-- table-responsive -->  
                 </div>
               </div>
-            </div>
-
-            <!-- <br>
-            <div class="row">
-              <div class="col-lg-12">
-                <p>Award Prize Won: <span></span></p>
-                <p>Date of Vacation: <span></span></p>
-                <p>Date of Resumption: <span></span></p>
-                <p>Class Teacher's Comment: <span></span></p>
-                <div class="row">
-                  <div class="col-lg-7">
-                    <p>HEAD TEACHER'S NAME:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date:</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>PARENT'S/GUARDIAN'S NAME:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>Class Teacher's Comments:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Date</p>
-                  </div>
-                  <div class="col-lg-7">
-                    <p>Next Semester Begins:</p>
-                  </div>
-                  <div class="col-lg-5">
-                    <p>Next Semester Ends</p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-    
+            </div>    
           </div>
         </div>
       </div>

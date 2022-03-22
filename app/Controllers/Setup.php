@@ -27,6 +27,8 @@ use App\Models\ApplicationForm;
 use App\Models\SessionModel;
 use App\Models\ClassModel;
 use App\Models\SubjectModel;
+use App\Models\AffectiveAreaModel;
+
 
 //use App\Models\DateTime;
 use CodeIgniter\Controller;
@@ -191,13 +193,14 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classtype' => 'required',
 				'classgroup' => 'required',
 				'classname' => 'required'
 			])){
 				$classname = $this->request->getPost('classname');
 				$classgroup = $this->request->getPost('classgroup');
-				$classmodel->where(array('class_fullname'=>$classname, 'class_group'=>$classgroup));	
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
 				$query = $classmodel->get();
 				$result = $query->getRow();
 				if(!(is_object($result))){
@@ -205,8 +208,8 @@ class Setup extends BaseController
 						$recsaved = $classmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 							'class_type' => $this->request->getPost('classtype'),
-							'class_group' => $this->request->getPost('classgroup'),
-							'class_fullname' => $this->request->getPost('classname')	
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -239,7 +242,7 @@ class Setup extends BaseController
 			'class_id' => 'required',			
 		])){
 			$class_id = $this->request->getPost('class_id');
-			$classmodel->where(['class_id'=>$class_id]);	
+			$classmodel->where(['classid'=>$class_id]);	
 			$query = $classmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -254,6 +257,7 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classid' => 'required',
 				'classtype' => 'required',
 				'classgroup' => 'required',
@@ -261,7 +265,7 @@ class Setup extends BaseController
 			])){
 				$classname = $this->request->getPost('classname');
 				$classgroup = $this->request->getPost('classgroup');
-				$classmodel->where(array('class_fullname'=>$classname, 'class_group'=>$classgroup));	
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
 				$query = $classmodel->get();
 				$result = $query->getRow();
 				if(!(is_object($result))){
@@ -270,8 +274,8 @@ class Setup extends BaseController
 	                        //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 							//'class_id' => $this->request->getPost('classid'),
 							'class_type' => $this->request->getPost('classtype'),
-							'class_group' => $this->request->getPost('classgroup'),
-							'class_fullname' => $this->request->getPost('classname')	
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
 	                    ]);				
 	                    $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
 	                    $data['savedmsg'] = 'Record saved successfully';
@@ -319,7 +323,7 @@ class Setup extends BaseController
                 echo json_encode(array("success"=>-2, "message"=>$failed));
 				exit;
 			}
-    }	
+    }		
 
 	//subjects
 	public function subjects() {
@@ -343,6 +347,7 @@ class Setup extends BaseController
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				 //`subjectid`, `subjectname`, `subjectcode`, `subjectdescription`
 				'subjectname' => 'required',
 				'subjectcode' => 'required',
 				'subjectdescription' => 'required'
@@ -355,9 +360,9 @@ class Setup extends BaseController
 					try{
 						$recsaved = $subjectsmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-							'subject_name' => $this->request->getPost('subjectname'),
-							'subject_code' => $this->request->getPost('subjectcode'),
-							'subject_description' => $this->request->getPost('subjectdescription')	
+							'subjectname' => $this->request->getPost('subjectname'),
+							'subjectcode' => $this->request->getPost('subjectcode'),
+							'subjectdescription' => $this->request->getPost('subjectdescription')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -387,10 +392,10 @@ class Setup extends BaseController
 		$session = session();
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
-			'subjects_id' => 'required',			
+			'subjectsid' => 'required',			
 		])){
-			$subjects_id = $this->request->getPost('subjects_id');
-			$subjectsmodel->where(['subject_id'=>$subjects_id]);	
+			$subjects_id = $this->request->getPost('subjectsid');
+			$subjectsmodel->where(['subjectid'=>$subjects_id]);	
 			$query = $subjectsmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -413,10 +418,10 @@ class Setup extends BaseController
                 try{	
                     $recsaved = $subjectsmodel->save([
                         //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'subject_id' => $this->request->getPost('subjectsid'),
-						'subject_name' => $this->request->getPost('subjectname'),
+						'subjectid' => $this->request->getPost('subjectsid'),
+						'subjectname' => $this->request->getPost('subjectname'),
 						//'subject_code' => $this->request->getPost('subjectcode'),
-						'subject_description' => $this->request->getPost('subjectdescription')	
+						'subjectdescription' => $this->request->getPost('subjectdescription')	
                     ]);				
                     $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
                     $data['savedmsg'] = 'Record saved successfully';
@@ -434,9 +439,166 @@ class Setup extends BaseController
                 }
 			}else{
 				$data['savedmsg'] = $failed =  $this->validation->getErrors();
-				print_r($failed);
+				//print_r($failed);
                 echo json_encode(array("success"=>-2, "message"=>$failed));
 				exit;
 			}
-    }		
+    }	
+
+
+	public function fetchAffectiveArea() {
+		$session = session();
+		$affectiveareamodel = new AffectiveAreaModel();
+		if($this->request->getMethod() === 'post' && $this->validate([
+			'regNo' => 'required',			
+		])){
+			$regNo = $this->request->getPost('regNo');
+                try{	
+					$affectiveareamodel->where(['regno'=>$regNo]);	
+					$query = $affectiveareamodel->get();
+					$result = $query->getResult();
+					echo json_encode($result[0]);				
+                    exit;
+                }catch(\Exception $e){
+					echo 0;	
+                    exit;
+                }
+		}else{
+			$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			return array();
+		}
+	}
+
+	public function affectiveArea() {
+		$session = session();
+		$affectiveareamodel = new AffectiveAreaModel();
+		if($this->request->getMethod() === 'get' && $this->validate([
+			'sentClassId' => 'required',			
+		])){
+			$sentClassId = $this->request->getGet('sentClassId');
+			//$affectiveareamodel->orderBy('last_updated', 'ASC');	
+			$affectiveareamodel->where(['class'=>$sentClassId]);	
+			$query = $affectiveareamodel->get();
+			$result = $query->getResult();
+			echo json_encode(array('affectiveareantabledata'=>$result));
+			//echo json_encode($result[0]);
+		}else{
+			$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			return array();
+		}
+	}
+
+	public function updateAffectiveArea() {
+		$session = session();
+		$affectiveareamodel = new AffectiveAreaModel();
+		if($this->request->getMethod() === 'post' && $this->request->getPost('punctuality') !='Rate Students'){
+			$regNo = $this->request->getPost('regNo');
+			$affectiveareamodel->where(array('regno'=>$regNo));	
+			$query = $affectiveareamodel->get();
+			$result = $query->getRow();
+			if(!(is_object($result))){
+				try{
+					$recsaved = $affectiveareamodel->insert([
+						'studentid' => $this->request->getPost('studentIdX'),
+						'regno' => $regNo,
+						'session' => $this->request->getPost('session'),
+						'term' => $this->request->getPost('term'),
+						'class' => $this->request->getPost('classId'),
+						'punctuality' => $this->request->getPost('punctuality'),
+						'neatness' => $this->request->getPost('neatness'),
+						'politeness' => $this->request->getPost('politeness'),
+						'honesty' => $this->request->getPost('honesty'),
+						'relationshipwithstaffs' => $this->request->getPost('relwithstaff'),
+						'relationshipwithothers' => $this->request->getPost('relwithothers'),
+						'leadership' => $this->request->getPost('leadership'),
+						'emotionalstability' => $this->request->getPost('emotionalstability'),
+						'health' => $this->request->getPost('health'),
+						'attitudetoschoolwork' => $this->request->getPost('attitude'),
+						'attentiveness' => $this->request->getPost('attentiveness'),
+						'persevearance' => $this->request->getPost('perseverance'),
+						'attendanceinclass' => $this->request->getPost('attendance'),
+						'reliability' => $this->request->getPost('reliability'),
+						'selfcontrol' => $this->request->getPost('selfcontrol'),
+						'cooperation' => $this->request->getPost('cooperation'),
+						'responsibility' => $this->request->getPost('responsibility'),
+						'initiative' => $this->request->getPost('initiative'),
+						'organisationalability' => $this->request->getPost('orgability'),
+						'fluency' => $this->request->getPost('fluency'),
+						'games' => $this->request->getPost('games'),
+						'sports' => $this->request->getPost('sports'),
+						'drawingandpainting' => $this->request->getPost('drawing'),
+						'musicalskills' => $this->request->getPost('music'),
+						'handlingoftools' => $this->request->getPost('handlingtools')
+					]);
+					$this->session->setFlashdata('savedmsg', 'Record saved successfully');
+					$data['savedmsg'] = 'Record saved successfully';
+					if($recsaved > 0){
+						echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+					}elseif($recsaved == 0){
+						echo json_encode(array("success"=>-1, "message"=>'Record saved FAILED'));
+					}else{
+						echo json_encode(array("success"=>0, "message"=>'Error saving record'));
+					}
+					exit;
+				}catch(\Exception $e){
+					echo json_encode(array("success"=>-2, "message"=>$e->getMessage()));
+					exit;
+				}					
+			}else{
+				//echo json_encode(array("success"=>2, "message"=>'Record already exist'));
+                try{	
+                    $recsaved = $affectiveareamodel->save([
+                    	'studentid' => $this->request->getPost('studentIdX'),
+                    	'regno' => $regNo,
+						'session' => $this->request->getPost('session'),
+						'term' => $this->request->getPost('term'),
+						'class' => $this->request->getPost('classId'),
+						'punctuality' => $this->request->getPost('punctuality'),
+						'neatness' => $this->request->getPost('neatness'),
+						'politeness' => $this->request->getPost('politeness'),
+						'honesty' => $this->request->getPost('honesty'),
+						'relationshipwithstaffs' => $this->request->getPost('relwithstaff'),
+						'relationshipwithothers' => $this->request->getPost('relwithothers'),
+						'leadership' => $this->request->getPost('leadership'),
+						'emotionalstability' => $this->request->getPost('emotionalstability'),
+						'health' => $this->request->getPost('health'),
+						'attitudetoschoolwork' => $this->request->getPost('attitude'),
+						'attentiveness' => $this->request->getPost('attentiveness'),
+						'persevearance' => $this->request->getPost('perseverance'),
+						'attendanceinclass' => $this->request->getPost('attendance'),
+						'reliability' => $this->request->getPost('reliability'),
+						'selfcontrol' => $this->request->getPost('selfcontrol'),
+						'cooperation' => $this->request->getPost('cooperation'),
+						'responsibility' => $this->request->getPost('responsibility'),
+						'initiative' => $this->request->getPost('initiative'),
+						'organisationalability' => $this->request->getPost('orgability'),
+						'fluency' => $this->request->getPost('fluency'),
+						'games' => $this->request->getPost('games'),
+						'sports' => $this->request->getPost('sports'),
+						'drawingandpainting' => $this->request->getPost('drawing'),
+						'musicalskills' => $this->request->getPost('music'),
+						'handlingoftools' => $this->request->getPost('handlingtools')
+                    ]);				
+                    $this->session->setFlashdata('savedmsg', 'Record updated successfully');	
+                    $data['savedmsg'] = 'Record updated successfully';
+                    if($recsaved > 0){
+                        echo json_encode(array("success"=>1, "message"=>'Record updated successfully'));
+                    }elseif($recsaved == 0){
+                        echo json_encode(array("success"=>-1, 'Failed to updated Record'));
+                    }else{
+                        echo json_encode(array("success"=>0, "message"=>'Error updateding Record'));
+                    }
+                    exit;
+                }catch(\Exception $e){
+                    echo json_encode(array("success"=>0, "message"=>$e->getMessage()));
+                    exit;
+                }				
+			}
+		}else{
+			//empty fields 
+			echo 'empty fields posted';
+		}
+	}
+
+
 }

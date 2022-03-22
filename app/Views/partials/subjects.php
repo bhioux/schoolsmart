@@ -15,22 +15,30 @@ function editAction(obj){
     var url = '<?php echo site_url('setup/editsubjects'); ?>';
     $.post({
         url:url,
-        data: { subjects_id: obj.title, [csrfName]:  csrfHash },
+        data: { subjectsid: obj.title, [csrfName]:  csrfHash },
         type:'POST',
         dataType: 'json',
         success: function(json) {
             /************Clear All values*******************/
-            $("#subjectname").val('');
-            $("#subjectcode").val('');
-            $("#subjectdescription").val('');
+            var formw = document.querySelector('#subjectsetupform')
+            imps = formw.querySelectorAll('input[type="text"], select');
+            imps.forEach(element => {
+              element.value = ''
+              //$(element).prop('disabled', 'disabled');
+              $(element).prop('selected','selected').val('').change();
+            });
             /************Load New values*******************/  
-            $("#subjectname").val(json.formarray.subject_name).change();
-            $("#subjectcode").val(json.formarray.subject_code);
-            $("#subjectdescription").val(json.formarray.subject_description).change();
+            //$("#subjectname").val(json.formarray.subject_name).change();
+            //$('#subjectname option[value="' + json.formarray.subjectname + '"]').prop('selected','selected').val(json.formarray.subjectname).change();
+            $("#subjectname").val(json.formarray.subjectname);
+            $("#subjectcode").val(json.formarray.subjectcode).prop('disabled', 'disabled');
+            $("#subjectdescription").val(json.formarray.subjectdescription);
+           // $("#subjectdescription").val(json.formarray.subject_description).change();
+            //$('#subjectdescription option[value="' + json.formarray.subjectdescription + '"]').prop('selected','selected').val(json.formarray.subjectdescription).change();
             //disable session code
             $("#subjectcode").attr('disabled', true);            
             //pass class id in hidden field
-            $("#subjectsid").val(json.formarray.subject_id);
+            $("#subjectsid").val(json.formarray.subjectid);
             $("#btnsubmit").val();
             $("#btnsubmit").val('edit').text('Update')
             return false;

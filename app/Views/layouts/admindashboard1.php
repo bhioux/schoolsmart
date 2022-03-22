@@ -31,7 +31,7 @@
     <body class="form">                    
                 
                 <!--  BEGIN CONTENT AREA  -->       
-                    <?= $this->renderSection("content") ?>
+                <?= $this->renderSection("content") ?>
                     
 
         <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->

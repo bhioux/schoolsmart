@@ -7,6 +7,11 @@
     <!-- <link href="plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
     <link href="plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css">
     <link href="plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">-->
+
+    <link href="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/assets/css/flatpickr.min.css" rel="stylesheet" type="text/css">
+
     <link href="<?= base_url() ?>/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
@@ -30,10 +35,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
-    <div id="notifier"></div>
-
-    <?= $this->include('partials/gradebooksetup1') ?>
+    <?php
+        //print_r($sessionrecs); exit;
+    ?>
+    <?= $this->include('partials/billsetup') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
@@ -41,21 +46,22 @@
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <!--   <script src="assets/js/scrollspyNav.js"></script>
-    <script src="plugins/flatpickr/flatpickr.js"></script>
-    <script src="plugins/noUiSlider/nouislider.min.js"></script>
-    <script src="plugins/flatpickr/custom-flatpickr.js"></script>
     <script src="plugins/noUiSlider/custom-nouiSlider.js"></script>
     <script src="plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
     <script src="plugins/highlight/highlight.pack.js"></script> -->
+
+    <script src="<?= base_url() ?>/plugins/flatpickr/flatpickr.js"></script>
+    <script src="<?= base_url() ?>/plugins/noUiSlider/nouislider.min.js"></script>
+    <script src="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.js"></script>
+    <script>
+        var f5 = flatpickr(document.getElementById('basicFlatpickr1'));
+        var f7 = flatpickr(document.getElementById('basicFlatpickr2'));
+        var f8 = flatpickr(document.getElementById('basicFlatpickr3'));
+    </script>
+
     <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
-    <script src="<?= base_url() ?>/scripts/gradebook.js"></script>
-
-    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
-
-    <!-- <script>
+    <script>
         $('#zero-config').DataTable({
             "oLanguage": {
                 "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
@@ -68,7 +74,7 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 50
         });
-    </script> -->
+    </script>
 
     <script>        
         checkall('todoAll', 'todochkbox');

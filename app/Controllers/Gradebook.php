@@ -20,12 +20,14 @@ use App\Models\PopulateClass;
 use App\Models\AssignClasses;
 use App\Models\ParentsProfile;
 use App\Models\GradebookSetup;
+use App\Models\Gradebooks;
 use App\Models\Registration;
 use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
 use App\Models\ApplicationForm;
 //use App\Models\DateTime;
 use CodeIgniter\Controller;
+use CodeIgniter\Database\Query;
 
 class Gradebook extends BaseController
 {
@@ -48,7 +50,11 @@ class Gradebook extends BaseController
 		//$data['header'] = "";
         //$data['mainnav'] = "";
         $data['content'] = "";
-		//$data['footer'] = "";
+		$data['hashcode'] = $this->refreshcsrf();
+		$data['sessionrecs'] = $this->sessionrecs();
+		$data['termrecs'] = $this->termrecs();
+		$data['classes'] = $this-> classrecs();
+		$data['subjects'] = $this-> subjectrecs();
 		//$data['adminmenu'] = $menu->asObject()->findAll();
 		return view('pages/home', $data);
 	}
@@ -60,72 +66,214 @@ class Gradebook extends BaseController
         $data['mainnav'] = "";        
         $data['gradebooksetup'] = "";
 
-		// $data['sessionrecs'] = $this->sessionrecs();
-		// $data['termsrecs'] = $this->termsrecs();
-		$data['sessionrecs'] = [''];
-		$data['termsrecs'] = [''];
+		$data['hashcode'] = $this->refreshcsrf();
+		$data['sessionrecs'] = $this->sessionrecs();
+		$data['termrecs'] = $this->termrecs();
+		$data['classes'] = $this-> classrecs();
+		$data['subjects'] = $this-> subjectrecs();
 
         return view('pages/gradebooksetup', $data);
     }
 
 	public function postgradebook()
     {
-		$studentprofilemodel = new StudentProfile();
+		$gradebookmodel = new Gradebooks();
 		$allvalues = '';
 
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
 
-				'studentclass' => 'required',
-				'studentsubject' => 'required',
-				'studentid' => 'required',
-				'assessmenttype'  => 'required',
-				'assessmentgrade'  => 'required',
-				'session'  => 'required',
-				'term'  => 'required',
+				'studentid.*' => 'required|decimal|required_with[studentgrade.*]',
+				'studentno.*' => 'required|required_with[studentid.*]',
+				'studentgrade.*' => 'required|decimal|required_with[studentid.*]',
+				'sybjectgroup' => 'required',
+				'classgroup' => 'required',
+				'assessment1'  => 'required',
+				'gSession'  => 'required',
+				'gTerm'  => 'required',
 			])){
-				
-				try{                    
-                    $recsaved = $studentprofilemodel->insert([
-						//'username' => $this->request->getPost('username'),
-						'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'studentclass' => $this->request->getPost('studentclass'),
-						'studentsubject' => $this->request->getPost('studentsubject'),
-						'studentid' => $this->request->getPost('studentid'),
-						'assessmenttype'  => $this->request->getPost('assessmenttype'),
-						'assessmentgrade'  => $this->request->getPost('assessmentgrade'),
-						'session'  => $this->request->getPost('session'),
-						'term'  => $this->request->getPost('term'),
-					]);
-					$this->session->setFlashdata('savedmsg', 'Record saved successfully');
-					//$data['token'] = csrf_hash();	
-					$data['savedmsg'] = 'Record saved successfully';
-					//return view('pages/users', $data);
-					//return redirect()->to(site_url("/"));
-					//print_r($recsaved);
-					if($recsaved > 0){
-						//echo 1;
-                        echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
-					}elseif($recsaved == 0){
-						//echo -1;
-                        echo json_encode(array("success"=>-1, "message"=>'Record saved FAILED'));
-					}else{
-						//echo 0;
-                        echo json_encode(array("success"=>0, "message"=>'Error saving record'));
+				// print_r($this->request->getPost('studentid'));
+				// echo '<br>';
+				// print_r($this->request->getPost('studentgrade'));
+				// exit;
+
+				$studentid = $this->request->getPost('studentid');
+				$studentno = $this->request->getPost('studentno');
+				$studentgrade = $this->request->getPost('studentgrade');
+				$classgroup = $this->request->getPost('classgroup'); //sybjectgroup
+				$subjectgroup = $this->request->getPost('sybjectgroup'); //sybjectgroup
+				$assessmenttype = $this->request->getPost('assesstype');
+				$session = $this->request->getPost('gSession');
+				$term = $this->request->getPost('gTerm');
+
+				$savedid = [];
+				$failedid = [];
+				$failedstudentno = [];
+				$failedmessages = [];
+				$savedmessages = [];
+
+				$pQuery = $gradebookmodel->prepare(function ($gradebookmodel) {
+					$sql = 'INSERT INTO setup_gradebook (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, ssession, term )
+					VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+					ON DUPLICATE KEY UPDATE 
+						id=VALUES(id), 
+						studentid=VALUES(studentid), 
+						assessmentgrade=VALUES(assessmentgrade), 
+						studentclass=VALUES(studentclass), 
+						studentsubject=VALUES(studentsubject), 
+						assessmenttype=VALUES(assessmenttype), 
+						ssession=VALUES(ssession), 
+						term=VALUES(term)';
+
+					return (new Query($gradebookmodel))->setQuery($sql);
+				});
+
+
+				for ($i=0; $i < sizeof($studentid); $i++) { 
+
+					try{     
+
+						$id = $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype;
+						$studentids = $studentno[$i];
+						$assessmentgrades = $studentgrade[$i];
+						$studentclass = $classgroup;
+						$studentsubject = $subjectgroup;
+						$assessmenttype = $assessmenttype;
+						$ssession = $session;
+						$term = $term;
+
+
+						$sqldata = [
+						'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+						'studentid' => $studentno[$i],
+						'assessmentgrade' => $studentgrade[$i],
+						'studentclass' => $classgroup, //sybjectgroup
+						'studentsubject' => $subjectgroup, //sybjectgroup
+						'assessmenttype'  => $assessmenttype,
+						'ssession'  => $session,
+						'term'  => $term,];
+
+						$sqldata1 = [
+							$studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+							 $studentno[$i],
+							$studentgrade[$i],
+							$classgroup, 
+							$subjectgroup, 
+							$assessmenttype,
+							$session,
+							$term,];
+
+						//$recsaved = $pQuery->execute($id, $studentids, $assessmentgrades, $studentclass, $studentsubject, $assessmenttype, $ssession, $term);
+						$recsaved = $pQuery->_execute($sqldata1);
+						
+						// $sql1 = 'INSERT INTO menu_sub (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, session, term )
+						// VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+						// ON DUPLICATE KEY UPDATE 
+						// 	studentid=VALUES(studentid), 
+						// 	assessmentgrade=VALUES(assessmentgrade), 
+						// 	studentclass=VALUES(studentclass), 
+						// 	studentsubject=VALUES(studentsubject), 
+						// 	assessmenttype=VALUES(assessmenttype), 
+						// 	session=VALUES(session), 
+						// 	term=VALUES(term)';
+
+						// $pQuery = $gradebookmodel->prepare(function ($gradebookmodel) {
+						// 	$sql = 'INSERT INTO menu_sub (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, session, term )
+						// 	VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+						// 	ON DUPLICATE KEY UPDATE 
+						// 		studentid=VALUES(studentid), 
+						// 		assessmentgrade=VALUES(assessmentgrade), 
+						// 		studentclass=VALUES(studentclass), 
+						// 		studentsubject=VALUES(studentsubject), 
+						// 		assessmenttype=VALUES(assessmenttype), 
+						// 		session=VALUES(session), 
+						// 		term=VALUES(term)';
+
+						// 	return (new Query($gradebookmodel))->setQuery($sql);
+						// });
+
+
+						// ///////////////////////////
+
+						// $query = $gradebookmodel->query($sql, [
+						// 	'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+						// 	'studentid' => $studentno[$i],
+						// 	'assessmentgrade' => $studentgrade[$i],
+						// 	'studentclass' => $classgroup, //sybjectgroup
+						// 	'studentsubject' => $subjectgroup, //sybjectgroup
+						// 	'assessmenttype'  => $assessmenttype,
+						// 	'session'  => $session,
+						// 	'term'  => $term,
+						// ]);
+
+						//$recsaved = $gradebookmodel->getResult($query );
+
+
+
+						// $recsaved = $gradebookmodel->save([
+						// 	//'username' => $this->request->getPost('username'),
+						// 	//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
+						// 	//'studentid' => $studentid,
+						// 	'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+						// 	'studentid' => $studentno[$i],
+						// 	'assessmentgrade' => $studentgrade[$i],
+						// 	'studentclass' => $classgroup, //sybjectgroup
+						// 	'studentsubject' => $subjectgroup, //sybjectgroup
+						// 	'assessmenttype'  => $assessmenttype,
+						// 	'session'  => $session,
+						// 	'term'  => $term,							
+						// ]);
+
+						//$savedmessages[] = $recsaved;
+						//$failedmessages[] =  $pQuery->getQueryString();
+
+						
+
+						if($recsaved > 0){
+							//echo 1;
+							$savedid[] = $studentid[$i];
+							$savedmessages[] = $recsaved;
+							//echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+						}else{
+							$failedid[] = $studentid[$i];
+							$failedstudentno[] = $studentno[$i];
+							//echo 0;
+							//echo json_encode(array("success"=>0, "message"=>'Error saving record'));
+						}
+						
+					}catch(\Exception $e){
+						$failedid[] = $studentid[$i];
+						$failedstudentno[] = $studentno[$i];
+						$failedmessages[] = $pQuery->$e->getMessage(); //$e->getMessage();
+						//print_r($e->getMessage());
+						//echo json_encode(array("success"=>-2, "message"=>$e->getMessage()));
+						//exit;
 					}
-					exit;
-				}catch(\Exception $e){
-					//print_r($e->getMessage());
-                    echo json_encode(array("success"=>-2, "message"=>$e->getMessage()));
-					exit;
+
 				}
+
+				if(sizeof($savedid) == sizeof($studentid)){
+					//echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+					echo json_encode(array_merge(array("success"=>1, "message"=>'Record saved successfully'),  $savedmessages, $failedmessages));
+				}else{
+					//$message = 'Failed to save '.json_encode($failedmessages);		
+					echo json_encode(array_merge(array("success"=>0, "message"=>'Failed to save'),  $savedmessages, $failedmessages));
+				}
+
+				// studentid[], studentgrade[], classgroup, subjectgroup, refhasname, refhashcode, refreshedhash, gSession, gTerm, assessment1, hashurl, gradebooktableurl, editurl, posturl, gradebookid, csrf_test_name
+				
+				//'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term', 'created_at', 'updated_at'
+
+				//STUDENTNO-SUBJECT-CLASS-TERM-SESSION-ASSESSMENTTYPE
+
+				
 				
 			}else{
 				//$data['errors'] = $this->validation->getErrors();
 				$data['savedmsg'] = $failed =  $this->validation->getErrors();
 				//print_r($failed);
                 echo json_encode(array("success"=>-2, "message"=>$failed));
-				exit;
+				//exit;
 				//return view('pages/gradebooksetup', $data);
 			}
     }
@@ -134,12 +282,48 @@ class Gradebook extends BaseController
 	{
 		$session = session();
 		$gradebookmodel = new GradebookSetup();
-		//$model->where('msgtype !=','V');
-		$gradebookmodel->orderBy('last_updated', 'ASC');	
-		$query = $gradebookmodel->get();
-		$result = $query->getResult();
-		//echo json_encode("messagelog"=$result);
-		echo json_encode(array('gradebookdata'=>$result));
+		//$session = $this->request->getGet('session');
+		//$term  = $this->request->getGet('term');
+
+		if($this->request->getMethod() === 'get' && $this->validate([
+			// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
+
+			// http://schoolsmart.test/gradebook/gradebooktable?subject=&class=&term=2&session=3&csrf_test_name=ec738cc0fcaadb5081e6786ca1ad2867&_=1643793937684
+
+			'subject' => 'required',
+			'class' => 'required',
+			'csrf_test_name'  => 'required',
+
+		])){
+			
+			$subject = $this->request->getGet('subject');
+			$class = $this->request->getGet('class');
+			//$term = $this->request->getPost('term');
+			//$session = $this->request->getPost('session');
+			$csrf_test_name = $this->request->getGet('csrf_test_name');
+
+			// echo $class."- Class";
+			// echo $subject."- subject"; exit;
+
+			//$model->where('msgtype !=','V');
+			//$gradebookmodel->orderBy('created_at', 'ASC');	
+			$gradebookmodel->where(['class'=>trim($class), 'subjects'=>trim($subject)]);	
+			$query = $gradebookmodel->get();
+			$result = $query->getResult();
+			//echo json_encode("messagelog"=$result);
+			echo json_encode(array('gradebookdata'=>$result));
+			
+		}else{
+			//print_r($this->validation->getErrors());
+			//$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			//print_r($failed);
+			echo json_encode(array('gradebookdata'=>array()));
+			// exit;
+			//return view('pages/gradebooksetup', $data);
+		}
+
+		
+		
 	}
 
 	public function editgradebook(){
@@ -166,19 +350,53 @@ class Gradebook extends BaseController
 		
 	}
 
+	function refreshcsrf(){
+		$csrfName = csrf_token();
+    	$csrfHash = csrf_hash();  
+		return $csrfHash;
+	}
+
 	public function sessionrecs(){
 		$session = session();
 		$sessionmodel = new SessionSetup();
 		$sessionmodel->orderBy('sessionid', 'ASC');	
-		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$sessionmodel->where(['activeflag'=>1]);	
 		$query = $sessionmodel->get();
 		$result = $query->getResult();
-		return @$result;
-		//$result = $query->getResult();
-		//echo json_encode(array('formarray'=>$result));
+		return @$result[0];
 	}
 
-	public function sessionrecs1(){
+	public function termrecs(){
+		$session = session();
+		$termmodel = new TermSetup();
+		$termmodel->orderBy('termid', 'ASC');	
+		$termmodel->where(['activeflag'=>1]);	
+		$query = $termmodel->get();
+		$result = $query->getResult();
+		return @$result[0];
+	}
+
+	public function classrecs(){
+		$session = session();
+		$classmodel = new ClassSetup();
+		$classmodel->orderBy('classid', 'ASC');	
+		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$query = $classmodel->get();
+		$result = $query->getResult();
+		return @$result;
+	}
+
+	public function subjectrecs(){
+		$session = session();
+		$subjectmodel = new SubjectSetup();
+		$subjectmodel->orderBy('subjectid', 'ASC');	
+		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$query = $subjectmodel->get();
+		$result = $query->getResult();
+		return @$result;
+	}
+
+	public function sessionrecs2(){
 		$session = session();
 		$sessionmodel = new SessionSetup();
 		//$model->where('msgtype !=','V');
@@ -201,7 +419,7 @@ class Gradebook extends BaseController
 		}		
 	}
 
-	public function termsrecs(){
+	public function termsrecs2(){
 		$session = session();
 		$termsmodel = new TermSetup();
 		//$model->where('msgtype !=','V');
