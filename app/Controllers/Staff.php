@@ -37,6 +37,8 @@ use App\Models\ReportCardSss;
 use App\Models\ObservableTraitsSSS;
 use App\Models\ObservableTraitsJSS;
 use App\Models\SubjectReport;
+use App\Models\MarkBroadSheetJss;
+use App\Models\MarkBroadSheetSss;
 use App\Models\ApplicationForm;
 // use App\Models\ApplicationFormSecSchool;
 //use App\Models\DateTime;
@@ -306,6 +308,24 @@ class Staff extends BaseController
         $data['mainnav'] = "";        
         $data['subjectreport'] = "";
         return view('pages/subjectreport', $data);
+    }
+
+	public function markbroadsheetjss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['markbroadsheetjss'] = "";
+        return view('pages/markbroadsheetjss', $data);
+    }
+
+	public function markbroadsheetsss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['markbroadsheetsss'] = "";
+        return view('pages/markbroadsheetsss', $data);
     }
 
 	public function classattendance()

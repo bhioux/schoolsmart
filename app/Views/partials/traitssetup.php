@@ -107,19 +107,7 @@
             <div class="invoice-container">
                 <div class="invoice-inbox">
 
-                    <div class="inv-not-selected">
-                        <p>Select a class from above to setup the Observable Traits'.</p>
-                    </div>
-
-                    <!-- <div class="invoice-header-section">
-                        <h4 class="inv-number"></h4>
-                        <div class="invoice-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer action-print" data-toggle="tooltip" data-placement="top" data-original-title="Reply"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                        </div>
-                    </div> -->
-                    
-                    <div id="ct" class="">
-                        
+                    <div class="">
                         <div class="invoice-00001">
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
 
@@ -563,16 +551,461 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- <div class="invoice-header-section">
+                        <h4 class="inv-number"></h4>
+                        <div class="invoice-action">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer action-print" data-toggle="tooltip" data-placement="top" data-original-title="Reply"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        </div>
+                    </div> -->
+                    
+                    <!-- <div id="ct" class="">
+                        
+                        <div class="invoice-00001">
+                            <div class="content-section  animated animatedFadeInUp fadeInUp">
+
+                                <div class="row inv--product-table-section">
+                                    <div class="col-lg-5">
+                                        <div class="row inv--head-section">
+                                            <div class="col-12 layout-spacing">
+                                                <h4><span>Student ID:</span> <?php echo "studentid"?></h4>
+                                                <h4><span>Student Names:</span> <?php echo "studentnames"?></h4>
+                                            </div>
+                                        </div>
+                                        <div class="table table-hover">
+                                            <table id="assessment1" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50%" scope="col">Observable Traits'</th>
+                                                        <th width="50%" scope="col">Ratings</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Punctuality</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="punctuality" name="punctuality" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Neatness</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="neatness" name="neatness" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Politeness</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="politeness" name="politeness" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Honesty</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="honesty" name="honesty" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Relationship  with Staff</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="relwithstaff" name="relwithstaff" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Relationship with others</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="relwithothers" name="relwithothers" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Leadership</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="leadership" name="leadership" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Emotional Stability</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="emotionalstability" name="emotionalstability" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Health</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="health" name="health" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Attitude to School Work</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="attitude" name="attitude" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Attentiveness</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="attentiveness" name="attentiveness" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Perseverance</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="perseverance" name="perseverance" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Attendance in Class</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="attendance" name="attendance" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Reliability</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="reliability" name="reliability" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Self Control</td>                                                        
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="selfcontrol" name="selfcontrol" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>                                                       
+                                                        <td>Cooperation</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="cooperation" name="cooperation" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Responsibility</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="responsibility" name="responsibility" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Initiative</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="initiative" name="initiative" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Organisational Ability</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="orgability" name="orgability" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Fluency</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="fluency" name="fluency" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>                                                        
+                                                        <td>Games</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="games" name="games" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sports</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="sports" name="sports" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Drawing & Painting</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="drawing" name="drawing" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Musical Skills</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="music" name="music" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>                                                        
+                                                        <td>Handling of Tools</td>
+                                                        <td class="text-right">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="handlingtools" name="handlingtools" required>
+                                                                    <option hidden>Rate Students</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th width="50%" scope="col">Observable Traits'</th>
+                                                        <th width="50%" scope="col">Ratings</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button class="btn btn-primary mb-4 mr-2 btn-lg">Save Ratings</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-7 border-left">
+                                        <div class="main-container sidebar-closed sbar-open" id="container">
+                                        
+                                            <div class="col-xl-12 col-lg-12 col-sm-12 ">
+
+                                            <h3 style="margin-bottom: 20px;">Students Traits' Score List</h3>
+
+                                            <div class="widget-content widget-content-area br-6">
+                                                <div class="table-responsive mb-4 mt-4">
+                                                <table id="studentprofiletable" class="table table-hover" style="width:100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Appln. No.</th>
+                                                        <th>Name</th>
+                                                        <th>Remarks</th>
+                                                        <th class="no-content">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                                </div>
+                                            </div>
+                                            </div>    
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="invoice-00002">
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
 
                                 <div class="row inv--product-table-section">
                                     <div class="col-lg-5">
                                         <div class="row inv--head-section">
-                                            <!-- <div class="col-12 layout-spacing">
-                                                <h3 class="in-heading">Observable Traits' Setup</h3>
-                                            </div>
-                                            <br> -->
+                                            
                                             <div class="col-12 layout-spacing">
                                                 <h4><span>Student ID:</span> <?php echo "studentid"?></h4>
                                                 <h4><span>Student Names:</span> <?php echo "studentnames"?></h4>
@@ -978,8 +1411,7 @@
                                     </div>
                                     <div class="col-lg-7 border-left">
                                         <div class="main-container sidebar-closed sbar-open" id="container">
-                                            <!--  BEGIN CONTENT AREA  -->        
-                                        
+
                                             <div class="col-xl-12 col-lg-12 col-sm-12 ">
 
                                             <h3 style="margin-bottom: 20px;">Students Traits' Score List</h3>
@@ -999,14 +1431,13 @@
                                                 </div>
                                             </div>
                                             </div>    
-                                            <!--  END CONTENT AREA  -->
                                         </div>
                                         
                                     </div>
                                 </div>
                             </div>
                         </div> 
-                    </div>
+                    </div> -->
 
 
                 </div>

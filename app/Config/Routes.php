@@ -53,6 +53,8 @@ $routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
 $routes->get('/staffsetup', 'Home::staffsetup');
 $routes->get('/assessmentsetup', 'Staff::assessmentsetup');
 $routes->get('/subjectreport', 'Staff::subjectreport');
+$routes->get('/markbroadsheetjss', 'Staff::markbroadsheetjss');
+$routes->get('/markbroadsheetsss', 'Staff::markbroadsheetsss');
 $routes->get('/classattendance', 'Staff::classattendance');
 $routes->get('/classattendance', 'Staff::classattendance');
 $routes->get('/billsetup', 'Staff::billsetup');
