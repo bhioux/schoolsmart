@@ -518,9 +518,9 @@ FROM
 
 
 
--- AUTHENTICATITION VIEW QUERIES
+-- AUTHENTICATITION VIEW QUERIES (STUDENT)
 
-CREATE VIEW userlogin AS
+CREATE OR REPLACE VIEW userlogin AS
 SELECT 
 TRIM(sp.`regno`) AS username,
 COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = sp.regno),
@@ -528,6 +528,29 @@ COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = sp.regno),
 TRIM(sp.`email`) AS email,
 'student' AS category
 FROM `student_profile` AS sp
+
+UNION
+
+SELECT 
+TRIM(sp.`empno`) AS username,
+COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = ssp.empno),
+    md5(UPPER(TRIM(ssp.`surname`)))) AS password,
+TRIM(ssp.`email`) AS email,
+TRIM(ssp.`position`) AS category,
+FROM `staff_profile` AS ssp
+
+
+
+-- AUTHENTICATITION VIEW QUERIES (STAFF)
+
+CREATE VIEW userlogin AS
+SELECT 
+TRIM(sp.`empno`) AS username,
+COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = sp.regno),
+    md5(UPPER(TRIM(sp.`surname`)))) AS password,
+TRIM(sp.`email`) AS email,
+'student' AS category
+FROM `staff_profile` AS sp
 
 
 
@@ -690,3 +713,124 @@ concat(`sp`.`surname`,' ',`sp`.`othernames`) AS `fullname`,
 (select `futaprysch`.`term_setup`.`termid` from `futaprysch`.`term_setup` where (`futaprysch`.`term_setup`.`activeflag` = 1)) AS `schoolterm`,
 (select `futaprysch`.`term_setup`.`term` from `futaprysch`.`term_setup` where (`futaprysch`.`term_setup`.`activeflag` = 1)) AS `termname` 
 from `futaprysch`.`student_profile` `sp`
+
+
+
+------------------
+CREATE OR REPLACE VIEW view_menu AS
+
+SELECT 
+m.`menuid`,
+m.`menuposition`,
+m.`menutitle`, 
+m.`menudescription`, 
+m.`menuroute`, 
+m.`menucategory`, 
+(SELECT c.`category` FROM `categorytable` AS c WHERE c.categoryid = m.menucategory) AS category,
+m.`menurole`, 
+m.`created_at`,
+m.`updated_at`
+
+FROM `menu`AS m
+
+
+---------------------------------
+
+CREATE VIEW userlogin AS
+(
+    SELECT 
+TRIM(sp.`regno`) AS username,
+COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = sp.regno),
+    md5(UPPER(TRIM(sp.`surname`)))) AS password,
+TRIM(sp.`email`) AS email,
+'student' AS category
+FROM `student_profile` AS sp
+
+UNION
+
+SELECT 
+TRIM(ssp.`empno`) AS username,
+COALESCE((SELECT pwd FROM password_table AS pt WHERE pt.studentno = ssp.empno),
+    md5(UPPER(TRIM(ssp.`surname`)))) AS password,
+TRIM(ssp.`email`) AS email,
+TRIM(ssp.`position`) AS category
+FROM `staff_profile` AS ssp
+    )
+
+
+---------------------------
+
+CREATE OR REPLACE VIEW view_staffprofile AS
+SELECT 
+spr.`staffid`,
+spr.`empno` AS regno,
+CONCAT(spr.`surname`, ' ', spr.`othernames`) AS fullname, 
+spr.`dob`, 
+spr.`hometown`, 
+spr.`lga`,
+spr.`stateoforigin`, 
+spr.`permanentaddress`, 
+spr.`nin`, 
+spr.`email`, 
+spr.`phonenumber`, 
+spr.`position`, 
+spr.`gender`, 
+spr.`ethnicity`, 
+spr.`religion`,
+
+spr.`weight`, 
+spr.`height`, 
+spr.`disability`, 
+spr.`bloodgroup`, 
+spr.`genotype`, 
+spr.`vision`, 
+spr.`hearing`, 
+spr.`speech`, 
+spr.`generalvitality`, 
+spr.`nationality`, 
+spr.`nextofkin`, 
+spr.`nextofkinrelationship`, 
+spr.`nextofkinnin`, 
+spr.`nextofkinoccupation`, 
+spr.`nextofkinaddress`, 
+spr.`nextofkinphonenumber`, 
+spr.`startedon`, 
+spr.`courseofstudy`, 
+spr.`qualification`, 
+spr.`dateofaward`, 
+spr.`lastupdate`
+
+FROM `staff_profile` spr
+
+
+---------------------
+
+
+eng, yor, frc, mat, intsc, introtech, agric scince, homeecons, socialstudies, businessstudies, music, fineart, crk, physical and heath, physics, chemistry, biology, geography, economics, furthermaths, computer, civic education, totalpassed, remarks, followup action
+
+
+
+------------------------------
+CREATE OR REPLACE VIEW view_broadsheet AS
+SELECT 
+vs.`studentno`, 
+vs.`fullname`,
+vs.`class`,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'ENG'), '') AS engscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'FRC'), '') AS frcscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'MAT'), '') AS matscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'ANH'), '') AS anhscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'YOR'), '') AS yorscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'CHM'), '') AS chmscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'PHY'), '') AS physcore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'CRK'), '') AS crkscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'CCP'), '') AS ccpscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'AGR'), '') AS agrscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'BIO'), '') AS bioscore,
+COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.subjects = 'FMT'), '') AS fmtscore,
+(SELECT COUNT(*) FROM view_scoresheet AS v WHERE v.studentno = vs.studentno AND v.cumavg2 > 40 ) AS totalpasses
+
+FROM `view_scoresheet` AS vs 
+WHERE schoolterm = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND `schoolsession` = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1 ORDER BY vs.`subjects`, vs.`class`)
+
+    

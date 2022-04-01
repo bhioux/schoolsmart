@@ -43,9 +43,6 @@
         }
 
   }
-
-
-
 </style>
 
 <div class="container">
@@ -80,7 +77,15 @@
               </div>
 
               <div class="col-lg-7">
-                  <p>AGE: </p>
+              <?php
+                  if(isset($studentview->dob)){
+                    $dateOfBirth = $studentview->dob;
+                    $today = date("Y-m-d");
+                    $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                    //echo 'Age is '.$diff->format('%y');
+                  }                    
+                ?>
+                  <p>AGE: <?= $diff->format('%y') ?? '' ?></p>
               </div>
               <div class="col-lg-5">
                   <p>HOUSE:</p>

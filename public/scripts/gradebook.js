@@ -39,11 +39,9 @@ $(document).ready(function(){
             //alert( $('#classgroup').val())
             gradebooktable.ajax.url(url).load();
             //$('#table').DataTable().ajax.url(url).load();
-        }
-        
+        }        
        
     })
-
 
 
     var gradebooktable = $('#gradebooktable').DataTable( {

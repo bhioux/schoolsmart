@@ -1,18 +1,18 @@
 $(document).ready(function(){
     
-    var formw = document.querySelector('#frmstaffprofile');
-    imps = formw.querySelectorAll('input[type="text"], input[type="date"], input[type="email"], select');
-    imps.forEach(element => {
-    element.value = ''
-    $(element).prop('selected','selected').val('').change();
-    });
+    // var formw = document.querySelector('#frmstaffprofile');
+    // imps = formw.querySelectorAll('input[type="text"], input[type="date"], input[type="email"], select');
+    // imps.forEach(element => {
+    // element.value = ''
+    // $(element).prop('selected','selected').val('').change();
+    // });
 
     console.log('preparing data insert...')
     var regdatatableurl = $("#regdatatableurl").val();
 
     var studentprofiletable = $('#studentprofiletable').DataTable( {
-        "pageLength": 50,
-        "lengthMenu": [50, 100 ],
+        "pageLength": 20,
+        "lengthMenu": [20, 30, 40, 50, 100 ],
         dom: 'Bfrtip',
         responsive: true,
         buttons: [

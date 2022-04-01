@@ -12,7 +12,9 @@ use App\Models\AddVehicles;
 use App\Models\StaffProfile;
 use App\Models\UpdateStaffProfile;
 use App\Models\StudentProfile;
+use App\Models\StudentProfileView;
 use App\Models\StaffSetup;
+use \App\Models\StaffProfileView;
 use App\Models\SubjectSetup;
 use App\Models\SessionSetup;
 use App\Models\TermSetup;
@@ -34,6 +36,8 @@ class Home extends BaseController
 
 	protected $request;
 	public $isLogin = false;
+	protected $studentview;
+	protected $currentuser = null;
 
 	use ResponseTrait;
 
@@ -43,21 +47,43 @@ class Home extends BaseController
 		helper(['form', 'string']);
 		$this->request = $request = \Config\Services::request();
 
-		//var_dump($this->session);
 		$uri = $request->uri;
 		$this->requestMethod = $request->getMethod(TRUE);
 		$this->validation =  \Config\Services::validation();
+
+		if(isset($_SESSION['username'])){
+
+			if(isset($_SESSION['category'])  && strtoupper($_SESSION['category']) =='STUDENT' ){
+				$this->currentuser = $_SESSION['username'];
+				$studentprofile = new StudentProfileView();
+				$studentprofile->where(['regno'=>$this->currentuser]);	
+				$query = $studentprofile->get();
+				$result = $query->getResult();
+				$this->studentview = $student = $result[0];
+				$this->class = $student->class;
+			}else{
+				$this->currentuser = $_SESSION['username'];
+				$studentprofile = new StaffProfileView();
+				$studentprofile->where(['regno'=>$this->currentuser]);	
+				$query = $studentprofile->get();
+				$result = $query->getResult();
+				$this->studentview = $student = $result[0];
+				$this->class = $student->class ?? '';
+			}
+			
+		}
+
+		
+
+		
     }
 
 	public function index()
 	{
-		//session_start();
-		//print_r($_SESSION['username']); exit;
 		if(!isset($_SESSION['islogin'])){
 			return redirect()->to('/login');
 		}
-
-		$menu = new MenuModel();        
+      
 		//$data['header'] = "";
         //$data['mainnav'] = "";
         $data['content'] = "";
@@ -98,6 +124,8 @@ class Home extends BaseController
 			$userCred->where(['username'=>$username, 'password'=>$pwd]);	
 			$query = $userCred->get();
 			$result = $query->getResult();
+
+			//var_dump($result); exit;
 			
 
 			if(sizeof($result) > 0){	
@@ -113,6 +141,7 @@ class Home extends BaseController
 						return redirect()->to("student/studentprofile");
 						break;
 					case "staff":
+					case "admin":
 						return redirect()->to("staff/staffprofile");
 						break;
 					default:
@@ -154,8 +183,10 @@ class Home extends BaseController
     {
         $menu = new MenuModel();
 		$data['header'] = "";
-        $data['mainnav'] = "";        
+		$data['title'] = "FUTA STAFF ";
+        $data['mainnav'] = $_SESSION['menu'];        
         $data['staffprofile'] = "";
+		//var_dump($_SESSION['menu']); exit;
         return view('pages/studentprofile', $data);
     }
 
