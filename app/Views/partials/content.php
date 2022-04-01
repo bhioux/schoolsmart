@@ -1,13 +1,27 @@
 
-    
+    <style>
+        .sticky {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+        }
+    </style>
 
-    <div class="form-container outer">
-        <div class="form-form">
-            <div class="form-form-wrap">
-                <div class="form-container">
-                    <div class="form-content">
-
-                        <h1 class="">Sign In</h1>
+    <div class="form-container outer">        
+        <div class="form-form">            
+            <div class="form-form-wrap">     
+                
+                <div class="form-container">                  
+                    
+                    <div class="form-content">                       
+                        <center>
+                            <div class="sticky">
+                                <img  src="<?= base_url() ?>/assets/img/Logo - 90x90.png" />
+                                <p></p>
+                                <h2>FUTA STAFF SECONDARY SCHOOL</h2>
+                            </div>
+                        </center>
+                        <h6 class="">Sign In</h6>
                         <p class="">Log in to your account to continue.</p>
 
                         <form id="frmobj" class="text-left" method="POST" action="<?= site_url('/dologin') ?>">
@@ -23,7 +37,6 @@
                             ?>
                             
                             <div class="form">
-
                                 <div id="username-field" class="field-wrapper input">
                                     <label for="username">USERNAME</label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>

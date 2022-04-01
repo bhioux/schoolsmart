@@ -75,7 +75,6 @@ class Reports extends BaseController
 	
 	public function reportcard()
     {
-		//echo $_SESSION['username']; exit;
 		if(!isset($_SESSION['username'])){
 			return redirect()->to('/login');
 		}
@@ -126,19 +125,19 @@ class Reports extends BaseController
         $data['mainnav'] = "";        
         $data['reportcardjss'] = "";
 
-		$data['title'] = "OBSERVABLES REPORT - ".$this->currentuser;
-        return view('pages/reportobservables', $data);
+		// $data['title'] = "OBSERVABLE REPORT - ".$this->currentuser;
+        // return view('pages/reportobservables', $data);
 
-        // switch(strtoupper(substr(trim($this->class),0,1))){
-        //     case 'J':
-        //         $data['title'] = "JUNIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
-        //         return view('pages/reportcardjss', $data);
-        //     case 'S':
-        //         $data['title'] = "SENIOR SECONDARY SCHOOL, TERMINAL REPORT - ".$this->currentuser;
-        //         return view('pages/reportobservables', $data);
-        //     default:
-        //         return redirect()->to('/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
-        // }
+        switch(strtoupper(substr(trim($this->class),0,1))){
+            case 'J':
+                $data['title'] = "OBSERVABLE REPORT - ".$this->currentuser;
+                return view('pages/reportjssobservables', $data);
+            case 'S':
+                $data['title'] = "OBSERVABLE REPORT - ".$this->currentuser;
+                return view('pages/reportobservables', $data);
+            default:
+                return redirect()->to('student/studentprofile')->with('message', 'Gradebook record not found for '. $this->currentuser);
+        }
         
     }
 

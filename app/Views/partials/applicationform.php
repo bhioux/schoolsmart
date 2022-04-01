@@ -87,7 +87,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="t-text">Date of Birth: </label> &ast;
-                        <input id="basicFlatpickr" name="dob" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." required>
+                        <input id="dob" name="dob" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Select Date.." required>
                         <!-- <input type="text" id="age" age="name" placeholder="Age" class="form-control" required> -->
                     </div>
                 </div>  

@@ -78,8 +78,8 @@ class Setup extends BaseController
 		$sessionmodel = new SessionModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				//'session_code', 'session_duration'
-				'sessioncode' => 'required',
-				'sessionduration' => 'required'
+				'session' => 'required',
+				'activeflag' => 'required|'
 			])){
 				$sessioncode = $this->request->getPost('sessioncode');
 				$sessionmodel->where(array('session_code'=>$sessioncode));	
@@ -89,8 +89,8 @@ class Setup extends BaseController
 					try{
 						$recsaved = $sessionmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-							'session_code' => $this->request->getPost('sessioncode'),
-							'session_duration' => $this->request->getPost('sessionduration')	
+							'session' => $this->request->getPost('sessioncode'),
+							'activeflag' => $this->request->getPost('sessionduration')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';

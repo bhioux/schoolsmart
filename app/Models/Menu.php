@@ -5,8 +5,9 @@ use CodeIgniter\Model;
 class MenuModel extends Model
 {
     protected $table = 'menu';
+    protected $primaryKey = "menuid";
     protected $allowedFields = [
-        'menutext', 'menulink', 'menucategory', 'menugroup'
+        'menutitle', 'menudescription', 'menuroute', 'menucategory', 'menurole'
     ];
     protected $returnType    = 'App\Entities\Menu';
     //protected $useTimestamps = true;
