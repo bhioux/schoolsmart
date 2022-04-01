@@ -19,15 +19,25 @@ function editAction(obj){
         dataType: 'json',
         success: function(json) {
             /************Clear All values*******************/
-            $("#classtype")[0].selectedIndex = 0
-            $("#classname").val('');
-            $("#classgroup")[0].selectedIndex = 0;
+            // $("#classtype")[0].selectedIndex = 0
+            // $("#classname").val('');
+            // $("#classgroup")[0].selectedIndex = 0;
+
+            var formw = document.querySelector('#classsetupform')
+            imps = formw.querySelectorAll('input[type="text"], select');
+            imps.forEach(element => {
+              element.value = ''
+              //$(element).prop('disabled', 'disabled');
+              $(element).prop('selected','selected').val('').change();
+            });
             /************Load New values*******************/  
-            $("#classtype").val(json.formarray.class_type).change();
-            $("#classname").val(json.formarray.class_fullname);
-            $("#classgroup").val(json.formarray.class_group).change();
+           // $("#classtype").val(json.formarray.class_type).change();
+            $('#classtype option[value="' + json.formarray.classtype + '"]').prop('selected','selected').val(json.formarray.classtype).change();
+            $("#classname").val(json.formarray.classname);
+            //$("#classgroup").val(json.formarray.class_group).change();
+            $('#classgroup option[value="' + json.formarray.classgroup + '"]').prop('selected','selected').val(json.formarray.classgroup).change();
             //pass class id in hidden field
-            $("#classid").val(json.formarray.class_id);
+            $("#classid").val(json.formarray.classid);
             $("#btnsubmit").val();
             $("#btnsubmit").val('edit').text('Update')
             return false;
@@ -74,18 +84,18 @@ function editAction(obj){
                   <input type="hidden" name="classdatatableurl" id="classdatatableurl" value="<?= site_url('setup/classtable'); ?>">                   
                   <select class="selectpicker form-control" id="classtype" name="classtype" required>
                       <option disabled selected>--Choose One--</option>
-                      <option value="prenursery">Pre-Nursery</option>
-                      <option value="nursery">Nursery</option>
-                      <option value="primary">Primary</option>
-                      <option value="secondary">Secondary</option>
+                      <option value="PRY">Pre-Nursery</option>
+                      <option value="NUR">Nursery</option>
+                      <option value="JSS">Junior Secondary</option>
+                      <option value="SS">Senior Secondary</option>
                   </select>
                 </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="form-group">
-              <label for="t-text">Class Name: </label> &ast;<small> &lbrack; e.g: Primary 1 or JSS 1 &rbrack;</small>
-              <input type="text" id="classname" name="classname" placeholder="Class Name" class="form-control" required>
+              <label for="t-text">Class Name: </label> &ast;<small> &lbrack; e.g: 1 or 2 or 3 &rbrack;</small>
+              <input type="number" id="classname" name="classname" placeholder="Class Name" class="form-control" required>
             </div>
           </div>                                        
         </div>
@@ -99,7 +109,8 @@ function editAction(obj){
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
-                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
                     </select>
                 </div>
             </div>
@@ -124,7 +135,8 @@ function editAction(obj){
                 <thead>
                   <tr>
                     <th>Class Type</th>
-                    <th>Full Class Name</th>
+                    <th>Class Name</th>
+                    <th>Class Group</th>
                     <th class="no-content">Action</th>
                   </tr>
                 </thead>

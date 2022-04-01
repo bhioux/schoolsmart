@@ -191,13 +191,14 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classtype' => 'required',
 				'classgroup' => 'required',
 				'classname' => 'required'
 			])){
 				$classname = $this->request->getPost('classname');
 				$classgroup = $this->request->getPost('classgroup');
-				$classmodel->where(array('class_fullname'=>$classname, 'class_group'=>$classgroup));	
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
 				$query = $classmodel->get();
 				$result = $query->getRow();
 				if(!(is_object($result))){
@@ -205,8 +206,8 @@ class Setup extends BaseController
 						$recsaved = $classmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
 							'class_type' => $this->request->getPost('classtype'),
-							'class_group' => $this->request->getPost('classgroup'),
-							'class_fullname' => $this->request->getPost('classname')	
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -239,7 +240,7 @@ class Setup extends BaseController
 			'class_id' => 'required',			
 		])){
 			$class_id = $this->request->getPost('class_id');
-			$classmodel->where(['class_id'=>$class_id]);	
+			$classmodel->where(['classid'=>$class_id]);	
 			$query = $classmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -254,33 +255,66 @@ class Setup extends BaseController
 		$classmodel = new ClassModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				// `classid`, `classtype`, `classname`, `classgroup`
 				'classid' => 'required',
 				'classtype' => 'required',
 				'classgroup' => 'required',
 				'classname' => 'required'
 			])){
-                try{	
-                    $recsaved = $classmodel->save([
-                        //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'class_id' => $this->request->getPost('classid'),
-						'class_type' => $this->request->getPost('classtype'),
-						'class_group' => $this->request->getPost('classgroup'),
-						'class_fullname' => $this->request->getPost('classname')	
-                    ]);				
-                    $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
-                    $data['savedmsg'] = 'Record saved successfully';
-                    if($recsaved > 0){
-                        echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
-                    }elseif($recsaved == 0){
-                        echo json_encode(array("success"=>-1, 'Failed to Save Record'));
-                    }else{
-                        echo json_encode(array("success"=>0, "message"=>'Error Saving Record'));
-                    }
-                    exit;
-                }catch(\Exception $e){
-                    echo json_encode(array("success"=>0, "message"=>$e->getMessage()));
-                    exit;
-                }
+				$classname = $this->request->getPost('classname');
+				$classgroup = $this->request->getPost('classgroup');
+				$classmodel->where(array('classname'=>$classname, 'classgroup'=>$classgroup));	
+				$query = $classmodel->get();
+				$result = $query->getRow();
+				if(!(is_object($result))){
+	                try{	
+	                    $recsaved = $classmodel->save([
+	                        //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
+							//'class_id' => $this->request->getPost('classid'),
+							'class_type' => $this->request->getPost('classtype'),
+							'classgroup' => $this->request->getPost('classgroup'),
+							'classname' => $this->request->getPost('classname')	
+	                    ]);				
+	                    $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
+	                    $data['savedmsg'] = 'Record saved successfully';
+	                    if($recsaved > 0){
+	                        echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+	                    }elseif($recsaved == 0){
+	                        echo json_encode(array("success"=>-1, 'Failed to Save Record'));
+	                    }else{
+	                        echo json_encode(array("success"=>0, "message"=>'Error Saving Record'));
+	                    }
+	                    exit;
+	                }catch(\Exception $e){
+	                    echo json_encode(array("success"=>0, "message"=>$e->getMessage()));
+	                    exit;
+	                }					
+				}else {
+					echo json_encode(array("success"=>2, "message"=>'Record already exist'));
+				}
+
+      //           try{	
+      //               $recsaved = $classmodel->save([
+      //                   //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
+						// 'class_id' => $this->request->getPost('classid'),
+						// 'class_type' => $this->request->getPost('classtype'),
+						// 'class_group' => $this->request->getPost('classgroup'),
+						// 'class_fullname' => $this->request->getPost('classname')	
+      //               ]);				
+      //               $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
+      //               $data['savedmsg'] = 'Record saved successfully';
+      //               if($recsaved > 0){
+      //                   echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+      //               }elseif($recsaved == 0){
+      //                   echo json_encode(array("success"=>-1, 'Failed to Save Record'));
+      //               }else{
+      //                   echo json_encode(array("success"=>0, "message"=>'Error Saving Record'));
+      //               }
+      //               exit;
+      //           }catch(\Exception $e){
+      //               echo json_encode(array("success"=>0, "message"=>$e->getMessage()));
+      //               exit;
+      //           }
 			}else{
 				$data['savedmsg'] = $failed =  $this->validation->getErrors();
 				print_r($failed);
@@ -289,7 +323,7 @@ class Setup extends BaseController
 			}
     }	
 
-	//subjects
+	//-------------subjects
 	public function subjects() {
         $menu = new MenuModel();
 		$data['header'] = "";
@@ -311,6 +345,7 @@ class Setup extends BaseController
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'class_id', 'class_type', 'class_group', 'class_fullname'
+				 //`subjectid`, `subjectname`, `subjectcode`, `subjectdescription`
 				'subjectname' => 'required',
 				'subjectcode' => 'required',
 				'subjectdescription' => 'required'
@@ -323,9 +358,9 @@ class Setup extends BaseController
 					try{
 						$recsaved = $subjectsmodel->insert([
 							//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-							'subject_name' => $this->request->getPost('subjectname'),
-							'subject_code' => $this->request->getPost('subjectcode'),
-							'subject_description' => $this->request->getPost('subjectdescription')	
+							'subjectname' => $this->request->getPost('subjectname'),
+							'subjectcode' => $this->request->getPost('subjectcode'),
+							'subjectdescription' => $this->request->getPost('subjectdescription')	
 						]);
 						$this->session->setFlashdata('savedmsg', 'Record saved successfully');
 						$data['savedmsg'] = 'Record saved successfully';
@@ -355,10 +390,10 @@ class Setup extends BaseController
 		$session = session();
 		$subjectsmodel = new SubjectModel();
 		if($this->request->getMethod() === 'post' && $this->validate([
-			'subjects_id' => 'required',			
+			'subjectsid' => 'required',			
 		])){
-			$subjects_id = $this->request->getPost('subjects_id');
-			$subjectsmodel->where(['subject_id'=>$subjects_id]);	
+			$subjects_id = $this->request->getPost('subjectsid');
+			$subjectsmodel->where(['subjectid'=>$subjects_id]);	
 			$query = $subjectsmodel->get();
 			$result = $query->getResult();
 			echo json_encode(array('formarray'=>$result[0]));
@@ -381,10 +416,10 @@ class Setup extends BaseController
                 try{	
                     $recsaved = $subjectsmodel->save([
                         //'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						'subject_id' => $this->request->getPost('subjectsid'),
-						'subject_name' => $this->request->getPost('subjectname'),
+						'subjectid' => $this->request->getPost('subjectsid'),
+						'subjectname' => $this->request->getPost('subjectname'),
 						//'subject_code' => $this->request->getPost('subjectcode'),
-						'subject_description' => $this->request->getPost('subjectdescription')	
+						'subjectdescription' => $this->request->getPost('subjectdescription')	
                     ]);				
                     $this->session->setFlashdata('savedmsg', 'Record saved successfully');	
                     $data['savedmsg'] = 'Record saved successfully';
@@ -402,7 +437,7 @@ class Setup extends BaseController
                 }
 			}else{
 				$data['savedmsg'] = $failed =  $this->validation->getErrors();
-				print_r($failed);
+				//print_r($failed);
                 echo json_encode(array("success"=>-2, "message"=>$failed));
 				exit;
 			}

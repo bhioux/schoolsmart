@@ -4,9 +4,9 @@ use CodeIgniter\Model;
 
 class GradebookSetup extends Model
 {
-    protected $table = 'setup_gradebook';
-    protected $primaryKey = 'studentid';
+    protected $table = 'view_scoresheet';
+    protected $primaryKey = 'studentno';
     protected $allowedFields = [
-        'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade',  'session', 'term'
+        
     ];
 }

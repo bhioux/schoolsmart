@@ -35,7 +35,7 @@
             </a>
             <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                 <li>
-                    <a href="<?= base_url() ?>/studentprofile"> Student Profile </a>
+                    <a href="<?= site_url('student/studentprofile') ?>"> Student Profile </a>
                 </li>
                 <li>
                     <a href="<?= base_url() ?>/updateprofile"> Update Profile </a>
@@ -46,7 +46,7 @@
             </ul>
         </li>
         <li class="menu active">
-            <a href="#staffprofile" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <a href="<?= site_url("staff/staffprofile") ?>" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                 <div class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                     <span>Staff Profile</span>
@@ -57,13 +57,13 @@
             </a>
             <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                 <li>
-                    <a href="<?= base_url() ?>/staffprofile"> Staff Profile </a>
+                    <a href="<?= site_url("staff/staffprofile") ?>"> Staff Profile </a>
                 </li>
                 <li>
-                    <a href="<?= base_url() ?>/updatestaffprofile"> Update Staff Profile </a>
+                    <a href="<?= site_url("staff/staffsetup") ?>"> Update Staff Profile </a>
                 </li>
                 <li>
-                    <a href="<?= site_url('gradebook/gradebooksetup') ?>"> Gradebook Setup </a>
+                    <a href="<?= site_url('gradebook') ?>"> Gradebook Setup </a>
                 </li>
             </ul>
         </li>
@@ -113,49 +113,22 @@
         </li>
 
         <li class="menu">
-            <a href="<?= base_url() ?>/reportcardjss" aria-expanded="false" class="dropdown-toggle">
+            <a href="<?= site_url("/report/reportcard") ?>" aria-expanded="false" class="dropdown-toggle">
                 <div class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span>JSS Terminal Report</span>
+                    <span>Terminal Report</span>
                 </div>
             </a>
         </li>
 
         <li class="menu">
-            <a href="<?= base_url() ?>/reportcardsss" aria-expanded="false" class="dropdown-toggle">
+            <a href="<?= site_url("/report/reportobservables") ?>" aria-expanded="false" class="dropdown-toggle">
                 <div class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span>SSS Terminal Report</span>
+                    <span>Observables Report</span>
                 </div>
             </a>
         </li>
-
-        <!-- <li class="menu">
-            <a href="staffsetup" aria-expanded="false" class="dropdown-toggle">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    <span>Staff Setup</span>
-                </div>
-            </a>
-        </li>
-
-        <li class="menu">
-            <a href="subjectsetup" aria-expanded="false" class="dropdown-toggle">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    <span>Subject Setup</span>
-                </div>
-            </a>
-        </li>
-
-        <li class="menu">
-            <a href="classsetup" aria-expanded="false" class="dropdown-toggle">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    <span>Class Setup</span>
-                </div>
-            </a>
-        </li> -->
 
         <li class="menu">
             <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -188,7 +161,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/sessionsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url("setup/session") ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Session Setup</span>
@@ -196,7 +169,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/termsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url("setup/term") ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Term Setup</span>
@@ -204,7 +177,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/classsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url("setup/class") ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Class Setup</span>
@@ -212,7 +185,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/subjectsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url("setup/subjects") ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Subject Setup</span>
@@ -220,7 +193,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="<?= base_url() ?>/staffsetup" aria-expanded="false" class="dropdown-toggle">
+                    <a href="<?= site_url("staff/staffsetup") ?>" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Staff Setup</span>

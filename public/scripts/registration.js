@@ -1,5 +1,12 @@
 $(document).ready(function(){
-    //alert("888")
+    
+    var formw = document.querySelector('#frmstaffprofile');
+    imps = formw.querySelectorAll('input[type="text"], input[type="date"], input[type="email"], select');
+    imps.forEach(element => {
+    element.value = ''
+    $(element).prop('selected','selected').val('').change();
+    });
+
     console.log('preparing data insert...')
     var regdatatableurl = $("#regdatatableurl").val();
 
@@ -19,7 +26,7 @@ $(document).ready(function(){
         // 'studentid', 'passport', 'surname', 'othernames', 'dob', 'class', 'hometown', 'lga', 'stateoforigin', 'nationality', 'nin', 'gender', 'height', 'weight', 'fathername', 'fatheroccupation', 'mothername', 'motheroccupation', 'fatherpermaddress', 'fatherphonenumber', 'motherpermaddress', 'motherphonenumber', 'guardianname', 'guardianoccupation', 'guardianpermaddress', 'guardianphonenumber', 'familytype', 'familysize', 'positioninfamily', 'noofbrothers', 'noofsisters', 'parentreligion', 'disability', 'bloodgroup', 'genotype', 'vision', 'hearing', 'speech', 'generalvitality', 'classgiven', 'classgroup', 'last_updated'
 
         columns: [
-            {data: "studentid"},
+            {data: "regno"},
             //{data: "surname"},
             { 
                  "data": "surname",
@@ -30,6 +37,7 @@ $(document).ready(function(){
                     return row['surname'] + ' - ' + row['othernames'];
                  }
             },
+            {data: "class"},
             { 
                 "data": "studentid",
                 "render": function(data, type, row, meta){
@@ -55,7 +63,7 @@ $(document).ready(function(){
         var editurl = $("#editurl").val();
         $("#btntest").attr("disabled","disabled");
         $("#btntest").html('posting data...');
-        $("#notifier").addClass('alert alert-warning').html('<strong>Saving</strong> Do not close this page...');
+        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-warning').html('<strong>Saving</strong> Do not close this page...');
         var form = document.getElementById('frmstprofile');
         var formdata = new FormData(form);
 
@@ -65,6 +73,7 @@ $(document).ready(function(){
         if(btnvalue == 'Submit'){
             var targeturl = posturl;
             var btntext = "Add";
+            var btnsubmit = $("#btnsubmit").html();
 
             $.ajax({
                 url: targeturl, // point to server-side controller method
@@ -75,16 +84,16 @@ $(document).ready(function(){
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    alert(data)
-                    if(data == 1){
+                    parsedData = JSON.parse(data)
+                    console.log(parsedData)
+                    if(parsedData.success == 1){
+                        alert("Record successfully loaded");
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log( "Data Loaded: " + data );
-                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
-                        $("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
-                        
-                        //$("#frmtest")[0].reset();
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
 
+                        var formw = document.querySelector('#frmstprofile');
                         imps = formw.querySelectorAll('input[type="text"], select');
                         imps.forEach(element => {
                         element.value = ''
@@ -98,16 +107,18 @@ $(document).ready(function(){
                         console.log('Data refreshed');
 
                     }else if(data == '-1'){
-                        console.log("Invalid file format")
-                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        //console.log("Invalid file format")
+                        alert("<strong>Error </strong>Save failed!");
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log(data + 'Data error');
                         //return false;
                     
                     }else{
+                        alert("<strong>Error </strong>Save failed!");
                         console.log("Invalid file format")
-                        $("#notifier").addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log(data + 'Data error');
@@ -115,12 +126,12 @@ $(document).ready(function(){
                     }
                     
                 },
-                error: function (data) {
+                error: function (error) {
+                    alert("<strong>Error </strong>Save failed!" + error.message );
                     $("#btnsubmit").removeAttr("disabled");
                     $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
-                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
-                    $("#notifier").addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
+                    $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
             });
@@ -128,6 +139,7 @@ $(document).ready(function(){
         }else{
             var targeturl = editurl
             var btntext = "Update";
+            var btnsubmit = $("#btnsubmit").html();
             var studentid = $("#studentid").val();
             console.log(studentid);
 
@@ -140,18 +152,16 @@ $(document).ready(function(){
                 data: formdata,
                 type: 'post',
                 success: function (data) {
-                    if(data == 0){
-                        console.log("File upload error")
-                        //notify.update({ type: 'danger', message: '<strong>Error </strong>Update failed!' });
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
-                        //return false;
-                    }else{
+                    parsedData = JSON.parse(data)
+                    console.log(parsedData)
+                    if(parsedData.success == 1){
+                        alert("Record successfully loaded");
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log( "Data Loaded: " + data );
-                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record updated!' });
-                        
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
+
+                        var formw = document.querySelector('#frmstprofile');
                         imps = formw.querySelectorAll('input[type="text"], select');
                         imps.forEach(element => {
                         element.value = ''
@@ -159,15 +169,35 @@ $(document).ready(function(){
                         });
 
                         $("#studentid").val('');
-                        $("#btnsubmit").val('add').text('Save');
+                        $("#btnsubmit").val('Submit').text(btnsubmit);
+                        console.log('Data about to be refreshed');
                         studentprofiletable.ajax.reload();
+                        console.log('Data refreshed');
+
+                    }else if(data == '-1'){
+                        //console.log("Invalid file format")
+                        alert("<strong>Error </strong>Save failed!");
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        $("#btnsubmit").removeAttr("disabled");
+                        $("#btnsubmit").html(btnsubmit);
+                        console.log(data + 'Data error');
+                        //return false;
+                    
+                    }else{
+                        alert("<strong>Error </strong>Save failed!");
+                        console.log("Invalid file format")
+                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        $("#btnsubmit").removeAttr("disabled");
+                        $("#btnsubmit").html(btnsubmit);
+                        console.log(data + 'Data error');
+                        //return false;
                     }
                 },
-                error: function (data) {
+                error: function (error) {
                     $("#btnsubmit").removeAttr("disabled");
                     $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
-                    notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
                     return false
                 }
             });

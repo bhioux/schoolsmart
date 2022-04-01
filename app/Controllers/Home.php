@@ -25,6 +25,7 @@ use App\Models\Registration;
 use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
 use App\Models\ApplicationForm;
+use App\Models\Userlogin;
 //use App\Models\DateTime;
 use CodeIgniter\Controller;
 
@@ -32,12 +33,17 @@ class Home extends BaseController
 {
 
 	protected $request;
+	public $isLogin = false;
 
 	use ResponseTrait;
+
     public function __construct(){
+		//$session = \Config\Services::session($config);
         $this->session = $session = session();
 		helper(['form', 'string']);
 		$this->request = $request = \Config\Services::request();
+
+		//var_dump($this->session);
 		$uri = $request->uri;
 		$this->requestMethod = $request->getMethod(TRUE);
 		$this->validation =  \Config\Services::validation();
@@ -45,6 +51,12 @@ class Home extends BaseController
 
 	public function index()
 	{
+		//session_start();
+		//print_r($_SESSION['username']); exit;
+		if(!isset($_SESSION['islogin'])){
+			return redirect()->to('/login');
+		}
+
 		$menu = new MenuModel();        
 		//$data['header'] = "";
         //$data['mainnav'] = "";
@@ -53,20 +65,79 @@ class Home extends BaseController
 		//$data['adminmenu'] = $menu->asObject()->findAll();
 		return view('pages/home', $data);
 	}
-    
-    public function register()
-    {
-		/*`accountid``username``password``email``phoneno``status`*/
 
-        $menu = new MenuModel();        
-        $data['register'] = "";
-        return view('pages/register', $data);
-    }
 
-	public function createaccount(){
-		$result = $this->MenuModel->createaccount();
-		echo $result;				
+	public function logout()
+	{	
+		session_destroy();
+		return view('pages/login');
 	}
+
+	public function login()
+	{	
+		session_destroy();
+		return view('pages/login');
+	}
+
+	public function dologin()
+	{	
+		if($this->request->getMethod() === 'post' && $this->validate([
+			'username' => 'required',
+			'password' => 'required',
+			//'csrf_test_name'  => 'required',
+
+		])){
+			$username = $this->request->getPost('username');
+			$password = $this->request->getPost('password');
+			$pwd = md5(strtoupper(trim($password)));
+
+			$menu = new MenuModel();  
+			$userCred = new Userlogin();
+			$data['footer'] = "";
+
+			$userCred->where(['username'=>$username, 'password'=>$pwd]);	
+			$query = $userCred->get();
+			$result = $query->getResult();
+			
+
+			if(sizeof($result) > 0){	
+				//print_r($result);			
+				$this->session->set('islogin', true);
+				$this->session->set('username', $username);
+				$this->session->set('email', $result[0]->email);
+				$this->session->set('category', $result[0]->category);
+				$category = $result[0]->category;
+
+				switch(strtolower($category)){
+					case "student":
+						return redirect()->to("student/studentprofile");
+						break;
+					case "staff":
+						return redirect()->to("staff/staffprofile");
+						break;
+					default:
+						return redirect()->to("/");
+						break;
+				}
+				
+			}else{
+				return redirect()->to("/login")->with('message', 'Login failed, please check your entries and try again');
+			}
+
+		}else{
+			$data['message'] = $failed =  $this->validation->getErrors();
+			return redirect()->to("/login")->with('message', $failed);
+			print_r($this->validation->getErrors());
+			//$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			//print_r($failed);
+			//echo json_encode(array('gradebookdata'=>array()));
+			// exit;
+			//return view('pages/login', $data);
+
+		}
+		
+	}
+    
 
 	public function passreset()
     {
@@ -84,100 +155,9 @@ class Home extends BaseController
         $menu = new MenuModel();
 		$data['header'] = "";
         $data['mainnav'] = "";        
-        $data['studentprofile'] = "";
+        $data['staffprofile'] = "";
         return view('pages/studentprofile', $data);
     }
-
-	public function updateprofile()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['updateprofile'] = "";
-        return view('pages/updateprofile', $data);
-    }
-
-	// public function editprofile()
- //    {
- //        $menu = new MenuModel();
-	// 	$data['header'] = "";
- //        $data['mainnav'] = "";        
- //        $data['editprofile'] = "";
- //        return view('pages/editprofile', $data);
- //    }
-
-	public function vehicleslist()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['vehicleslist'] = "";
-        return view('pages/vehicleslist', $data);
-    }
-
-	public function addvehicles()
-    {
-        $menu = new MenuModel();
-		$data['header'] = "";
-        $data['mainnav'] = "";        
-        $data['addvehicles'] = "";
-        return view('pages/addvehicles', $data);
-    }
-
-	public function reportcardnur()
-	{		
-		$menu = new MenuModel();
-		// $staffprofile = new StaffProfile();
-		// $studentprofile = new StudentProfile();
-		// $parentsprofile = new ParentsProfile();
-		// $personalinfo = new PersonalInfo();
-		$reportcardnur = new ReportCardNur();
-		$data['header'] = "";
-        $data['mainnav'] = ""; 
-		$data['reportcardpry'] = "";
-		// $data['adminmenu'] = $menu->asObject()->findAll();
-		$data["title"] = "Student Report Card";
-		// $data['guardians'] = $parentsprofile->asObject()->findAll();
-		//$data['guardians'] = $guardians;
-		//$profiletable = $this->load->view('admin/global/profiletable', $defaults , TRUE);
-		//$studentprofile = $this->load->view('admin/global/studentprofile', $defaults , TRUE);
-		// $data['studentprofile'] = $studentprofile->asObject()->findAll();	
-		//$modaltest = $this->load->view('admin/global/modaltest', $defaults , TRUE);
-		//$stprofilecrudscript = $this->load->view('admin/global/stprofilecrudscript', $defaults , TRUE);
-		/*modaltest.php*/
-		//$datatablescripts = $this->load->view('admin/global/datatablescripts', $defaults , TRUE);
-		//$defaults = array_merge($defaults, array("profiletable"=>$profiletable, "modaltest"=>$modaltest, "stprofilecrudscript"=>$stprofilecrudscript, 'datatablescripts'=>$datatablescripts));
-
-		return view('pages/reportcardnur', $data);
-	}
-
-	public function reportcardpry()
-	{		
-		$menu = new MenuModel();
-		// $staffprofile = new StaffProfile();
-		// $studentprofile = new StudentProfile();
-		// $parentsprofile = new ParentsProfile();
-		// $personalinfo = new PersonalInfo();
-		$reportcardnur = new ReportCardNur();
-		$reportcardpry = new ReportCardPry();
-		$data['header'] = "";
-        $data['mainnav'] = ""; 
-		$data['reportcardpry'] = "";
-		// $data['adminmenu'] = $menu->asObject()->findAll();
-		$data["title"] = "Student Report Card";
-		// $data['guardians'] = $parentsprofile->asObject()->findAll();
-		//$data['guardians'] = $guardians;
-		//$profiletable = $this->load->view('admin/global/profiletable', $defaults , TRUE);
-		//$studentprofile = $this->load->view('admin/global/studentprofile', $defaults , TRUE);
-		// $data['studentprofile'] = $studentprofile->asObject()->findAll();	
-		//$modaltest = $this->load->view('admin/global/modaltest', $defaults , TRUE);
-		//$stprofilecrudscript = $this->load->view('admin/global/stprofilecrudscript', $defaults , TRUE);
-		/*modaltest.php*/
-		//$datatablescripts = $this->load->view('admin/global/datatablescripts', $defaults , TRUE);
-		//$defaults = array_merge($defaults, array("profiletable"=>$profiletable, "modaltest"=>$modaltest, "stprofilecrudscript"=>$stprofilecrudscript, 'datatablescripts'=>$datatablescripts));
-
-		return view('pages/reportcardpry', $data);
-	}
 
 	public function registration()
     {
@@ -300,7 +280,7 @@ class Home extends BaseController
 						echo 0;
 					}
 					exit;
-				}catch(exception $e){
+				}catch(\Exception $e){
 					print_r($e->getMessage());
 					exit;
 				}
@@ -475,28 +455,7 @@ class Home extends BaseController
         // $data['registration'] = "";
         //return view('pages/registration', $data);
     }
-	// public function personalinfo()
-	// {		
-		// $menu = new MenuModel();
-		// $staffprofile = new StaffProfile();
-		// $studentprofile = new StudentProfile();
-		// $parentsprofile = new ParentsProfile();
-		// $personalinfo = new PersonalInfo();
-		// $data['adminmenu'] = $menu->asObject()->findAll();
-		// $data["title"] = "Student Profile";
-		// $data['guardians'] = $parentsprofile->asObject()->findAll();
-		//$data['guardians'] = $guardians;
-		//$profiletable = $this->load->view('admin/global/profiletable', $defaults , TRUE);
-		//$studentprofile = $this->load->view('admin/global/studentprofile', $defaults , TRUE);
-		// $data['studentprofile'] = $studentprofile->asObject()->findAll();	
-		//$modaltest = $this->load->view('admin/global/modaltest', $defaults , TRUE);
-		//$stprofilecrudscript = $this->load->view('admin/global/stprofilecrudscript', $defaults , TRUE);
-		/*modaltest.php*/
-		//$datatablescripts = $this->load->view('admin/global/datatablescripts', $defaults , TRUE);
-		//$defaults = array_merge($defaults, array("profiletable"=>$profiletable, "modaltest"=>$modaltest, "stprofilecrudscript"=>$stprofilecrudscript, 'datatablescripts'=>$datatablescripts));
-
-	// 	return view('pages/personalinfo', $data);
-	// }
+	
 
 	public function applicationform()
 	{		
@@ -626,22 +585,6 @@ class Home extends BaseController
         $data['gradebooksetup'] = "";
         return view('pages/gradebooksetup', $data);
     }
-
-	// public function academicYear(DateTime $userDate) {
-	// 	$currentYear = $userDate->format('Y');
-	// 	$cutoff = new DateTime($userDate->format('Y') . '/07/31 23:59:59');
-	// 	if ($userDate < $cutoff) {
-	// 		return ($currentYear-1) . '/' . $currentYear;
-	// 	}
-	// 	return $currentYear . '/' . ($currentYear+1);
-	// }
-
-	// public static function getAcademicYear(){
-	// 	$now = new DateTime();
-
-	// 	$year = $now->format('Y');
-	// 	return ($now->format('m') < 8) ? $year - 1 : $year;
-	// }
 
 
 	public function registrationtable()

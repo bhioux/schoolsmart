@@ -30,9 +30,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?php
-        print_r($sessionrecs); exit;
-    ?>
+
+    <div id="notifier"></div>
+
     <?= $this->include('partials/gradebooksetup1') ?>
 <?= $this->endSection() ?>
 
@@ -49,7 +49,13 @@
     <script src="plugins/highlight/highlight.pack.js"></script> -->
     <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
-    <script>
+    <script src="<?= base_url() ?>/scripts/gradebook.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
+
+    <!-- <script>
         $('#zero-config').DataTable({
             "oLanguage": {
                 "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
@@ -62,7 +68,7 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 50
         });
-    </script>
+    </script> -->
 
     <script>        
         checkall('todoAll', 'todochkbox');

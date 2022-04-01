@@ -14,11 +14,11 @@ $(document).ready(function(){
             dataSrc: 'subjectstabledata'
         },
         columns: [
-            {data: "subject_name"},
-            {data: "subject_code"},
-            {data: "subject_description"},
+            {data: "subjectname"},
+            {data: "subjectcode"},
+            {data: "subjectdescription"},
             { 
-                "data": "subject_id",
+                "data": "subjectid",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
                        data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editAction(this)">Edit</a>';
@@ -120,9 +120,11 @@ $(document).ready(function(){
                         alert("Record Updated Successfully");
                         //$("#notifier").addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
                         $("#subjectname").val(''); $("#subjectname").focus();
-                        $("#subjectcode").val('');
+                        $("#subjectcode").val(''); 
+                        $("#subjectcode").attr('disabled', false);        
                         $("#subjectdescription").val('');
                         //$("#btnsubmit").val('Submit').text(btnsubmit);
+                        $("#btnsubmit").val('Submit').text('Submit')
                         subjectlisttable.ajax.reload();
                    }else if(data == -1){
                         $("#subjectname").val('');
