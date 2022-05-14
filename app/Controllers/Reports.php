@@ -125,6 +125,7 @@ class Reports extends BaseController
         $data['mainnav'] = "";        
         $data['reportcardjss'] = "";
 
+
 		// $data['title'] = "OBSERVABLE REPORT - ".$this->currentuser;
         // return view('pages/reportobservables', $data);
 

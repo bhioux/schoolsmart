@@ -53,6 +53,7 @@ class Gradebook extends BaseController
 		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
 		$data['termrecs'] = $this->termrecs();
+
 		$data['classes'] = $this->classrecs();
 		$data['subjects'] = $this->subjectrecs();
 		//$data['adminmenu'] = $menu->asObject()->findAll();
@@ -70,6 +71,7 @@ class Gradebook extends BaseController
 		$data['sessionrecs'] = $this->sessionrecs();
 		$data['termrecs'] = $this->termrecs();
 		$data['classes'] = $this-> classrecs();
+
 		$data['subjects'] = $this->subjectrecs();
 
         return view('pages/gradebooksetup', $data);
