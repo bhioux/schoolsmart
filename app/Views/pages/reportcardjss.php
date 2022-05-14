@@ -14,6 +14,10 @@
     <?= $this->include('partials/mainnav') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('title') ?>
+    <?= $title ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('header') ?>
     <?= $this->include('partials/header') ?>
 <?= $this->endSection() ?>

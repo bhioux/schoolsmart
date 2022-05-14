@@ -34,6 +34,8 @@ use App\Models\ReportCardPry;
 use App\Models\ReportCardJss;
 use App\Models\ReportCardSss;
 use App\Models\ApplicationForm;
+use App\Models\StudentProfileView;
+use \App\Models\StaffProfileView;
 // use App\Models\ApplicationFormSecSchool;
 //use App\Models\DateTime;
 use CodeIgniter\Controller;
@@ -51,6 +53,24 @@ class Staff extends BaseController
 		$uri = $request->uri;
 		$this->requestMethod = $request->getMethod(TRUE);
 		$this->validation =  \Config\Services::validation();
+
+		if(isset($_SESSION['category']) && strtoupper($_SESSION['category']) =='STUDENT' ){
+			$this->currentuser = $_SESSION['username'];
+			$studentprofile = new StudentProfileView();
+			$studentprofile->where(['regno'=>$this->currentuser]);	
+			$query = $studentprofile->get();
+			$result = $query->getResult();
+			$this->studentview = $student = $result[0];
+			$this->class = $student->class;
+		}else{
+			$this->currentuser = $_SESSION['username'];
+			$studentprofile = new StaffProfileView();
+			$studentprofile->where(['regno'=>$this->currentuser]);	
+			$query = $studentprofile->get();
+			$result = $query->getResult();
+			$this->studentview = $student = $result[0];
+			$this->class = $student->class ?? '';
+		}
     }
 
 	public function index()

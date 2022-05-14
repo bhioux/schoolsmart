@@ -10,22 +10,14 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'authfilter' => \App\Filters\AuthFilter::class,
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 				//'honeypot'
-				'csrf' => ['except' => ['/student/editregistration', '/student/postregistration', '/student/updateregistration', 
-				// '/setup/editsession', '/setup/postsession', '/setup/updatesession', '/setup/sessiontable',
-				// '/setup/editclass', '/setup/postclass',  '/setup/updateclass', '/setup/classtable',
-				// '/setup/editsubjects', '/setup/postsubjects',  '/setup/updatesubjects', '/setup/subjectstable',
-				'/staff/poststaffsetup',
-				'setup/fetchaffectivearea',
-				//'/setup/studentbyclass', //get post is permitted from being in the filters
-				//, '/setup/affectivearea',//get post is permitted from being in the filters
-				'/setup/updateaffectivearea'
-			]],
+
 		],
 		'after'  => [
 			'toolbar',
