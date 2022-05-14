@@ -7,7 +7,6 @@
     <link href="<?= base_url() ?>/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/assets/css/forms/theme-checkbox-radio.css">
     <link href="<?= base_url() ?>/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
-    <!-- <link href="<?= base_url() ?>/assets/css/apps/invoice.css" rel="stylesheet" type="text/css" /> -->
     <!-- END PAGE LEVEL STYLES -->
 <?= $this->endSection() ?>
 
@@ -20,16 +19,16 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?= $this->include('partials/reportcardnur') ?>
+    <?= $this->include('partials/markbroadsheetsss') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="<?= base_url() ?>/assets/js/scrollspyNav.js"></script>
+    
     <script>
         checkall('todoAll', 'todochkbox');
         $('[data-toggle="tooltip"]').tooltip()
     </script>
-    <script src="<?= base_url() ?>/assets/js/apps/invoice.js"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
 <?= $this->endSection() ?>

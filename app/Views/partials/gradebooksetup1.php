@@ -182,8 +182,8 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                                         </div>
                                         <div class="f-body">
-                                            <p class="invoice-number">Assessment #1</p>
-                                            <p class="invoice-customer-name">Setup Assessment 1</p>
+                                            <p class="invoice-number">Assessment</p>
+                                            <p class="invoice-customer-name">Setup Assessment</p>
                                             <p class="invoice-generated-date"><small>Click to Setup</small></p>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@
                                     <div class="col-lg-9">
                                         <div class="row inv--head-section">
                                             <div class="col-12 layout-spacing">
-                                                <h3 class="in-heading">ASSESSMENT 1</h3>
+                                                <h3 class="in-heading">ASSESSMENT SETUP</h3>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
@@ -616,12 +616,6 @@
                                                         <div class="col-sm-6 col-6">
                                                             <p class="">Core</p>
                                                         </div>
-                                                        <!-- <div class="col-sm-6 col-6">
-                                                            <p class="">Name of Teacher: </p>
-                                                        </div>
-                                                        <div class="col-sm-6 col-6">
-                                                            <p class="">Mr. Johnson Oluwagbemi</p>
-                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -765,7 +759,6 @@
                                             </table>
                                         </div>
                                         <div class="col text-right">
-                                            <!-- <button class="mt-4 btn btn-primary" name="btnsubmit" id="btnsubmit">Update Table</button> &nbsp; &nbsp; -->
                                             <button class="btn btn-primary mb-4 mr-2 btn-lg" name="btnsubmit" id="btnsubmit">Update Table</button>
                                         </div>
 
@@ -827,12 +820,6 @@
                                                         <div class="col-sm-6 col-6">
                                                             <p class="">Core</p>
                                                         </div>
-                                                        <!-- <div class="col-sm-6 col-6">
-                                                            <p class="">Name of Teacher: </p>
-                                                        </div>
-                                                        <div class="col-sm-6 col-6">
-                                                            <p class="">Mr. Johnson Oluwagbemi</p>
-                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>

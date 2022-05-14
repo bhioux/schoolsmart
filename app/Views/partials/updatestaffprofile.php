@@ -4,7 +4,7 @@
                 <div class="widget-content widget-content-area">
 
                 <nav class="breadcrumb-one float-left">
-                    <a href="staffprofile">Back to Profile</a>
+                    <a href="<?= base_url() ?>/staffprofile">Back to Profile</a>
                 </nav>
 
                 <nav class="breadcrumb-one float-right" aria-label="breadcrumb">
@@ -956,7 +956,6 @@
                       </div>
                     </div>                      
                   </div>
-
                 </div>
               </div>
             </div>
@@ -1512,7 +1511,7 @@
             
             messages: {
 
-                passport:               "Please Upload a passport with .jpg|.jpeg format".
+                passport:               "Please Upload a passport with .jpg|.jpeg format",
                 surname:                "Please enter a value",
                 othernames:             "Please enter a value",
                 dob:                    "Please enter a value",

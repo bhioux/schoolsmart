@@ -1,15 +1,20 @@
 <style>
    .uptab{
+    writing-mode: vertical-rl;
     writing-mode: sideways-lr; 
-    text-orientation: upright;
+    text-orientation: mixed;
+    padding-left: 0px;
+    margin: 0px;
   }
 
   #reportcard {
     background: #fff;
-    text-orientation:upright;
+    writing-mode: vertical-rl;
+    text-orientation:mixed;
   }
 
 </style>
+
 
 <?php
 //var_dump($guardians); //exit;
@@ -21,6 +26,7 @@
       <div class="statbox widget box box-shadow">
         <div class="widget-header">
           <div class="row">
+            
             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
               <h4>Nursery School Report Card</h4>
             </div>                 
@@ -180,7 +186,7 @@
             <div class="row mg-b-5 justify-content-center"><h4>SOCIAL AND STUDY HABIT</h4></div>
 
             <div class="table-responsive">
-              <table id="reportcard" class="table table-bordered mg-b-0">
+              <table class="table table-bordered mg-b-0">
                 <thead>
                   <tr>
                     <th width="22%">GRADING</th>

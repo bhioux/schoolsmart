@@ -66,6 +66,7 @@ class Gradebook extends BaseController
         $data['mainnav'] = "";        
         $data['gradebooksetup'] = "";
 
+
 		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
 		$data['termrecs'] = $this->termrecs();

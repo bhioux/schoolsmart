@@ -411,8 +411,9 @@
             <div class="form-group">
               <select class="selectpicker form-control" id="familytype" name="familytype" required>
               <option disabled selected>--Choose One--</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Nuclear">Nuclear Family</option>
+                <option value="Extended">Extended Family</option>
+                <option value="Single-Parent">Single-Parent Family</option>
               </select>
             </div>
           </div>
