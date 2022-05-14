@@ -39,11 +39,9 @@ $(document).ready(function(){
             //alert( $('#classgroup').val())
             gradebooktable.ajax.url(url).load();
             //$('#table').DataTable().ajax.url(url).load();
-        }
-        
+        }        
        
     })
-
 
 
     var gradebooktable = $('#gradebooktable').DataTable( {
@@ -156,9 +154,10 @@ $(document).ready(function(){
                     //alert('raw' + data.success)
 
                     if(parsedData.success == 1){
+                        alert("Record Updated Successfully");
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
-                        console.log( "Data Loaded: " + data );
+                        //console.log( "Data Loaded: " + data );
                         //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
                         $("#notifier").removeClass('alert').addClass('alert alert-success').html('Success: <strong>Success </strong>Record saved!')
                         
@@ -189,14 +188,16 @@ $(document).ready(function(){
                         console.log('Data refreshed');
 
                     }else if(data == '-1'){
+                        alert('<strong>Error </strong>Save failed!');
                         console.log("Invalid file format")
                         $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error: </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
-                        console.log(data + 'Data error');
+                       // console.log(data + 'Data error');
                         //return false;
                     
                     }else{
+                        alert('<strong>Error </strong>Save failed!');
                         //console.log("Invalid file format")
                         $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
                         $("#btnsubmit").removeAttr("disabled");
@@ -207,6 +208,7 @@ $(document).ready(function(){
                     
                 },
                 error: function (data) {
+                    alert("error occured: " + error.message);
                     $("#btnsubmit").removeAttr("disabled");
                     $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
@@ -234,6 +236,7 @@ $(document).ready(function(){
                     parsedData = JSON.parse(data)
                     console.log('parsed' + parsedData.success)
                     if(parsedData.success == 1){
+                        alert("Record Updated Successfully");
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         //console.log( "Data Loaded: " + data );
@@ -255,6 +258,7 @@ $(document).ready(function(){
                         console.log('Table refreshed');
 
                     }else{
+                        alert('<strong>Error </strong> SAve failed');
                         $("#btnsubmit").removeAttr("disabled");
                         $("#btnsubmit").html(btnsubmit);
                         console.log( "error occured: " + error.message );
@@ -264,6 +268,7 @@ $(document).ready(function(){
                     }
                 },
                 error: function (data) {
+                    alert('<strong>Error </strong>' + error.message);
                     $("#btnsubmit").removeAttr("disabled");
                     $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );

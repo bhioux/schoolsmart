@@ -4,9 +4,9 @@ use CodeIgniter\Model;
 
 class SessionModel extends Model
 {
-    protected $table = 'session';
+    protected $table = 'session_setup';
     protected $primaryKey = 'session_id';
     protected $allowedFields = [
-        'session_code', 'session_duration'
+        'session', 'activeflag'
     ];
 }

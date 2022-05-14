@@ -105,8 +105,8 @@ function editAction(obj){
               <table id="sessionlisttable" name="sessionlisttable" class="table table-hover" style="width:100%">
                 <thead>
                   <tr>
-                    <th>S/N</th>
-                    <th>Session Duration</th>
+                    <th>Session</th>
+                    <th>Active Flag</th>
                     <th class="no-content">Action</th>
                   </tr>
                 </thead>

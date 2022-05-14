@@ -16,9 +16,9 @@ $(document).ready(function(){
         },
         //'session_code', 'session_duration'
         columns: [
-            {data: "session_id"},
+            {data: "session"},
             { 
-                data: "session_duration",
+                data: "activeflag",
             },
             { 
                 "data": "session_id",

@@ -18,6 +18,10 @@
     <?= $this->include('partials/header') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('title') ?>
+    <?= $title ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
     <?= $this->include('partials/reportcardsss') ?>
 <?= $this->endSection() ?>
