@@ -83,7 +83,7 @@ class Home extends BaseController
 		if(!isset($_SESSION['islogin'])){
 			return redirect()->to('/login');
 		}
-      
+     
 		//$data['header'] = "";
         //$data['mainnav'] = "";
         $data['content'] = "";

@@ -69,5 +69,6 @@
         $('[data-toggle="tooltip"]').tooltip()
     </script>
     <script src="<?= base_url() ?>/assets/js/apps/invoice.js"></script>
+    <script src="<?= base_url() ?>/scripts/traits.js"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
 <?= $this->endSection() ?>

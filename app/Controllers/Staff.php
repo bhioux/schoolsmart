@@ -264,6 +264,8 @@ class Staff extends BaseController
 		$data['header'] = "";
         $data['mainnav'] = "";        
         $data['traitssetup'] = "";
+		$data['classrecs'] = $this-> classrecs();        
+		//$data['subjects'] = Gradebook::classrecs();       
         return view('pages/traitssetup', $data);
     }
 
@@ -302,6 +304,17 @@ class Staff extends BaseController
         $data['awardsetup'] = "";
         return view('pages/awardsetup', $data);
     }
+
+	public static function classrecs(){
+		$session = session();
+		$classmodel = new ClassSetup();
+		$classmodel->orderBy('classid', 'ASC');	
+		//$sessionmodel->where(['sessionid'=>$sessionid]);	
+		$query = $classmodel->get();
+		$result = $query->getResult();
+		return @$result;
+	}
+
 
 	public function assessmentsetup()
     {

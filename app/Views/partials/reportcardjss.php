@@ -14,6 +14,7 @@
 <style>
    .uptab{
     writing-mode: vertical-rl;
+
     /* writing-mode: sideways-lr;  */
     text-orientation: mixed;
     padding-left: 0px;
@@ -355,8 +356,6 @@
             </div>
           </div>
         </div>
-
-        
       </div>
     </div>
   </div>

@@ -392,11 +392,31 @@ class StudentRegistration extends BaseController
 		
 	}
 
+
+  public function studentByClass(){
+		$session = session();
+		$studentprofilemodel = new StudentProfile();    
+
+
+		if($this->request->getMethod() === 'get' && $this->validate([
+			'sentClassId' => 'required',			
+		])){
+			$sentClassId = $this->request->getGet('sentClassId');
+			$studentprofilemodel->orderBy('last_updated', 'ASC');	
+			$studentprofilemodel->where(['class'=>$sentClassId]);	
+			$query = $studentprofilemodel->get();
+			$result = $query->getResult();
+			echo json_encode(array('students'=>$result));
+			//echo json_encode($result);
+		}  
+    }	
+
 	function refreshcsrf(){
 		$csrfName = csrf_token();
     	$csrfHash = csrf_hash();  
 		return $csrfHash;
 	}
+
 
 
 	//--------------------------------------------------------------------

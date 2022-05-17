@@ -25,3 +25,32 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   `subject_description` tinytext NOT NULL,
   PRIMARY KEY (`subject_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+
+
+-- Dumping structure for table session
+CREATE TABLE IF NOT EXISTS `session` (
+  `session_id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_code` varchar(150) NOT NULL,
+  `session_duration` varchar(150) NOT NULL,
+  PRIMARY KEY (`session_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+INSERT INTO `session` (`session_id` `session_code` `session_duration`) VALUES
+(1, '2019/2020', '2019-03-16 to 2020-04-20'),
+(2, '2020/2021', '2020-03-16 to 2021-04-21'),
+(3, '2021/2022', '2021-03-16 to 2022-04-22');
+
+INSERT INTO `session` (`session_id` `session_code` `session_duration`) VALUES
+('', '2019/2020', '2019-03-16 to 2020-04-20'),
+('', '2020/2021', '2020-03-16 to 2021-04-21'),
+('', '2021/2022', '2021-03-16 to 2022-04-22');
+
+
+ALTER TABLE `session` 
+  ADD PRIMARY KEY (`session_id`);
+
+
+
+

@@ -32,6 +32,31 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Home::index'); //
+
+$routes->get('/register', 'Home::register');
+$routes->get('/passreset', 'Home::passreset');
+$routes->get('/studentprofile', 'Home::studentprofile');
+$routes->get('/updateprofile', 'Home::updateprofile');
+$routes->get('/editprofile', 'Home::editprofile');
+$routes->get('/students', 'Home::students');
+//$routes->get('/addvehicles', 'Home::addvehicles');
+
+$routes->get('/reportcardnur', 'Home::reportcardnur');
+$routes->get('/reportcardpry', 'Home::reportcardpry');
+$routes->get('/reportcardjss', 'Staff::reportcardjss');
+$routes->get('/reportcardsss', 'Staff::reportcardsss');
+$routes->get('/applicationform', 'Home::applicationform');
+$routes->get('/staffprofile', 'Home::staffprofile');
+$routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
+$routes->get('/staffsetup', 'Home::staffsetup');
+$routes->get('/assessmentsetup', 'Staff::assessmentsetup');
+$routes->get('/billsetup', 'Staff::billsetup');
+$routes->get('/awardsetup', 'Staff::awardsetup');
+$routes->get('/traitssetup', 'Staff::traitssetup');
+$routes->get('/affectiveareasetup', 'Staff::affectiveareasetup');
+$routes->get('/socialhabitsetup', 'Staff::socialhabitsetup');
+$routes->get('/commentssetup', 'Staff::commentssetup');
+
 $routes->get('/login', 'Home::login'); //
 $routes->get('/logout', 'Home::logout'); //
 $routes->post('/dologin', 'Home::dologin'); //
@@ -72,6 +97,8 @@ $routes->get('/commentssetup', 'Staff::commentssetup');
 // $routes->get('/termsetup', 'Home::termsetup');
 
 //$routes->get('/classsetup', 'Home::classsetup');
+//$routes->get('/assignclasses', 'Home::assignclasses');
+$routes->get('/populateclass', 'Home::populateclass');
 
 // $routes->get('/populateclass', 'Home::populateclass');
 
@@ -85,6 +112,7 @@ $routes->group('student', ["filter" => "authfilter"], function($routes)
 	$routes->post('editregistration', 'StudentRegistration::editregistration');
 	$routes->post('updateregistration', 'StudentRegistration::updateregistration');
 });
+$routes->post('/refreshcsrf', 'StudentRegistration::refreshcsrf');
 
 $routes->post('/refreshcsrf', 'StudentRegistration::refreshcsrf');
 
@@ -111,9 +139,14 @@ $routes->group('setup', ["filter" => "authfilter"], function($routes)
 	$routes->post('editsubjects', 			'Setup::editsubjects');
 	$routes->post('updatesubjects', 		'Setup::updatesubjects');	
 
+	$routes->get('studentbyclass', 		'StudentRegistration::studentByClass');	
+
+	$routes->get('affectivearea', 		'Setup::affectiveArea');	
+
+	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea');
+
+	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');
 	$routes->get('assignclasses', 'Home::assignclasses');
-
-
 });
 
 
@@ -131,6 +164,7 @@ $routes->group('staff', ["filter" => "authfilter"], function($routes)
 
 $routes->post('/refreshcsrf', 'Gradebook::refreshcsrf');
 
+
 $routes->group('gradebook', ["filter" => "authfilter"], function($routes)
 {
 	$routes->get('/', 'Gradebook::gradebooksetup');
@@ -138,6 +172,7 @@ $routes->group('gradebook', ["filter" => "authfilter"], function($routes)
 	$routes->get('gradebooktable', 'Gradebook::gradebooktable'); //
 	$routes->post('postgradebook', 'Gradebook::postgradebook'); 
 });
+
 
 $routes->group('report', ["filter" => "authfilter"], function($routes)
 {
