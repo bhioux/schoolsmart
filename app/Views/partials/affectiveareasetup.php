@@ -8,22 +8,23 @@
     }
 
     function showform(obj){
-        $("#ct").show()
+        //$("#placeholder").attr('hidden', false);
+        //$("#realform").attr('hidden', true);
         event.preventDefault()
         alert(obj.title)
         
-        //var studentno  = obj.title;
-        //var classId = $('#classgroup option:selected').text();
-        // if($('#classgroup').children("option:selected").val() == ''){
-        //     alert("Please make sure Class ");
-        //     return false;
-        // }else{
-        //     alert(classId);
-        //     var studenbyclassturl = $("#studentlisttableurl").val() + '?sentClassId=' + classId;
-        //     studentlisttable.ajax.url(studenbyclassturl).load();   
-        //     var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=' + classId;
-        //     affectivearealisttable.ajax.url(affectiveareatableurl).load();  
-        // }
+        var studentno  = obj.title;
+        var classId = $('#classgroup option:selected').text();
+        if($('#classgroup').children("option:selected").val() == ''){
+            alert("Please make sure Class ");
+            return false;
+        }else{
+            alert(classId);
+            var studenbyclassturl = $("#studentlisttableurl").val() + '?sentClassId=' + classId;
+            studentlisttable.ajax.url(studenbyclassturl).load();   
+            var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=' + classId;
+            affectivearealisttable.ajax.url(affectiveareatableurl).load();  
+        }
         return false;
     }  
 
@@ -54,24 +55,15 @@
 <div class="row invoice layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="row inv--head-section justify-content-md-center">
-            <!-- <div class="col-lg-8 col-offset-2"> -->
-                <!-- <div class="col-12 layout-spacing justify-content-md-center">
-                    <h3 class="in-heading">ASSESSMENT SETUP</h3>
-                </div> -->
-                <!-- <div class="col-lg-6">
-                    <h3 class="in-heading">ASSESSMENT SETUP</h3>
-                </div> -->
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                 <h3 class="in-heading">AFFECTIVE AREA SETUP</h3>
-                <br>
                     <div class="form-group">
-                        <label for="t-text">Select Class: </label> &ast;
                         <div class="form-group">
                             <input type="hidden" name="posturl" id="posturl" value="<?= site_url('gradebook/postgradebook'); ?>">
                             <input type="hidden" name="editurl" id="editurl" value="<?= site_url('gradebook/updategradebook'); ?>"> 
                             <input type="hidden" name="studentlisttableurl" id="studentlisttableurl" value="<?= site_url('setup/affectiveAreatable') ?>" />
                             <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
-                                <option value='' selected>--Choose One--</option>
+                                <option value='' selected>--Choose Class To Load Students--</option>
                                 <!-- <option value="A">Primary 4b</option> -->
                                 <?php
                                     foreach($classes as $class){
@@ -106,14 +98,14 @@
                         <div class="widget-content widget-content-area br-6">
                             <h4 class="title-heading"><strong><u>STUDENT NAMES</u></strong></h4>
                             <div class="table-responsive mb-4 mt-4">
-                                <table id="studentlisttable" class="table table-hover" style="width:100%">
+                                <table id="studentlisttable" class="table table-hover table-responsive" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>S/N.</th>
+                                            <th>S/N</th>
                                             <th>Name</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tbody>
+                                    <!--<tbody>
                                         <tr class="list-actions" id="invoice-00001" data-invoice-id="00001">
                                             <td>1</td>
                                             <td>Johnson Oladunni</td>
@@ -122,11 +114,11 @@
                                             <td>2</td>
                                             <td>Johnson Olufemi</td>
                                         </tr>
-                                    </tbody> -->
+                                    </tbody>-->
                                 </table>
                             </div>
                         </div>
-                        <!-- <ol class="nav nav-pills inv-list-container d-block" id="pills-tab" role="tablist">
+                        <!--<ol class="nav nav-pills inv-list-container d-block" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <div class="nav-link list-actions" id="invoice-00001" data-invoice-id="00001">
                                     <div class="f-m-body">
@@ -141,7 +133,7 @@
                                     </div>
                                 </div>
                             </li>
-                        </ol> -->
+                        </ol>-->
                     </div>
                 </div>
             </div>
@@ -149,32 +141,21 @@
             <div class="invoice-container">
                 <div class="invoice-inbox">
 
-                    <div class="inv-not-selected">
+                    <div clas="inv-not-selected" id="placeholder">
                         <p>Select a class from above to setup the Affective Area.</p>
                     </div>
-
-                    <!-- <div class="invoice-header-section">
-                        <h4 class="inv-number"></h4>
-                        <div class="invoice-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer action-print" data-toggle="tooltip" data-placement="top" data-original-title="Reply"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                        </div>
-                    </div> -->
                     
-                    <div id="ct" class="active" hidden>
+                    <div id="realform" class="active">
                         
-                        <div class="invoice-00001">
+                        <div clas="invoice-00001" id="invoice1" hidden>
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
 
                                 <div class="row inv--product-table-section">
                                     <div class="col-lg-5">
                                         <div class="row inv--head-section">
-                                            <!-- <div class="col-12 layout-spacing">
-                                                <h3 class="in-heading">Observable Traits' Setup</h3>
-                                            </div>
-                                            <br> -->
                                             <div class="col-12 layout-spacing">
-                                                <h4><span>Student ID:</span> <?php echo "studentid"?></h4>
-                                                <h4><span>Student Names:</span> <?php echo "studentnames"?></h4>
+                                                <h6><span>Student ID:</span> <?php echo "studentid"?></h6>
+                                                <h6><span>Student Name:</span> <?php echo "studentnames"?></h6>
                                             </div>
                                         </div>
                                         <div class="table table-hover">
@@ -392,23 +373,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="invoice-00002">
-                            <div class="content-section  animated animatedFadeInUp fadeInUp">
+                        <div clas="invoice-00002" id="invoice2">
+                            <div class="content-section  animated">
 
                                 <div class="row inv--product-table-section">
                                     <div class="col-lg-5">
                                         <div class="row inv--head-section">
-                                            <!-- <div class="col-12 layout-spacing">
-                                                <h3 class="in-heading">Observable Traits' Setup</h3>
-                                            </div>
-                                            <br> -->
                                             <div class="col-12 layout-spacing">
-                                                <h4><span>Student ID:</span> <?php echo "studentid"?></h4>
-                                                <h4><span>Student Names:</span> <?php echo "studentnames"?></h4>
+                                                <h6><span>Student ID:</span> <?php echo "studentid"?></h6>
+                                                <h6><span>Student Name:</span> <?php echo "studentnames"?></h6>
                                             </div>
                                         </div>
-                                        <div class="table table-hover">
-                                            <table id="assessment1" style="width:100%">
+                                        <div class="table-responsive mb-4 mt-4">
+                                            <table id="assessment1" style="width:100%" class="table table-responsive table-stripped table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th width="50%" scope="col">Affective Area</th>
@@ -590,6 +567,7 @@
                                                 </tfoot>
                                             </table>
                                         </div>
+                                        
                                         <div class="col text-right">
                                             <button class="btn btn-primary mb-4 mr-2 btn-lg">Save Ratings</button>
                                         </div>

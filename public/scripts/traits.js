@@ -3,6 +3,8 @@ $(document).ready(function(){
     
     siteUrl = window.location.origin;
     console.log(siteUrl);
+    $("#placeholder").attr('hidden', true);
+    $("#realform").attr('hidden', false);
 
     // START STUDENT LIST LOAD AFTER CLASS SELECTION SECTION
     $("#classgroup").change(function(getClassId){
@@ -32,8 +34,8 @@ $(document).ready(function(){
             // id="invoice-00002" data-invoice-id="00002"
         },
         rowId: 'studentid',
-        "pageLength": 20,
-        "lengthMenu": [20, 50, 100 ],
+        "pageLength": 10,
+        "lengthMenu": [10, 20, 50, 100 ],
         dom: 'Bfrtip',
         responsive: true,
         buttons: [
