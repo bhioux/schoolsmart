@@ -335,10 +335,10 @@
                                             <table id="gradebooktable" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th width="10%" scope="col">S/N</th>
-                                                        <th width="20%" scope="col">Registration No</th>
-                                                        <th width="55%" scope="col">Class List</th>
-                                                        <th width="15%" scope="col">Assessment 1</th>
+                                                        <th width="10%" scope="col">Student No</th>
+                                                        <th width="20%" scope="col">Full Name</th>
+                                                        <th width="55%" scope="col">Class</th>
+                                                        <th width="15%" scope="col">Assessment Type</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -475,9 +475,9 @@
                                             <table id="assessment1" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th width="10%" scope="col">S/N</th>
-                                                        <th width="20%" scope="col">Registration No</th>
-                                                        <th width="55%" scope="col">Class List</th>
+                                                        <th width="20%" scope="col">S/N</th>
+                                                        <th width="50%" scope="col">Registration No</th>
+                                                        <th width="15%" scope="col">Class List</th>
                                                         <th width="15%" scope="col">Assessment 2</th>
                                                     </tr>
                                                 </thead>

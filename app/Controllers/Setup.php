@@ -2,6 +2,8 @@
 
 use CodeIgniter\API\ResponseTrait;
 
+use App\Libraries\Util;
+
 use App\Models\MenuModel;
 use App\Models\Register;
 use App\Models\PassReset;
@@ -28,6 +30,7 @@ use App\Models\SessionModel;
 use App\Models\ClassModel;
 use App\Models\SubjectModel;
 use App\Models\AffectiveAreaModel;
+use App\Models\AffectiveAreaViewModel;
 
 
 //use App\Models\DateTime;
@@ -445,6 +448,35 @@ class Setup extends BaseController
 			}
     }	
 
+	public function affectiveArea() {
+		$util = new Util();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['session'] = "";
+		$data['sessionrecs'] = $util->sessionrecs();
+		$data['termrecs'] = $util->termrecs();
+		$data['classes'] = $util-> classrecs();
+		$data['subjects'] = $util->subjectrecs();
+
+        return view('pages/affectiveareasetup', $data);
+		// $session = session();
+		// $affectiveareamodel = new AffectiveAreaModel();
+		// if($this->request->getMethod() === 'get' && $this->validate([
+		// 	'sentClassId' => 'required',			
+		// ])){
+		// 	$sentClassId = $this->request->getGet('sentClassId');
+		// 	//$affectiveareamodel->orderBy('last_updated', 'ASC');	
+		// 	$affectiveareamodel->where(['class'=>$sentClassId]);	
+		// 	$query = $affectiveareamodel->get();
+		// 	$result = $query->getResult();
+		// 	echo json_encode(array('affectiveareantabledata'=>$result));
+		// 	//echo json_encode($result[0]);
+		// }else{
+		// 	$data['savedmsg'] = $failed =  $this->validation->getErrors();
+		// 	return array();
+		// }
+	}
+
 
 	public function fetchAffectiveArea() {
 		$session = session();
@@ -469,7 +501,26 @@ class Setup extends BaseController
 		}
 	}
 
-	public function affectiveArea() {
+	public function affectiveAreaTable() {
+		$session = session();
+		$affectiveareamodel = new AffectiveAreaViewModel();
+		if($this->request->getMethod() === 'get' && $this->validate([
+			'sentClassId' => 'required',			
+		])){
+			$sentClassId = $this->request->getGet('sentClassId');
+			//$affectiveareamodel->orderBy('last_updated', 'ASC');	
+			$affectiveareamodel->where(['class'=>$sentClassId]);	
+			$query = $affectiveareamodel->get();
+			$result = $query->getResult();
+			echo json_encode(array('studentslist'=>$result));
+			//echo json_encode($result[0]);
+		}else{
+			$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			return array();
+		}
+	}
+
+	public function postaffectiveArea() {
 		$session = session();
 		$affectiveareamodel = new AffectiveAreaModel();
 		if($this->request->getMethod() === 'get' && $this->validate([

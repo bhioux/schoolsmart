@@ -1,5 +1,10 @@
 $(document).ready(function(){
+
+    
     siteUrl = window.location.origin;
+    console.log(siteUrl);
+
+    // START STUDENT LIST LOAD AFTER CLASS SELECTION SECTION
     $("#classgroup").change(function(getClassId){
         var classId  = $('#classgroup').children("option:selected").val();
         //var classId = $('#classgroup option:selected').text();
@@ -7,17 +12,28 @@ $(document).ready(function(){
             alert("Please make sure Class ");
             return false;
         }else{
-            var studenbyclassturl = $("#studenbyclassturl").val() + '?sentClassId=' + classId;
+            alert(classId);
+            var studenbyclassturl = $("#studentlisttableurl").val() + '?sentClassId=' + classId;
             studentlisttable.ajax.url(studenbyclassturl).load();   
             var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=' + classId;
             affectivearealisttable.ajax.url(affectiveareatableurl).load();  
         }
-    }) 
+    })    
+    // END STUDENT LIST LOAD AFTER CLASS SELECTION SECTION
 
-    var studenbyclassturl = $("#studenbyclassturl").val() + '?sentClassId=1';
+
+    // START STUDENT LIST AUTOLOAD SECTION
+    var studenbyclassturl = $("#studentlisttableurl").val() + '?sentClassId=1';
     var studentlisttable = $('#studentlisttable').DataTable( {
-        "pageLength": 50,
-        "lengthMenu": [50, 100 ],
+
+        'createdRow': function (row, data, dataIndex) {
+          $(row).addClass( 'list-actions' );
+           $(row).attr('data-invoice-id', data[0]);
+            // id="invoice-00002" data-invoice-id="00002"
+        },
+        rowId: 'studentid',
+        "pageLength": 20,
+        "lengthMenu": [20, 50, 100 ],
         dom: 'Bfrtip',
         responsive: true,
         buttons: [
@@ -27,32 +43,54 @@ $(document).ready(function(){
         ajax: {
             url: studenbyclassturl,
             //data: { },
-            dataSrc: 'students'
+            dataSrc: 'studentslist'
         },
         columns: [
             {
-                "data": "studentid",
+                "data": "regno",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
-                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="return editAction(this)">'+ data + '</a>';                       
-                   }else{
-                       data = 'Edit&nbsp;|&nbsp;Delete';
+                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="showform(this)">'+ data + '</a>';                       
                    }
                    return data;
                 }                 
 
             },
             {
-                "data": "studentid",
+                "data": "regno",
                 "render": function(data, type, row, meta){
-                   
-                   return row['surname'] + ' ' + row['othernames'];
+                    // f(type === 'display'){
+                    //     data = '<a id="exp' + data  + '" title="' + data  + '" href="" class="lnkedit" ionclick="return showform(this)">'+ row['surname'] + ' ' + row['othernames'] + '</a>'; 
+                    // }
+                   return '<span class="selectedstudent" title="' + row['regno'] + '" onclick="showform(this)">' + row['surname'] + ' ' + row['othernames'] + '</span>';
                 }                 
 
             },
         ]
     });
 
+    function format (data) {
+        return '<div class="details-container">'+
+            '<table cellpadding="5" cellspacing="0" border="0" class="details-table">'+
+                '<tr class="list-actions" id="invoice-'+ data.regno +'" data-invoice-id="'+ data.regno +'">'+
+                    '<td>'+ data.regno +'</td>'+
+                    '<td style="background-color:red;">'+ data.surname +'</td>'+
+                '</tr>'+
+            '</table>'+
+          '</div>';
+    };
+    // END STUDENT LIST AUTOLOAD SECTION
+
+
+    // START STUDENT SELECTION EVENT SECTION
+    //$(".selectedstudent").click(function(e){
+        // var showform = function(obj){
+      
+   // })    
+    // END STUDENT SELECTION EVENT SECTION
+
+
+    // START AFFECTIVE AREAS FORM TABLE SECTION
     var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=1';
     var affectivearealisttable = $('#affectivearealisttable').DataTable( {
         "pageLength": 50,
@@ -90,6 +128,7 @@ $(document).ready(function(){
             }                        
         ]
     }); 
+    // END AFFECTIVE AREAS FORM TABLE SECTION
 
     $("#btnSaveRatings").click(function(){
         var punctuality = $("#punctuality").val();

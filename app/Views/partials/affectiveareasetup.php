@@ -1,3 +1,33 @@
+<?php
+    //dd($classes);
+?>
+
+<script>
+    editAction1 = function(){
+        alert(444)
+    }
+
+    function showform(obj){
+        $("#ct").show()
+        event.preventDefault()
+        alert(obj.title)
+        
+        //var studentno  = obj.title;
+        //var classId = $('#classgroup option:selected').text();
+        // if($('#classgroup').children("option:selected").val() == ''){
+        //     alert("Please make sure Class ");
+        //     return false;
+        // }else{
+        //     alert(classId);
+        //     var studenbyclassturl = $("#studentlisttableurl").val() + '?sentClassId=' + classId;
+        //     studentlisttable.ajax.url(studenbyclassturl).load();   
+        //     var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=' + classId;
+        //     affectivearealisttable.ajax.url(affectiveareatableurl).load();  
+        // }
+        return false;
+    }  
+
+</script>
 <div class="row row-form">
     <div id="breadcrumbBasic" class="col-xl-12 col-lg-12 layout-spacing">
         <div class="statbox widget box box-shadow">
@@ -18,6 +48,9 @@
     </div>
 </div>
 
+<form >
+
+
 <div class="row invoice layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="row inv--head-section justify-content-md-center">
@@ -34,12 +67,21 @@
                     <div class="form-group">
                         <label for="t-text">Select Class: </label> &ast;
                         <div class="form-group">
+                            <input type="hidden" name="posturl" id="posturl" value="<?= site_url('gradebook/postgradebook'); ?>">
+                            <input type="hidden" name="editurl" id="editurl" value="<?= site_url('gradebook/updategradebook'); ?>"> 
+                            <input type="hidden" name="studentlisttableurl" id="studentlisttableurl" value="<?= site_url('setup/affectiveAreatable') ?>" />
                             <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
-                                <option disabled selected>--Choose One--</option>
-                                <option value="A">Primary 4b</option>
-                                <option value="B">Primary 2a</option>
-                                <option value="C">Primary 5c</option>
-                                <option value="D">Primary 1a</option>
+                                <option value='' selected>--Choose One--</option>
+                                <!-- <option value="A">Primary 4b</option> -->
+                                <?php
+                                    foreach($classes as $class){
+                                ?>
+                                        <option value="<?= $class->classtype.$class->classname.$class->classgroup ?>">
+                                        <?= $class->classtype.$class->classname.$class->classgroup ?>
+                                        </option>
+                                <?php
+                                    }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -64,14 +106,14 @@
                         <div class="widget-content widget-content-area br-6">
                             <h4 class="title-heading"><strong><u>STUDENT NAMES</u></strong></h4>
                             <div class="table-responsive mb-4 mt-4">
-                                <table id="studentprofiletable" class="table table-hover" style="width:100%">
+                                <table id="studentlisttable" class="table table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>S/N.</th>
                                             <th>Name</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <!-- <tbody>
                                         <tr class="list-actions" id="invoice-00001" data-invoice-id="00001">
                                             <td>1</td>
                                             <td>Johnson Oladunni</td>
@@ -80,7 +122,7 @@
                                             <td>2</td>
                                             <td>Johnson Olufemi</td>
                                         </tr>
-                                    </tbody>
+                                    </tbody> -->
                                 </table>
                             </div>
                         </div>
@@ -118,7 +160,7 @@
                         </div>
                     </div> -->
                     
-                    <div id="ct" class="">
+                    <div id="ct" class="active" hidden>
                         
                         <div class="invoice-00001">
                             <div class="content-section  animated animatedFadeInUp fadeInUp">
@@ -601,12 +643,18 @@
         </div>
 
     </div>
-    </div>
+</div>
+
+</form>
+
+
 
 
 <script type="text/javascript">
-    $('a').on('click', function (e) {
+    $('.selectedstudent').on('click', function (e) {
+        alert(e.target)
         e.preventDefault();
+       
         var $href = $(this).attr('href');
         $(this).addClass('active');
 

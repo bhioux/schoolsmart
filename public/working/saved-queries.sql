@@ -833,4 +833,351 @@ COALESCE((SELECT v.`cumavg2` FROM view_scoresheet AS v WHERE v.studentno = vs.st
 FROM `view_scoresheet` AS vs 
 WHERE schoolterm = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1) AND `schoolsession` = (SELECT sst.sessionid FROM session_setup AS sst WHERE sst.activeflag=1 ORDER BY vs.`subjects`, vs.`class`)
 
-    
+
+
+-----------------------------
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT 
+sp.`studentid`, sp.`regno`, sp.`passport`, sp.`surname`, sp.`othernames`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+COALESCE((
+    SELECT sg.assessmentgrade FROM setup_gradebook AS sg, session_setup AS ss, setup_subjects AS subj WHERE sg.studentid = sp.regno AND sg.ssession = ss.sessionid AND ss.activeflag=1 AND sg.assessmenttype = 'ca1'  AND sg.studentsubject = subj.subjectcode)
+ , '') AS ca1,
+ 
+ COALESCE((
+    SELECT sg.assessmentgrade FROM setup_gradebook AS sg, session_setup AS ss, setup_subjects AS subj WHERE sg.studentid = sp.regno AND sg.ssession = ss.sessionid AND ss.activeflag=1 AND sg.assessmenttype = 'ca2'  AND sg.studentsubject = subj.subjectcode)
+ , '') AS ca2,
+ 
+ COALESCE((
+    SELECT sg.assessmentgrade FROM setup_gradebook AS sg, session_setup AS ss, setup_subjects AS subj WHERE sg.studentid = sp.regno AND sg.ssession = ss.sessionid AND ss.activeflag=1 AND sg.assessmenttype = 'ca3' AND sg.studentsubject = subj.subjectcode)
+ , '') AS ca3,
+ 
+ COALESCE((
+SELECT sg.assessmentgrade FROM setup_gradebook AS sg, session_setup AS ss, setup_subjects AS subj WHERE sg.studentid = sp.regno AND (sg.ssession = ss.sessionid AND ss.activeflag=1) AND sg.assessmenttype = 'exam'  AND sg.studentsubject = subj.subjectcode)
+ , '') AS exam,
+
+(SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+(SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+FROM `student_profile` AS sp
+
+
+-----------------------------
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT 
+sp.`studentid`, sp.`regno`, sp.`passport`, sp.`surname`, sp.`othernames`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class)
+ , '') AS ca1,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class)
+ , '') AS ca2,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class)
+ , '') AS ca3,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class)
+ , '') AS exam,
+
+(SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+(SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+FROM `view_student_profile` AS sp
+
+
+---------------
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT 
+sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+subj.subjectname,
+
+
+
+COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+ , '') AS ca1,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+ , '') AS ca2,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+ , '') AS ca3,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+ , '') AS exam,
+
+(SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+(SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+FROM `view_studentprofile` AS sp, setup_subjects AS subj
+
+
+-------------------
+CREATE OR REPLACE VIEW gradebook_view AS
+
+CASE
+    WHEN sp.class LIKE 'J%' THEN 
+    SELECT
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+    ----
+    WHEN sp.class LIKE 'S%' THEN 
+    SELECT
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+        
+    ELSE 
+
+        SELECT
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+END
+
+FROM `view_studentprofile` AS sp, setup_subjects AS subj
+
+------------------
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT 
+sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+subj.subjectname,
+
+COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca1,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca2,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca3,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS exam,
+
+(SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+(SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+FROM `view_studentprofile` AS sp, setup_subjects AS subj
+
+WHERE
+CASE
+    WHEN sp.class LIKE 'J%' THEN subj.subjectdescription IN ('J', 'B')
+    WHEN sp.class LIKE 'S%' THEN subj.subjectdescription IN ('S', 'B')
+    ELSE ""
+END
+
+
+----------------------
+
+
+---------------------
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT
+CASE
+    WHEN sp.class LIKE 'J%' THEN 
+    SELECT 
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+    WHEN sp.class LIKE 'S%' THEN 
+    SELECT
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('S', 'B'))
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+        
+    ELSE 
+
+        SELECT
+        sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+        subj.subjectname,
+
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca1,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca2,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS ca3,
+        
+        COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode)
+        , '') AS exam,
+
+        (SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+        (SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+END
+
+FROM `view_studentprofile` AS sp, setup_subjects AS subj
+
+
+===============================
+
+
+CREATE OR REPLACE VIEW gradebook_view AS
+SELECT 
+sp.`studentid`, sp.`regno`, sp.`fullname`, sp.`dob`, sp.`class`, sp.`hometown`, sp.`lga`, sp.`stateoforigin`, sp.`nationality`, sp.`nin`, sp.`gender`, sp.`height`, sp.`weight`, sp.`fathername`, sp.`fatheroccupation`, sp.`mothername`, sp.`motheroccupation`, sp.`fatherpermaddress`, sp.`fatherphonenumber`, sp.`motherpermaddress`, sp.`motherphonenumber`, sp.`guardianname`, sp.`guardianoccupation`, sp.`guardianpermaddress`, sp.`guardianphonenumber`, sp.`email`, sp.`familytype`, sp.`familysize`, sp.`positioninfamily`, sp.`noofbrothers`, sp.`noofsisters`, sp.`parentreligion`, sp.`disability`, sp.`bloodgroup`, sp.`genotype`, sp.`vision`, sp.`hearing`, sp.`speech`, sp.`generalvitality`, sp.`classgiven`, sp.`classgroup`, sp.`last_updated`,
+
+subj.subjectname,
+subj.subjectcode,
+
+COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca1' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca1,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca2' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca2,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'ca3' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS ca3,
+ 
+ COALESCE((SELECT sg.assessmentgrade FROM setup_gradebook AS sg WHERE sg.studentid = sp.regno AND sg.ssession = sp.schoolsession AND sg.term = sp.schoolterm AND sg.assessmenttype = 'exam' AND sg.studentclass = sp.class AND sg.studentsubject=subj.subjectcode AND subj.subjectdescription IN ('J', 'B'))
+ , '') AS exam,
+
+(SELECT ss.`sessionid` FROM session_setup AS ss WHERE ss.activeflag=1) AS sessionid,
+
+(SELECT ss.`session` FROM session_setup AS ss WHERE ss.activeflag=1) AS session
+
+
+FROM `view_studentprofile` AS sp, setup_subjects AS subj
+
+WHERE subj.subjectdescription LIKE substring(sp.class,1,1) OR  subj.subjectdescription = 'B'
+
+
+------------------------
+
+
+SELECT 
+sp.studentid, sp.regno, sp.passport, sp.surname, sp.othernames, sp.dob, sp.class, sp.hometown, sp.lga, sp.stateoforigin, sp.nationality, sp.nin, sp.gender, sp.height, sp.weight, sp.fathername, sp.fatheroccupation, sp.mothername, sp.motheroccupation, sp.fatherpermaddress, sp.fatherphonenumber, sp.motherpermaddress, sp.motherphonenumber, sp.guardianname, sp.guardianoccupation, sp.guardianpermaddress, sp.guardianphonenumber, sp.email, sp.familytype, sp.familysize, sp.positioninfamily, sp.noofbrothers, sp.noofsisters, sp.parentreligion, sp.disability, sp.bloodgroup, sp.genotype, sp.vision, sp.hearing, sp.speech, sp.generalvitality, sp.classgiven, sp.classgroup, sp.last_updated,
+
+COALESCE((SELECT sa.punctuality FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS punctuality,
+
+COALESCE((SELECT sa.neatness FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS neatness,
+
+COALESCE((SELECT sa.politeness FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS politeness,
+
+COALESCE((SELECT sa.honesty FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS honesty,
+
+COALESCE((SELECT sa.relationshipwithothers FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS relationshipwithothers,
+
+COALESCE((SELECT sa.leadership FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS leadership,
+
+COALESCE((SELECT sa.emotionalstability FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS emotionalstability,
+
+COALESCE((SELECT sa.health FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS health,
+
+COALESCE((SELECT sa.attitudetoschoolwork FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS attitudetoschoolwork,
+
+COALESCE((SELECT sa.attentiveness FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS attentiveness,
+
+COALESCE((SELECT sa.persevearance FROM setup_affectivearea AS sa WHERE sp.regno = sa.studentno AND sa.class = sp.class AND sa.session = (SELECT ss.sessionid FROM session_setup AS ss WHERE ss.activeflag=1) AND sa.term = (SELECT ts.termid FROM term_setup AS ts WHERE ts.activeflag=1)), '') AS persevearance
+
+FROM student_profile AS sp
+
+
+--------------------------------------

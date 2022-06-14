@@ -142,10 +142,10 @@ $routes->group('setup', ["filter" => "authfilter"], function($routes)
 	$routes->get('studentbyclass', 		'StudentRegistration::studentByClass');	
 
 	$routes->get('affectivearea', 		'Setup::affectiveArea');	
-
-	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea');
-
-	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');
+	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea'); 
+	$routes->get('affectiveAreatable', 		'Setup::affectiveAreaTable');  //
+	$routes->post('postaffectiveArea', 		'Setup::postaffectiveArea');  //
+	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');  //
 	$routes->get('assignclasses', 'Home::assignclasses');
 });
 
