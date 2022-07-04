@@ -86,6 +86,34 @@ class Util
 		return @$result;
 	}
 
+	public function selectaffectiverating1($default){
+		$sel = '';
+		$sel .= '<option hidden>Rate Students</option>';
+		for($i=5;$i>0;$i--){
+			if($i=$default){
+				$selected = 'selected';
+			}else{
+				$selected = '';
+			}
+			$sel .= '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+		}
+		echo $sel;
+	}
+
+	public function selectaffectiverating($default){
+		$sel = "";
+		$sel .= "<option hidden>Rate Students</option>";
+		for($i=5; $i>0; $i--){
+			if($i==$default){
+				$selected = 'selected';
+			}else{
+				$selected = '';
+			}
+			$sel .= "<option value='".$i."' " .$selected. ">".$i."</option>";
+		}
+		return $sel;
+	}
+
 
 	//--------------------------------------------------------------------
 

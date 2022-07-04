@@ -145,6 +145,7 @@ $routes->group('setup', ["filter" => "authfilter"], function($routes)
 	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea'); 
 	$routes->get('affectiveAreatable', 		'Setup::affectiveAreaTable');  //
 	$routes->post('postaffectiveArea', 		'Setup::postaffectiveArea');  //
+	$routes->post('editratingsurl', 		'Setup::editratingsurl');  //
 	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');  //
 	$routes->get('assignclasses', 'Home::assignclasses');
 });

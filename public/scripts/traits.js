@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    $("#relationshipwithothers").prop('disabled', true)
     
     siteUrl = window.location.origin;
     console.log(siteUrl);
@@ -52,7 +52,7 @@ $(document).ready(function(){
                 "data": "regno",
                 "render": function(data, type, row, meta){
                    if(type === 'display'){
-                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="showform(this)">'+ data + '</a>';                       
+                       data = '<a id="exp' + data + '" title="' + data + '" href="" class="lnkedit" onclick="editAction1(this)">'+ data + '</a>';                       
                    }
                    return data;
                 }                 
@@ -64,7 +64,7 @@ $(document).ready(function(){
                     // f(type === 'display'){
                     //     data = '<a id="exp' + data  + '" title="' + data  + '" href="" class="lnkedit" ionclick="return showform(this)">'+ row['surname'] + ' ' + row['othernames'] + '</a>'; 
                     // }
-                   return '<span class="selectedstudent" title="' + row['regno'] + '" onclick="showform(this)">' + row['surname'] + ' ' + row['othernames'] + '</span>';
+                   return '<span class="selectedstudent" title="' + row['regno'] + '" onclick="editAction1(this)">' + row['surname'] + ' ' + row['othernames'] + '</span>';
                 }                 
 
             },
@@ -132,7 +132,14 @@ $(document).ready(function(){
     }); 
     // END AFFECTIVE AREAS FORM TABLE SECTION
 
+    // 'affectiverecordid', 'studentno', 'class', 'session', 'term', 'punctuality', 'neatness', 'politeness', 'honesty', 'relationshipwithothers', 'leadership', 'emotionalstability', 'health', 'attitudetoschoolwork', 'attentiveness', 'persevearance', 'attendance', 'reliability', 'selfcontrol', 'cooperation', 'responsibility', 'innitiative', 'orgability', 'verbalfluency', 'games', 'sports', 'drawingpainting', 'musicalskills'
+
+
     $("#btnSaveRatings").click(function(){
+        var form = document.getElementById('frmstaffprofile');
+        var formdata = new FormData(form);
+
+        
         var punctuality = $("#punctuality").val();
         var neatness = $("#neatness").val();
         var politeness = $("#politeness").val();
@@ -144,7 +151,8 @@ $(document).ready(function(){
         var health = $("#health").val();
         var attitude = $("#attitude").val();
         var attentiveness = $("#attentiveness").val();
-        var perseverance = $("#perseverance").val();
+        var perseverance = $("#perseverance").val(); //End of junior
+
         var attendance = $("#attendance").val();
         var reliability = $("#reliability").val();
         var selfcontrol = $("#selfcontrol").val();
