@@ -88,9 +88,9 @@ class Gradebook extends BaseController
 		if($this->request->getMethod() === 'post' && $this->validate([
 				// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
 
-				'studentid.*' => 'required|decimal|required_with[studentgrade.*]',
+				'studentid.*' => 'required|alpha_numeric|required_with[studentgrade.*]',
 				'studentno.*' => 'required|required_with[studentid.*]',
-				'studentgrade.*' => 'required|decimal|required_with[studentid.*]',
+				'studentgrade.*' => 'required|if_exist|decimal|required_with[studentid.*]',
 				'sybjectgroup' => 'required',
 				'classgroup' => 'required',
 				'assessment1'  => 'required',

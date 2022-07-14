@@ -1181,3 +1181,90 @@ FROM student_profile AS sp
 
 
 --------------------------------------
+
+
+
+
+
+-- `affectiverecordid`, `studentno`, `class`, `session`, `term`, `punctuality`, `neatness`, `politeness`, `honesty`, `relationshipwithothers`, `leadership`, `emotionalstability`, `health`, `attitudetoschoolwork`, `attentiveness`, `persevearance`, `attendance`, `reliability`, `selfcontrol`, `cooperation`, `responsibility`, `innitiative`, `orgability`, `verbalfluency`, `games`, `sports`, `drawingpainting`, `musicalskills`, `handlingtools`
+
+---------------------
+
+
+`studentid`, `regno`, `passport`, `surname`, `othernames`, `dob`, `class`, `hometown`, `lga`, `stateoforigin`, `nationality`, `nin`, `gender`, `height`, `weight`, `fathername`, `fatheroccupation`, `mothername`, `motheroccupation`, `fatherpermaddress`, `fatherphonenumber`, `motherpermaddress`, `motherphonenumber`, `guardianname`, `guardianoccupation`, `guardianpermaddress`, `guardianphonenumber`, `email`, `familytype`, `familysize`, `positioninfamily`, `noofbrothers`, `noofsisters`, `parentreligion`, `disability`, `bloodgroup`, `genotype`, `vision`, `hearing`, `speech`, `generalvitality`, `classgiven`, `classgroup`, `last_updated`
+
+----------------
+
+SELECT 
+sp.`studentid`, sp.`surname`, sp.`othernames`, sp.`class`, sp.`regno` AS studentno, 
+(SELECT ss.sessionid FROM `session_setup` AS ss WHERE ss.activeflag=1) AS session,
+(SELECT ts.termid FROM `term_setup` AS ts WHERE ts.activeflag=1) AS term,
+COALESCE((SELECT sa.affectiverecordid FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS affectiverecordid,
+COALESCE((SELECT sa.punctuality FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS punctuality,
+COALESCE((SELECT sa.neatness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS neatness,
+COALESCE((SELECT sa.politeness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS politeness,
+COALESCE((SELECT sa.honesty FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS honesty,
+COALESCE((SELECT sa.relationshipwithothers FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS relationshipwithothers,
+COALESCE((SELECT sa.leadership FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS leadership,
+COALESCE((SELECT sa.emotionalstability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS emotionalstability,
+COALESCE((SELECT sa.health FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS health,
+COALESCE((SELECT sa.attitudetoschoolwork FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attitudetoschoolwork,
+COALESCE((SELECT sa.attentiveness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attentiveness,
+COALESCE((SELECT sa.persevearance FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS persevearance,
+COALESCE((SELECT sa.attendance FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attendance,
+COALESCE((SELECT sa.reliability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS reliability,
+COALESCE((SELECT sa.selfcontrol FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS selfcontrol,
+COALESCE((SELECT sa.cooperation FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS cooperation,
+COALESCE((SELECT sa.responsibility FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS responsibility,
+COALESCE((SELECT sa.innitiative FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS innitiative,
+COALESCE((SELECT sa.orgability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS orgability,
+COALESCE((SELECT sa.verbalfluency FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS verbalfluency,
+COALESCE((SELECT sa.games FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS games,
+COALESCE((SELECT sa.sports FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS sports,
+COALESCE((SELECT sa.drawingpainting FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS drawingpainting,
+COALESCE((SELECT sa.musicalskills FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS musicalskills,
+COALESCE((SELECT sa.handlingtools FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS handlingtools
+
+
+
+FROM `student_profile` AS sp
+
+
+------------------------------
+
+
+
+CREATE OR REPLACE VIEW view_affectiveareas AS
+SELECT 
+sp.`studentid`, sp.`surname`, sp.`othernames`, sp.`class`, sp.`regno` AS studentno, 
+(SELECT ss.sessionid FROM `session_setup` AS ss WHERE ss.activeflag=1) AS session,
+(SELECT ts.termid FROM `term_setup` AS ts WHERE ts.activeflag=1) AS term,
+COALESCE((SELECT sa.affectiverecordid FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS affectiverecordid,
+COALESCE((SELECT sa.punctuality FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS punctuality,
+COALESCE((SELECT sa.neatness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS neatness,
+COALESCE((SELECT sa.politeness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS politeness,
+COALESCE((SELECT sa.honesty FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS honesty,
+COALESCE((SELECT sa.relationshipwithothers FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS relationshipwithothers,
+COALESCE((SELECT sa.leadership FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS leadership,
+COALESCE((SELECT sa.emotionalstability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS emotionalstability,
+COALESCE((SELECT sa.health FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS health,
+COALESCE((SELECT sa.attitudetoschoolwork FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attitudetoschoolwork,
+COALESCE((SELECT sa.attentiveness FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attentiveness,
+COALESCE((SELECT sa.persevearance FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS persevearance,
+COALESCE((SELECT sa.attendance FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS attendance,
+COALESCE((SELECT sa.reliability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS reliability,
+COALESCE((SELECT sa.selfcontrol FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS selfcontrol,
+COALESCE((SELECT sa.cooperation FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS cooperation,
+COALESCE((SELECT sa.responsibility FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS responsibility,
+COALESCE((SELECT sa.innitiative FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS innitiative,
+COALESCE((SELECT sa.orgability FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS orgability,
+COALESCE((SELECT sa.verbalfluency FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS verbalfluency,
+COALESCE((SELECT sa.games FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS games,
+COALESCE((SELECT sa.sports FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS sports,
+COALESCE((SELECT sa.drawingpainting FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS drawingpainting,
+COALESCE((SELECT sa.musicalskills FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS musicalskills,
+COALESCE((SELECT sa.handlingtools FROM setup_affectivearea AS sa WHERE sa.studentno = sp.regno), '') AS handlingtools
+
+
+
+FROM `student_profile` AS sp

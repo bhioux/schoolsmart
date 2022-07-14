@@ -31,6 +31,8 @@ use App\Models\ClassModel;
 use App\Models\SubjectModel;
 use App\Models\AffectiveAreaModel;
 use App\Models\AffectiveAreaViewModel;
+use App\Models\StudentProfileView;
+use App\Models\ViewAffectiveAreaModel;
 
 
 //use App\Models\DateTime;
@@ -475,6 +477,30 @@ class Setup extends BaseController
 		// 	$data['savedmsg'] = $failed =  $this->validation->getErrors();
 		// 	return array();
 		// }
+	}
+
+	public function loadstudentrecord() {
+		$session = session();
+		$studentrecmodel = new ViewAffectiveAreaModel();
+		if($this->request->getMethod() === 'get' && $this->validate([
+			'regNo' => 'required',			
+		])){
+			$regNo = $this->request->getGet('regNo');
+                try{	
+					$studentrecmodel->where(['studentno'=>$regNo]);	
+					$query = $studentrecmodel->get();
+					$result = $query->getResult();
+					//dd($result);
+					echo json_encode(array("success"=> 1, "data"=>$result[0]));			
+                    exit;
+                }catch(\Exception $e){
+					echo 0;	
+                    exit;
+                }
+		}else{
+			$data['savedmsg'] = $failed =  $this->validation->getErrors();
+			return array();
+		}
 	}
 
 

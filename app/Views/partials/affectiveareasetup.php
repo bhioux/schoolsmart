@@ -19,24 +19,30 @@
 
 
     function editAction1(obj){
-        alert(9990)
-        targeturl = $("#editratingsurl").val();
+        //alert(9990)
+        targeturl = $("#loadstudentrecordurl").val();
         alert(obj.title)
         $.ajax({
                 url: targeturl, // point to server-side controller method
-                dataType: 'text', // what to expect back from the server
+                dataType: 'json', // what to expect back from the server
                 cache: false,
                 contentType: false,
-                processData: false,
-                data: formdata,
-                type: 'post',
+                processData: true,
+                data: { regNo: obj.title },
+                type: 'get',
+                //method: 'POST',
                 success: function (data) {
-                    alert("Record successfully added");
-                    parsedData = JSON.parse(data)
-                    console.log(parsedData)
-                    if(parsedData.success == 1){
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
+                    //alert("Record successfully added");
+                    //parsedData = JSON.parse(data)
+                    alert(data.data.surname)
+                    console.log(data.data)
+                    //return false;
+                    if(data.success == 1){
+                        // $("#btnsubmit").removeAttr("disabled");
+                        // $("#btnsubmit").html(btnsubmit);
+                        $("#studentnamelabel").html(data.data.surname + " " + data.data.othernames);
+                        $("#studentidlabel").html(data.data.studentno);
+                        $("#studentclasslabel").html(data.data.class)
                         console.log( "Data Loaded: " + data );
                         $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
 
@@ -47,38 +53,29 @@
                         $(element).prop('selected','selected').val('').change();
                         });
 
-                        $("#staffid").val('');
-                        $("#btnsubmit").val('Submit').text(btnsubmit);
+                        // $("#staffid").val('');
+                        // $("#btnsubmit").val('Submit').text(btnsubmit);
                         console.log('Data about to be refreshed');
                         staffprofiletable.ajax.reload();
                         console.log('Data refreshed');
 
-                    }else if(parsedData.success == '-1'){
-                        alert("<strong>Error </strong>Save failed!");
-                        //console.log("Invalid file format")
-                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
-                        console.log(data + 'Data error');
-                        //return false;
-                    
                     }else{
-                        alert("<strong>Error </strong>Save failed!" );
+                        alert("<strong>Error </strong>Save faileds!" );
                         //console.log("Invalid file format")
                         $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
-                        $("#btnsubmit").removeAttr("disabled");
-                        $("#btnsubmit").html(btnsubmit);
+                        // $("#btnsubmit").removeAttr("disabled");
+                        // $("#btnsubmit").html(btnsubmit);
                         console.log(data + 'Data error');
                         //return false;
                     }
                     
                 },
                 error: function (error) {
-                    alert("<strong>Error </strong>Save failed!" + error.message );
+                    alert("<strong>Error </strong>Save faileded!" + error );
                     // parsedData = JSON.parse(data)
-                    // console.log(parsedData)
-                    $("#btnsubmit").removeAttr("disabled");
-                    $("#btnsubmit").html(btnsubmit);
+                    console.log(error)
+                    // $("#btnsubmit").removeAttr("disabled");
+                    // $("#btnsubmit").html(btnsubmit);
                     console.log( "error occured: " + error.message );
                     //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
                     $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
@@ -137,12 +134,14 @@
         <div class="row inv--head-section justify-content-md-center">
                 <div class="col-lg-12">
                 <h3 class="in-heading">AFFECTIVE AREA SETUP</h3>
-                    <div class="form-group">
+                    <div class="form-group"> 
+                        <!-- loadstudentrecord -->
                         <div class="form-group">
                             <input type="hidden" name="posturl" id="posturl" value="<?= site_url('gradebook/postgradebook'); ?>">
                             <input type="hidden" name="editurl" id="editurl" value="<?= site_url('gradebook/updategradebook'); ?>"> 
                             <input type="hidden" name="editratingsurl" id="editratingsurl" value="<?= site_url('setup/editratingsurl'); ?>"> 
                             <input type="hidden" name="studentlisttableurl" id="studentlisttableurl" value="<?= site_url('setup/affectiveAreatable') ?>" />
+                            <input type="hidden" name="loadstudentrecordurl" id="loadstudentrecordurl" value="<?= site_url('setup/loadstudentrecord') ?>" />
                             <select class="selectpicker form-control" id="classgroup" name="classgroup" required>
                                 <option value='' selected>--Choose Class To Load Students--</option>
                                 <!-- <option value="A">Primary 4b</option> -->
@@ -222,8 +221,18 @@
                                         <div class="col-lg-5">
                                             <div class="row inv--head-section">
                                                 <div class="col-12 layout-spacing">
-                                                    <h6><span>Student ID:</span> <?php echo "studentid"?></h6>
-                                                    <h6><span>Student Name:</span> <?php echo "studentnames"?></h6>
+                                                    <h6>
+                                                        <span><b>Student ID:</b></span> 
+                                                        <span id="studentidlabel"></span>
+                                                    </h6>
+                                                    <h6>
+                                                        <span><b>Student Name:</b></span> 
+                                                        <span id="studentnamelabel"></span>
+                                                    </h6>
+                                                    <h6>
+                                                        <span><b>Class:</b></span> 
+                                                        <span id="studentclasslabel"></span>
+                                                    </h6>
                                                 </div>
                                             </div>
                                             <div class="table-responsive mb-4 mt-4">
