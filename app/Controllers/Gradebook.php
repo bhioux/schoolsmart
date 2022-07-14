@@ -16,6 +16,8 @@ use App\Models\StaffSetup;
 use App\Models\SubjectSetup;
 use App\Models\TermSetup;
 use App\Models\ClassSetup;
+use App\Models\StudentProfileView;
+use App\Models\GradebookView;
 use App\Models\PopulateClass;
 use App\Models\AssignClasses;
 use App\Models\ParentsProfile;
@@ -66,6 +68,7 @@ class Gradebook extends BaseController
 		$data['header'] = "";
         $data['mainnav'] = "";        
         $data['gradebooksetup'] = "";
+
 
 		$data['hashcode'] = $this->refreshcsrf();
 		$data['sessionrecs'] = $this->sessionrecs();
@@ -283,7 +286,8 @@ class Gradebook extends BaseController
 	public function gradebooktable()
 	{
 		$session = session();
-		$gradebookmodel = new GradebookSetup();
+		//$gradebookmodel = new GradebookSetup();
+		$gradebookmodel = new GradebookView();
 		//$session = $this->request->getGet('session');
 		//$term  = $this->request->getGet('term');
 
@@ -309,9 +313,11 @@ class Gradebook extends BaseController
 
 			//$model->where('msgtype !=','V');
 			//$gradebookmodel->orderBy('created_at', 'ASC');	
-			$gradebookmodel->where(['class'=>trim($class), 'subjects'=>trim($subject)]);	
+			$gradebookmodel->where(['class'=>trim($class), 'subjectcode'=>trim($subject)]);	
+			// $gradebookmodel->where(['class'=>trim($class)]);	
 			$query = $gradebookmodel->get();
 			$result = $query->getResult();
+			//var_dump($query);
 			//echo json_encode("messagelog"=$result);
 			echo json_encode(array('gradebookdata'=>$result));
 			

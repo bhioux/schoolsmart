@@ -14,22 +14,21 @@
     <link href="plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
     <link href="plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css"> -->
 
-    <link href="plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-    <!-- <link href="plugins/flatpickr/style.css" rel="stylesheet" type="text/css"> -->
-    <link href="assets/css/flatpickr.min.css" rel="stylesheet" type="text/css">
-    <link href="plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css">
-    <link href="plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="plugins/bootstrap-select/bootstrap-select.min.css">
-    <link href="plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
-    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
+    <link href="<?= base_url() ?>/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/assets/css/flatpickr.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>/assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>/assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.css">
+    <link href="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/dt-global_style.css">
 
-    <link rel="stylesheet" type="text/css" href="plugins/dropify/dropify.min.css">
-    <link href="assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/dropify/dropify.min.css">
+    <link href="<?= base_url() ?>/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
 
     <!-- END PAGE LEVEL STYLES -->
 <?= $this->endSection() ?>
@@ -50,10 +49,10 @@
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="assets/js/scrollspyNav.js"></script>
-    <script src="plugins/flatpickr/flatpickr.js"></script>
-    <script src="plugins/noUiSlider/nouislider.min.js"></script>
-    <script src="plugins/flatpickr/custom-flatpickr.js"></script>
+    <script src="<?= base_url() ?>/assets/js/scrollspyNav.js"></script>
+    <script src="<?= base_url() ?>/plugins/flatpickr/flatpickr.js"></script>
+    <script src="<?= base_url() ?>/plugins/noUiSlider/nouislider.min.js"></script>
+    <script src="<?= base_url() ?>/plugins/flatpickr/custom-flatpickr.js"></script>
 <!--     <script src="plugins/flatpickr/flatpickr4.6.9.js"></script>
     <script src="plugins/flatpickr/init.js"></script>
     <script src="plugins/flatpickr/application.js"></script>
@@ -71,11 +70,11 @@
         var f6 = flatpickr(document.getElementById('monthSelectPlugin'),
     </script> -->
 
-    <script src="plugins/noUiSlider/custom-nouiSlider.js"></script>
-    <script src="plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
-    <script src="plugins/highlight/highlight.pack.js"></script>
-    <script src="plugins/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="plugins/table/datatable/datatables.js"></script>
+    <script src="<?= base_url() ?>/plugins/noUiSlider/custom-nouiSlider.js"></script>
+    <script src="<?= base_url() ?>/plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
+    <script src="<?= base_url() ?>/plugins/highlight/highlight.pack.js"></script>
+    <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
     <script>
         $('#zero-config').DataTable({
             "oLanguage": {
@@ -90,10 +89,9 @@
             "pageLength": 10 
         });
     </script>
-    <script src="plugins/dropify/dropify.min.js"></script>
-    <script src="plugins/blockui/jquery.blockUI.min.js"></script>
-    <!-- <script src="plugins/tagInput/tags-input.js"></script> -->
-    <script src="assets/js/users/account-settings.js"></script>
+    <script src="<?= base_url() ?>/plugins/dropify/dropify.min.js"></script>
+    <script src="<?= base_url() ?>/plugins/blockui/jquery.blockUI.min.js"></script>
+    <script src="<?= base_url() ?>/assets/js/users/account-settings.js"></script>
 
 <!--     <script>        
         checkall('todoAll', 'todochkbox');

@@ -1,6 +1,7 @@
 <?php
 //var_dump($guardians); //exit;
 ?>
+
 <script type="text/javascript">
     /****************UTILITY FUNCTIONS*****************************/
     function refreshhash(){
@@ -16,6 +17,7 @@
         });
     }
 
+
     function confirmaction()
     {
         if(confirm('Continue with action?')){
@@ -30,6 +32,7 @@
             return false;
         }
 
+
         refreshhash()            
 
         var csrfName = '<?= csrf_token() ?>';
@@ -41,11 +44,12 @@
             type:'POST',
             dataType: 'json',
             success: function( json ) {
-                console.log(json)                
+                console.log(json)               
                 
                 //alert(json.formarray.authorshipposition)
 
                 /************Clear All values*******************/
+
                 var formw = document.querySelector('#frmstaffprofile')
                 imps = formw.querySelectorAll('input[type="text"], select');
                 imps.forEach(element => {
@@ -616,134 +620,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-        
-    // $.validator.addMethod('filesize', function (value, element, param) {
-    //     return this.optional(element) || (element.files[0].size <= param * 1000000)
-    // }, 'File size must be less than {0} MB');
-
-    $(function() {
-        "use strict";
-        $("form[name='studentprofileform']").validate({
-            rules: {
-
-                surname: "required",
-                othernames: "required",
-                basicFlatpickr: "required",
-                hometown: "required",
-                lga: "required",
-                stateoforigin: "required",
-                permanentaddress: "required",
-                nin: {
-                    required: true,
-                    digit: true
-                },
-
-                email: {
-                    required: true,
-                    email: true
-                },
-
-                phonenmber: "required",
-                position: "required",
-                bio: "required",
-                gender: "required",
-                ethnicity: "required",
-                religion: "required",
-                weight: "required",
-                height: "required",
-                disability: "required",
-                bloodgroup: "required",
-                genotype: "required",
-                vision: "required",
-                hearing: "required",
-                speech: "required",
-                generalvitality: "required",
-                nationality: "required",
-                nextofkin: "required",
-                nextofkinrelationship: "required",
-                nextofkinnin: "required",
-                nextofkinoccupation: "required",
-                nextofkinaddress: "required",
-                nextofkinphonenumber: "required",
-                employername: "required",
-                officeaddress: "required",
-                country1: "required",
-                jobtitle: "required",
-                startedon: "required",
-                stoppedon: "required",
-                descriptionofduty: "required",
-                country2: "required",
-                nameofschool: "required",
-                attendedfrom: "required",
-                attendedto: "required",
-                courseofstudy: "required",
-                qualification: "required",
-                classofaward: "required",
-                dateofaward: "required",
-                classesassigned: "required",
-                subjectsassigned: "required"
-
-            },
-            
-            messages: {
-
-                surname:                "Please enter a value",
-                othernames:             "Please enter a value",
-                dob:                    "Please enter a value",
-                hometown:               "Please enter a value",
-                lga:                    "Please enter a value",
-                stateoforigin:          "Please enter a value",
-                permanentaddress:       "Please enter a value",
-                nin:                    "Please enter a value",
-                email:                  "Please enter a value",
-                phonenmber:             "Please enter a value",
-                position:               "Please enter a value",
-                bio:                    "Please enter a value",
-                gender:                 "Please enter a value",
-                ethnicity:              "Please enter a value",
-                religion:               "Please enter a value",
-                weight:                 "Please enter a value",
-                height:                 "Please enter a value",
-                disability:             "Please enter a value",
-                bloodgroup:             "Please enter a value",
-                genotype:               "Please enter a value",
-                vision:                 "Please enter a value",
-                hearing:                "Please enter a value",
-                speech:                 "Please enter a value",
-                generalvitality:        "Please enter a value",
-                nationality:            "Please enter a value",
-                nextofkin:              "Please enter a value",
-                nextofkinrelationship:  "Please enter a value",
-                nextofkinnin:           "Please enter a value",
-                nextofkinoccupation:    "Please enter a value",
-                nextofkinaddress:       "Please enter a value",
-                nextofkinphonenumber:   "Please enter a value",
-                employername:           "Please enter a value",
-                officeaddress:          "Please enter a value",
-                country1:               "Please enter a value",
-                jobtitle:               "Please enter a value",
-                startedon:              "Please enter a value",
-                stoppedon:              "Please enter a value",
-                descriptionofduty:      "Please enter a value",
-                country2:               "Please enter a value",
-                nameofschool:           "Please enter a value",
-                attendedfrom:           "Please enter a value",
-                attendedto:             "Please enter a value",
-                courseofstudy:          "Please enter a value",
-                qualification:          "Please enter a value",
-                classofaward:           "Please enter a value",
-                dateofaward:            "Please enter a value",
-                classesassigned:        "Please enter a value",
-                subjectsassigned:       "Please enter a value"
-            },
-        
-        submitHandler: function(form) {
-          form.submit();
-        }
-      });
-        validator.resetForm();
-    });
-
-</script>

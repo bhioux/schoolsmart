@@ -57,6 +57,7 @@
         var f5 = flatpickr(document.getElementById('basicFlatpickr1'));
         var f7 = flatpickr(document.getElementById('basicFlatpickr2'));
         var f8 = flatpickr(document.getElementById('basicFlatpickr3'));
+        var f11 = flatpickr(document.getElementById('basicFlatpickr4'));
     </script>
 
     <script src="<?= base_url() ?>/plugins/bootstrap-select/bootstrap-select.min.js"></script>

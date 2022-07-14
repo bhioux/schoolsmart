@@ -1,15 +1,20 @@
 <style>
    .uptab{
+    writing-mode: vertical-rl;
     writing-mode: sideways-lr; 
-    text-orientation: upright;
+    text-orientation: mixed;
+    padding-left: 0px;
+    margin: 0px;
   }
 
   #reportcard {
     background: #fff;
-    text-orientation:upright;
+    writing-mode: vertical-rl;
+    text-orientation:mixed;
   }
 
 </style>
+
 
 <div class="container">
   <div class="row">
@@ -353,7 +358,7 @@
                     <!-- <div class="row mg-b-5 justify-content-center"><h4>SOCIAL AND STUDY HABIT</h4></div> -->
                     <!-- <h4>SOCIAL AND STUDY HABIT</h4> -->
                     <div class="table-responsive">
-                      <table id="reportcard" class="table table-bordered mg-b-0">
+                      <table class="table table-bordered mg-b-0">
                         <tbody>
                           <tr>
                             <th scope="row">Creativity</th>
@@ -399,7 +404,7 @@
                     </div>
                     <!-- <div class="row mg-b-1">&nbsp; &nbsp; &nbsp;<h5>GRADE</h5></div> -->
                     <div class="table-responsive">
-                      <table id="reportcard" class="table mg-b-0">
+                      <table class="table mg-b-0">
                         <tbody>
                           <tr>
                             <th scope="row">5 &nbsp; Excellent</th>
@@ -431,7 +436,7 @@
                 <br>
                 <br>
                 <div class="table-responsive">
-                  <table id="reportcard" class="table table-bordered mg-b-0">
+                  <table class="table table-bordered mg-b-0">
                     <thead>
                     <tr>
                       <th width="25%">Bill</th>
@@ -479,7 +484,7 @@
                 </div>
                 <!-- <div class="row mg-b-5 justify-content-center"><h4>AFFECTIVE AREAS</h4></div> -->
                 <div class="table-responsive">
-                  <table id="reportcard" class="table table-bordered mg-b-0">
+                  <table class="table table-bordered mg-b-0">
                     <tbody>
                       <tr>
                         <th scope="row">Punctuality</th>

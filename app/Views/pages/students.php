@@ -2,10 +2,10 @@
 
 <?= $this->section('styles') ?>
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/datatables.css">
-    <link rel="stylesheet" type="text/css" href="plugins/table/datatable/dt-global_style.css">
+    <link href="<?= base_url() ?>/assets/css/elements/miscellaneous.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>/assets/css/elements/breadcrumb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/plugins/table/datatable/dt-global_style.css">
     <!-- END PAGE LEVEL STYLES -->
 <?= $this->endSection() ?>
 
@@ -23,8 +23,8 @@
 
 <?= $this->section('script') ?>
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="plugins/table/datatable/datatables.js"></script>
-    <script src="assets/js/scrollspyNav.js"></script>
+    <script src="<?= base_url() ?>/plugins/table/datatable/datatables.js"></script>
+    <script src="<?= base_url() ?>/assets/js/scrollspyNav.js"></script>
     <script>
         $('#zero-config').DataTable({
             "oLanguage": {

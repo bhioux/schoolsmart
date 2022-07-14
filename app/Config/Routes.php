@@ -60,6 +60,38 @@ $routes->get('/commentssetup', 'Staff::commentssetup');
 $routes->get('/login', 'Home::login'); //
 $routes->get('/logout', 'Home::logout'); //
 $routes->post('/dologin', 'Home::dologin'); //
+$routes->get('/register', 'Home::register');
+$routes->get('/passreset', 'Home::passreset');
+
+$routes->get('/studentprofile', 'Home::studentprofile');
+$routes->get('/updateprofile', 'Home::updateprofile');
+$routes->get('/editprofile', 'Home::editprofile');
+$routes->get('/students', 'Home::students');
+//$routes->get('/addvehicles', 'Home::addvehicles');
+
+$routes->get('/reportcardnur', 'Home::reportcardnur');
+$routes->get('/reportcardpry', 'Home::reportcardpry');
+$routes->get('/reportcardjss', 'Staff::reportcardjss');
+$routes->get('/reportcardsss', 'Staff::reportcardsss');
+$routes->get('/observabletraitssss', 'Staff::observabletraitssss');
+$routes->get('/observabletraitsjss', 'Staff::observabletraitsjss');
+$routes->get('/subjectreport', 'Staff::subjectreport');
+$routes->get('/applicationform', 'Home::applicationform');
+$routes->get('/staffprofile', 'Home::staffprofile');
+$routes->get('/updatestaffprofile', 'Home::updatestaffprofile');
+$routes->get('/staffsetup', 'Home::staffsetup');
+$routes->get('/assessmentsetup', 'Staff::assessmentsetup');
+$routes->get('/subjectreport', 'Staff::subjectreport');
+$routes->get('/markbroadsheetjss', 'Staff::markbroadsheetjss');
+$routes->get('/markbroadsheetsss', 'Staff::markbroadsheetsss');
+$routes->get('/classattendance', 'Staff::classattendance');
+$routes->get('/classattendance', 'Staff::classattendance');
+$routes->get('/billsetup', 'Staff::billsetup');
+$routes->get('/awardsetup', 'Staff::awardsetup');
+$routes->get('/traitssetup', 'Staff::traitssetup');
+$routes->get('/affectiveareasetup', 'Staff::affectiveareasetup');
+$routes->get('/socialhabitsetup', 'Staff::socialhabitsetup');
+$routes->get('/commentssetup', 'Staff::commentssetup');
 
 //$routes->get('/subjectsetup', 'Home::subjectsetup');
 // $routes->get('/termsetup', 'Home::termsetup');
@@ -110,10 +142,11 @@ $routes->group('setup', ["filter" => "authfilter"], function($routes)
 	$routes->get('studentbyclass', 		'StudentRegistration::studentByClass');	
 
 	$routes->get('affectivearea', 		'Setup::affectiveArea');	
-
-	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea');
-
-	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');
+	$routes->post('fetchaffectivearea', 		'Setup::fetchAffectiveArea'); 
+	$routes->get('affectiveAreatable', 		'Setup::affectiveAreaTable');  //
+	$routes->post('postaffectiveArea', 		'Setup::postaffectiveArea');  //
+	$routes->post('editratingsurl', 		'Setup::editratingsurl');  //
+	$routes->post('updateaffectivearea', 		'Setup::updateAffectiveArea');  //
 	$routes->get('assignclasses', 'Home::assignclasses');
 });
 
@@ -121,6 +154,7 @@ $routes->group('setup', ["filter" => "authfilter"], function($routes)
 
 $routes->group('staff', ["filter" => "authfilter"], function($routes)
 {
+
 	$routes->get('staffprofile', 'StaffSetups::staffprofile');
 	$routes->get('staffsetup', 'StaffSetups::staffsetup');
 	$routes->post('poststaff', 'StaffSetups::poststaff');

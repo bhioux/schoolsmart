@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-    //public $baseURL = 'http://schoolsmart.test/';
+    //public $baseURL = 'http://schoolsmart.test/ ';
     public $baseURL;
 	
 	public function __construct()

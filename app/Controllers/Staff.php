@@ -14,6 +14,7 @@ use App\Models\UpdateStaffProfile;
 use App\Models\StudentProfile;
 use App\Models\StaffSetup;
 use App\Models\SubjectSetup;
+use App\Models\ClassAttendance;
 use App\Models\SessionSetup;
 use App\Models\TermSetup;
 use App\Models\AssessmentSetup;
@@ -33,6 +34,11 @@ use App\Models\ReportCardNur;
 use App\Models\ReportCardPry;
 use App\Models\ReportCardJss;
 use App\Models\ReportCardSss;
+use App\Models\ObservableTraitsSSS;
+use App\Models\ObservableTraitsJSS;
+use App\Models\SubjectReport;
+use App\Models\MarkBroadSheetJss;
+use App\Models\MarkBroadSheetSss;
 use App\Models\ApplicationForm;
 use App\Models\StudentProfileView;
 use \App\Models\StaffProfileView;
@@ -326,6 +332,60 @@ class Staff extends BaseController
         $data['mainnav'] = "";        
         $data['reportcardjss'] = "";
         return view('pages/reportcardjss', $data);
+    }
+
+	public function subjectreport()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['subjectreport'] = "";
+        return view('pages/subjectreport', $data);
+    }
+
+	public function markbroadsheetjss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['markbroadsheetjss'] = "";
+        return view('pages/markbroadsheetjss', $data);
+    }
+
+	public function markbroadsheetsss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['markbroadsheetsss'] = "";
+        return view('pages/markbroadsheetsss', $data);
+    }
+
+	public function classattendance()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['classattendance'] = "";
+        return view('pages/classattendance', $data);
+    }
+
+	public function observabletraitssss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['observabletraitssss'] = "";
+        return view('pages/observabletraitssss', $data);
+    }
+
+	public function observabletraitsjss()
+    {
+        $menu = new MenuModel();
+		$data['header'] = "";
+        $data['mainnav'] = "";        
+        $data['observabletraitsjss'] = "";
+        return view('pages/observabletraitsjss', $data);
     }
 
 	// public function applicationformsecschool()

@@ -14,8 +14,7 @@
 <style>
    .uptab{
     writing-mode: vertical-rl;
-
-    /* writing-mode: sideways-lr;  */
+    writing-mode: sideways-lr; 
     text-orientation: mixed;
     padding-left: 0px;
     margin: 0px;
@@ -105,8 +104,8 @@
             </div>
             <br>  
             <div class="row">
-              <div clas="table-responsive">
-                <table class="table table-bordered mb-4" style="width:100%">
+              <div class="table-responsive">
+                <table class="table table-bordered mb-4">
                   <thead>
                     <tr>
                       <th rowspan="2">SUBJECTS</th>
@@ -119,6 +118,7 @@
                       <th rowspan="2"><p class="uptab"> CUMULATIVE<br>AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">CLASS AVERAGE</p></th>
                       <th rowspan="2"><p class="uptab">POSITION GRADE<br>IN SUBJECT</p></th>
+
                       <th rowspan="2"><p class="uptab">SUBJECTS TEACHERS<br>REMARK</p></th>
                       <th rowspan="2"><p class="uptab">SUBJECT TEACHER<br>SIGNATURE</p></th>
                     </tr>
@@ -150,6 +150,7 @@
                     </tr>
                     <?php  $engrec = mapSubjects($gradebook, "ENG"); ?>
                     <tr>
+
                       <th>ENGLISH LANGUAGE</th>
                       <td class="<?= @($engrec->ca1 < 4) ? 'text-danger' : 'text-primary' ?>"><?= $engrec->ca1 ?? "-" ?></td>
                       <td class="<?= @($engrec->ca2 < 10) ? 'text-danger' : 'text-primary' ?>"><?= $engrec->ca2 ?? "-" ?></td>
@@ -192,6 +193,7 @@
                       <td><?= $yourec->position ?? "-" ?></td>
                       <td><?= $yourec->remark ?? "-" ?></td>
                       <td><?= $yourec->signs ?? "-" ?></td>
+
                     </tr>
                     <?php  $frcrec = mapSubjects($gradebook, "FRC"); ?>
                     <tr> 
@@ -525,8 +527,6 @@
                 </table>
               </div>
             </div>
-
-            
 
           </div>
         </div>
