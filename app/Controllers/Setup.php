@@ -546,7 +546,7 @@ class Setup extends BaseController
 		}
 	}
 
-	public function postaffectiveArea() {
+	public function postaffectiveArea1() {
 		$session = session();
 		$affectiveareamodel = new AffectiveAreaModel();
 		if($this->request->getMethod() === 'get' && $this->validate([
@@ -564,6 +564,174 @@ class Setup extends BaseController
 			return array();
 		}
 	}
+
+	public function postaffectiveArea()
+    {
+		//$gradebookmodel = new Gradebooks();
+		$session = session();
+		$affectiveareamodel = new AffectiveAreaModel();
+		$allvalues = '';
+
+		if($this->request->getMethod() === 'post' && $this->validate([
+				// 'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term'
+
+				
+
+				'studentno' => 'required|alpha_numeric',
+				// 'studentgrade.*' => 'required|if_exist|decimal|required_with[studentid.*]',
+				// 'sybjectgroup' => 'required',
+				// 'classgroup' => 'required',
+				// 'assessment1'  => 'required',
+				'surname'  => 'required',
+				'othernames'  => 'required',
+				'class'  => 'required',
+				'session'  => 'required',
+				'term'  => 'required',
+				'punctuality'  => 'required|if_exist|is_natural_no_zero',
+				'neatness'  => 'required|if_exist|is_natural_no_zero',
+				'politeness'  => 'required|if_exist|is_natural_no_zero',
+				'honesty'  => 'required|if_exist|is_natural_no_zero',
+				'relationshipwithothers'  => 'required|if_exist|is_natural_no_zero',
+				'leadership'  => 'required|if_exist|is_natural_no_zero',
+				'emotionalstability'  => 'required|if_exist|is_natural_no_zero',
+				'health'  => 'required|if_exist|is_natural_no_zero',
+				'attitudetoschoolwork'  => 'required|if_exist|is_natural_no_zero',
+				'attentiveness'  => 'required|if_exist|is_natural_no_zero',
+				'persevearance'  => 'required|if_exist|is_natural_no_zero',
+				'attendance'  => 'required|if_exist|is_natural_no_zero',
+				'reliability'  => 'required|if_exist|is_natural_no_zero',
+				'selfcontrol'  => 'required|if_exist|is_natural_no_zero',
+				'cooperation'  => 'required|if_exist|is_natural_no_zero',
+				'responsibility'  => 'required|if_exist|is_natural_no_zero',
+				'innitiative'  => 'required|if_exist|is_natural_no_zero',
+				'orgability'  => 'required|if_exist|is_natural_no_zero',
+				'verbalfluency'  => 'required|if_exist|is_natural_no_zero',
+				'games'  => 'required|if_exist|is_natural_no_zero',
+				'sports'  => 'required|if_exist|is_natural_no_zero',
+				'drawingpainting'  => 'required|if_exist|is_natural_no_zero',
+				'musicalskills'  => 'required|if_exist|is_natural_no_zero',
+				'handlingtools'  => 'required|if_exist|is_natural_no_zero',
+			])){
+				// print_r($this->request->getPost('studentid'));
+				// echo '<br>';
+				// print_r($this->request->getPost('studentgrade'));
+				// exit;
+
+				// 'studentid', 'surname', 'othernames', 'class', 'regno', 'session', 'term', 'affectiverecordid', 'punctuality', 'neatness', 'politeness', 'honesty', 'relationshipwithothers', 'leadership', 'emotionalstability', 'health', 'attitudetoschoolwork', 'attentiveness', 'persevearance', 'attendance', 'reliability', 'selfcontrol', 'cooperation', 'responsibility', 'innitiative', 'orgability', 'verbalfluency', 'games', 'sports', 'drawingpainting', 'musicalskills', 'handlingtools'
+
+				$dumped = $this->request->getPost();
+				dd($dumped);
+
+				//['studentid', 'surname', 'othernames', 'class', 'regno', 'session', 'term', 'affectiverecordid', 'punctuality', 'neatness', 'politeness', 'honesty', 'relationshipwithothers', 'leadership', 'emotionalstability', 'health', 'attitudetoschoolwork', 'attentiveness', 'persevearance', 'attendance', 'reliability', 'selfcontrol', 'cooperation', 'responsibility', 'innitiative', 'orgability', 'verbalfluency', 'games', 'sports', 'drawingpainting', 'musicalskills', 'handlingtools'] = $this->request->getPost();
+
+				$studentid = $this->request->getPost('studentid');
+				$studentno = $this->request->getPost('studentno');
+				$studentgrade = $this->request->getPost('studentgrade');
+				$classgroup = $this->request->getPost('classgroup'); //sybjectgroup
+				$subjectgroup = $this->request->getPost('sybjectgroup'); //sybjectgroup
+				$assessmenttype = $this->request->getPost('assesstype');
+				$session = $this->request->getPost('gSession');
+				$term = $this->request->getPost('gTerm');
+
+				$savedid = [];
+				$failedid = [];
+				$failedstudentno = [];
+				$failedmessages = [];
+				$savedmessages = [];
+
+				$pQuery = $affectiveareamodel->prepare(function ($affectiveareamodel) {
+					$sql = 'INSERT INTO setup_gradebook (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, ssession, term )
+					VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+					ON DUPLICATE KEY UPDATE 
+						id=VALUES(id), 
+						studentid=VALUES(studentid), 
+						assessmentgrade=VALUES(assessmentgrade), 
+						studentclass=VALUES(studentclass), 
+						studentsubject=VALUES(studentsubject), 
+						assessmenttype=VALUES(assessmenttype), 
+						ssession=VALUES(ssession), 
+						term=VALUES(term)';
+
+					return (new Query($affectiveareamodel))->setQuery($sql);
+				});
+
+
+				for ($i=0; $i < sizeof($studentid); $i++) { 
+
+					try{     
+
+						$id = $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype;
+						$studentids = $studentno[$i];
+						$assessmentgrades = $studentgrade[$i];
+						$studentclass = $classgroup;
+						$studentsubject = $subjectgroup;
+						$assessmenttype = $assessmenttype;
+						$ssession = $session;
+						$term = $term;
+
+
+						$sqldata = [
+						'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+						'studentid' => $studentno[$i],
+						'assessmentgrade' => $studentgrade[$i],
+						'studentclass' => $classgroup, //sybjectgroup
+						'studentsubject' => $subjectgroup, //sybjectgroup
+						'assessmenttype'  => $assessmenttype,
+						'ssession'  => $session,
+						'term'  => $term,];
+
+						$sqldata1 = [
+							$studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
+							 $studentno[$i],
+							$studentgrade[$i],
+							$classgroup, 
+							$subjectgroup, 
+							$assessmenttype,
+							$session,
+							$term,];
+
+						$recsaved = $pQuery->_execute($sqldata1);
+						
+						if($recsaved > 0){
+							//echo 1;
+							$savedid[] = $studentid[$i];
+							$savedmessages[] = $recsaved;
+							//echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+						}else{
+							$failedid[] = $studentid[$i];
+							$failedstudentno[] = $studentno[$i];
+							//echo 0;
+							//echo json_encode(array("success"=>0, "message"=>'Error saving record'));
+						}
+						
+					}catch(\Exception $e){
+						$failedid[] = $studentid[$i];
+						$failedstudentno[] = $studentno[$i];
+						$failedmessages[] = $pQuery->$e->getMessage(); //$e->getMessage();
+						//print_r($e->getMessage());
+						//echo json_encode(array("success"=>-2, "message"=>$e->getMessage()));
+						//exit;
+					}
+
+				}
+
+				if(sizeof($savedid) == sizeof($studentid)){
+					//echo json_encode(array("success"=>1, "message"=>'Record saved successfully'));
+					echo json_encode(array_merge(array("success"=>1, "message"=>'Record saved successfully'),  $savedmessages, $failedmessages));
+				}else{
+					//$message = 'Failed to save '.json_encode($failedmessages);		
+					echo json_encode(array_merge(array("success"=>0, "message"=>'Failed to save'),  $savedmessages, $failedmessages));
+				}				
+				
+			}else{
+				//$data['errors'] = $this->validation->getErrors();
+				$data['savedmsg'] = $failed =  $this->validation->getErrors();
+				//print_r($failed);
+                echo json_encode(array("success"=>-2, "message"=>$failed));
+				//exit;
+				//return view('pages/gradebooksetup', $data);
+			}
+    }
 
 	public function updateAffectiveArea() {
 		$session = session();

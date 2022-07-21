@@ -76,21 +76,21 @@
                             </li> -->
                             <li class="contacts-block__item">
                                 <ul class="list-inline">
-                                    <li class="list-inline-item">
+                                    <!-- <li class="list-inline-item">
                                         <div class="social-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                                         </div>
-                                    </li>
-                                    <li class="list-inline-item">
+                                    </li> -->
+                                    <!-- <li class="list-inline-item">
                                         <div class="social-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
                                         </div>
-                                    </li>
-                                    <li class="list-inline-item">
+                                    </li> -->
+                                    <!-- <li class="list-inline-item">
                                         <div class="social-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                         </ul>
@@ -114,7 +114,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Excellent</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -125,7 +125,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Average</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -136,7 +136,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Good</p>
+                            <p></p>
                         </div>
                     </div>
                     <div class="item-timeline">
@@ -146,7 +146,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Good</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -157,7 +157,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Excellent</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Average</p>
+                            <p></p>
                         </div>
                     </div>
                     <div class="item-timeline">
@@ -178,7 +178,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Good</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -189,7 +189,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Excellent</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -200,7 +200,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Average</p>
+                            <p></p>
                         </div>
                     </div>
                     <div class="item-timeline">
@@ -210,7 +210,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Good</p>
+                            <p></p>
                         </div>
                     </div>
 
@@ -221,7 +221,7 @@
                         <div class="t-dot">
                         </div>
                         <div class="t-text">
-                            <p>Excellent</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -233,113 +233,47 @@
 
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
 
-        <div class="skills layout-spacing ">
+        <div clas="col-xl-12 col-lg-12 col-sm-12 ">
+
+            <h3 style="margin-bottom: 20px;">Notice Board</h3>
+
+            <div class="widget-content widget-content-area br-6">
+                <div class="table-responsive mb-4 mt-4">
+                    <p></p>
+                </div>
+            </div>
+        </div> 
+
+        <hr />
+
+        <!-- <div class="skills layout-spacing ">          
             <div class="widget-content widget-content-area">
                 <h3 class="">SOCIAL AND STUDY HABIT</h3>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Creativity</span> <span>45%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Creativity</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Verbal Fluency</span> <span>50%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Verbal Fluency</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Games</span> <span>70%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Games</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Sports</span> <span>60%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Sports</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Handling tools</span> <span>50%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Handling tools</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Drawing & Painting</span> <span>70%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Drawing & Painting</span> <span></span> </div></div>
                 </div>
                 <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Musical Skills</span> <span>60%</span> </div></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Musical Skills</span> <span></span> </div></div>
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
-        <div class="main-container sidebar-closed sbar-open" id="container">
-            <!--  BEGIN CONTENT AREA  -->        
-        
-            <div class="col-xl-12 col-lg-12 col-sm-12 ">
-
-                <h3 style="margin-bottom: 20px;">Academic Performances</h3>
-
-                <div class="widget-content widget-content-area br-6">
-                    <div class="table-responsive mb-4 mt-4">
-                        <table id="zero-config" class="table table-hover" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Year</th>
-                                    <th>Class</th>
-                                    <th>No. in Class</th>
-                                    <th>Position</th>
-                                    <th>Awards</th>
-                                    <th class="no-content">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2000/2001</td>
-                                    <td>Primary 2</td>
-                                    <td>45</td>
-                                    <td>6</td>
-                                    <td>2011/04/25</td>
-                                    <td><a href="http://"><b><em>View Report</em></b></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2001/2002</td>
-                                    <td>Primary 3</td>
-                                    <td>46</td>
-                                    <td>8</td>
-                                    <td>2011/07/25</td>
-                                    <td><a href="http://"><b><em>View Report</em></b></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2002/2003</td>
-                                    <td>Primary 4</td>
-                                    <td>44</td>
-                                    <td>6</td>
-                                    <td>2009/01/12</td>
-                                    <td><a href="http://"><b><em>View Report</em></b></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2003/2004</td>
-                                    <td>Primary 5</td>
-                                    <td>46</td>
-                                    <td>8</td>
-                                    <td>2011/07/25</td>
-                                    <td><a href="http://"><b><em>View Report</em></b></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2004/2005</td>
-                                    <td>Primary 6</td>
-                                    <td>44</td>
-                                    <td>6</td>
-                                    <td>2009/01/12</td>
-                                    <td><a href="http://"><b><em>View Report</em></b></a></td>
-                                </tr>
-                        
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Year</th>
-                                    <th>Class</th>
-                                    <th>No. in Class</th>
-                                    <th>Position</th>
-                                    <th>Awards</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>    
-            <!--  END CONTENT AREA  -->
-        </div>
     </div>
 
 </div>

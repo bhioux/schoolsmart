@@ -38,20 +38,48 @@
                     console.log(data.data)
                     //return false;
                     if(data.success == 1){
+
+                        // 'studentid', 'surname', 'othernames', 'class', 'regno', 'session', 'term', 'affectiverecordid', 
+                        // 'punctuality', 'neatness', 'politeness', 'honesty', 'relationshipwithothers', 'leadership', 'emotionalstability', 'health', 'attitudetoschoolwork', 'attentiveness', 'persevearance', 'attendance', 'reliability', 'selfcontrol', 'cooperation', 'responsibility', 'innitiative', 'orgability', 'verbalfluency', 'games', 'sports', 'drawingpainting', 'musicalskills', 'handlingtools'
+
+                        $("#punctuality").prop('selected','selected').val(data.data.punctuality).change();
+                        $("#neatness").prop('selected','selected').val(data.data.neatness).change();
+                        $("#politeness").prop('selected','selected').val(data.data.politeness).change();
+                        $("#honesty").prop('selected','selected').val(data.data.honesty).change();
+                        $("#relationshipwithothers").prop('selected','selected').val(data.data.relationshipwithothers).change();
+                        $("#leadership").prop('selected','selected').val(data.data.leadership).change();
+                        $("#emotionalstability").prop('selected','selected').val(data.data.emotionalstability).change();
+                        $("#health").prop('selected','selected').val(data.data.health).change();
+                        $("#attitudetoschoolwork").prop('selected','selected').val(data.data.attitudetoschoolwork).change();
+                        $("#attentiveness").prop('selected','selected').val(data.data.attentiveness).change();
+                        $("#persevearance").prop('selected','selected').val(data.data.persevearance).change();
+                        $("#attendance").prop('selected','selected').val(data.data.attendance).change();
+                        $("#reliability").prop('selected','selected').val(data.data.reliability).change();
+                        $("#selfcontrol").prop('selected','selected').val(data.data.selfcontrol).change();
+                        $("#cooperation").prop('selected','selected').val(data.data.cooperation).change();
+                        $("#responsibility").prop('selected','selected').val(data.data.responsibility).change();
+                        $("#innitiative").prop('selected','selected').val(data.data.innitiative).change();
+                        $("#orgability").prop('selected','selected').val(data.data.orgability).change();
+                        $("#verbalfluency").prop('selected','selected').val(data.data.verbalfluency).change();
+                        $("#games").prop('selected','selected').val(data.data.games).change();
+                        $("#sports").prop('selected','selected').val(data.data.sports).change();
+                        $("#drawingpainting").prop('selected','selected').val(data.data.drawingpainting).change();
+                        $("#musicalskills").prop('selected','selected').val(data.data.musicalskills).change();
+                        $("#handlingtools").prop('selected','selected').val(data.data.handlingtools).change();
                         // $("#btnsubmit").removeAttr("disabled");
                         // $("#btnsubmit").html(btnsubmit);
                         $("#studentnamelabel").html(data.data.surname + " " + data.data.othernames);
                         $("#studentidlabel").html(data.data.studentno);
                         $("#studentclasslabel").html(data.data.class)
                         console.log( "Data Loaded: " + data );
-                        $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
+                        // $("#notifier").removeClass('alert alert-danger alert-warning alert-success').addClass('alert alert-success').html('success <strong>Success </strong>Record saved!')
 
-                        var formw = document.querySelector('#frmstaffprofile');
-                        imps = formw.querySelectorAll('input[type="text"], select');
-                        imps.forEach(element => {
-                        element.value = ''
-                        $(element).prop('selected','selected').val('').change();
-                        });
+                        // var formw = document.querySelector('#frmstaffprofile');
+                        // imps = formw.querySelectorAll('input[type="text"], select');
+                        // imps.forEach(element => {
+                        // element.value = ''
+                        // $(element).prop('selected','selected').val('').change();
+                        // });
 
                         // $("#staffid").val('');
                         // $("#btnsubmit").val('Submit').text(btnsubmit);
@@ -214,7 +242,7 @@
                         
                         
                         <div clas="invoice-00002" id="invoice2">
-                            <form action="" method="GET" name="frmrating">
+                            <form name="frmrating" id="frmrating">
                                 <div class="content-section  animated">
 
                                     <div class="row inv--product-table-section">
@@ -244,27 +272,27 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr <?= (in_array('punctuality',$junior)) ? $hidden:'' ?>>
+                                                        <tr>
                                                             <td>Punctuality</td>
                                                             <td class="text-right">
                                                                 <div class="form-group">
-                                                                    <select class="form-control" id="punctuality" name="punctuality" required>
+                                                                    <select class="form-control" id="punctuality" name="punctuality" <?= (in_array('punctuality', $junior)) ? "disabled":'required' ?>>
                                                                         <?= $utillib->selectaffectiverating("") ?>
                                                                     </select>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr <?= (in_array('neatness',$junior)) ? $hidden:'' ?>>
+                                                        <tr>
                                                             <td>Neatness</td>
                                                             <td class="text-right">
                                                                 <div class="form-group">
-                                                                    <select class="form-control" id="neatness" name="neatness" required>
+                                                                    <select class="form-control" id="neatness" name="neatness" <?= (in_array('punctuality', $junior)) ? "disabled":'required' ?>>
                                                                     <?= $utillib->selectaffectiverating("") ?>
                                                                     </select>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr <?= (in_array('politeness',$junior)) ? $hidden:'' ?>>
+                                                        <tr>
                                                             <td>Politeness</td>
                                                             <td class="text-right">
                                                                 <div class="form-group">
@@ -274,7 +302,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr <?= (in_array('honesty',$junior)) ? $hidden:'' ?>>
+                                                        <tr>
                                                             <td>Honesty</td>
                                                             <td class="text-right">
                                                                 <div class="form-group">
@@ -298,7 +326,7 @@
                                                             <td>Relationship with others</td>
                                                             <td class="text-right">
                                                                 <div class="form-group">
-                                                                    <select class="form-control junior" id="relationshipwithothers" name="relationshipwithothers" required>
+                                                                    <select class="form-control" id="relationshipwithothers" name="relationshipwithothers" required>
                                                                         <?= $utillib->selectaffectiverating("") ?>
                                                                     </select>
                                                                 </div>
@@ -508,6 +536,7 @@
                                             </div>
                                             
                                             <div class="col text-right">
+                                                <!-- <input type="submit" id="btnsubmit" name="btnsubmit" value="Save Ratings" class="btn btn-primary mb-4 mr-2 btn-lg" /> -->
                                                 <button type="submit" id="btnsubmit" name="btnsubmit" class="btn btn-primary mb-4 mr-2 btn-lg">Save Ratings</button>
                                             </div>
 

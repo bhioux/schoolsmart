@@ -65,7 +65,7 @@ $(document).ready(function(){
         //`studentno`, `subjects`, `subjectname`, `fullname`, `class`, `ca1`, `ca2`, `ca3`, `exam`, `termsummary`, `lasttermcum`, `cumavg`, `cumavg2`, `classavg`, `position`, `remark`, `signs`, `schoolsession`, `sessionname`, `schoolterm`, `termname`, `summary`
 
         columns: [
-            {data: "regno"},
+            {data: "studentno"},
             {data: "fullname"},
             { 
                 "data": "studentid",
@@ -76,22 +76,22 @@ $(document).ready(function(){
            },
 
            { 
-                "data": "regno",
+                "data": "studentno",
                 "render": function(data, type, row, meta){
                    if(type === 'display' && $('#assesstype').children("option:selected").val() == 'ca1'){    
-                       data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control"> <input type="hidden" id="studentno' + data + '" value="' + row['regno'] + '" name="studentno[]" class="form-control">                     <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca1'] + '">'
+                       data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control"> <input type="hidden" id="studentno' + data + '" value="' + row['studentno'] + '" name="studentno[]" class="form-control">                     <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca1'] + '">'
                    }
 
                    if(type === 'display' && $('#assesstype').children("option:selected").val() == 'ca2'){    
-                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">   <input type="hidden" id="studentno' + data + '" value="' + row['regno'] + '" name="studentno[]" class="form-control">                  <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca2'] + '">'
+                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">   <input type="hidden" id="studentno' + data + '" value="' + row['studentno'] + '" name="studentno[]" class="form-control">                  <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca2'] + '">'
                     }
 
                     if(type === 'display' && $('#assesstype').children("option:selected").val() == 'ca3'){    
-                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">    <input type="hidden" id="studentno' + data + '" value="' + row['regno'] + '" name="studentno[]" class="form-control">                 <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca3'] + '">'
+                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">    <input type="hidden" id="studentno' + data + '" value="' + row['studentno'] + '" name="studentno[]" class="form-control">                 <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['ca3'] + '">'
                     }
 
                     if(type === 'display' && $('#assesstype').children("option:selected").val() == 'exam'){    
-                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">     <input type="hidden" id="studentno' + data + '" value="' + row['regno'] + '" name="studentno[]" class="form-control">                <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['exam'] + '">'
+                        data = '<input type="hidden" id="studentid' + data + '" value="' + data + '" name="studentid[]" class="form-control">     <input type="hidden" id="studentno' + data + '" value="' + row['studentno'] + '" name="studentno[]" class="form-control">                <input type="text" id="student' + data + 'grade" title="' + data + '" name="studentgrade[]" class="form-control" value="' + row['exam'] + '">'
                     }
                     return data;
                 }

@@ -32,7 +32,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <?= $this->include('partials/staffprofile') ?>
+    <?= $this->include('partials/studentprofile') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
@@ -46,7 +46,7 @@
     <script src="plugins/noUiSlider/custom-nouiSlider.js"></script>
     <script src="plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
     <script src="plugins/highlight/highlight.pack.js"></script>
-    <script src= -->"plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src= "plugins/bootstrap-select/bootstrap-select.min.js"></script>-->
     <script src="plugins/table/datatable/datatables.js"></script>
     <script>
         $('#zero-config').DataTable({

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#relationshipwithothers").prop('disabled', true)
+    //$("#relationshipwithothers").prop('disabled', true)
     
     siteUrl = window.location.origin;
     console.log(siteUrl);
@@ -135,77 +135,133 @@ $(document).ready(function(){
     // 'affectiverecordid', 'studentno', 'class', 'session', 'term', 'punctuality', 'neatness', 'politeness', 'honesty', 'relationshipwithothers', 'leadership', 'emotionalstability', 'health', 'attitudetoschoolwork', 'attentiveness', 'persevearance', 'attendance', 'reliability', 'selfcontrol', 'cooperation', 'responsibility', 'innitiative', 'orgability', 'verbalfluency', 'games', 'sports', 'drawingpainting', 'musicalskills'
 
 
-    $("#btnSaveRatings").click(function(){
-        var form = document.getElementById('frmstaffprofile');
-        var formdata = new FormData(form);
+    //$("#frmrating").submit(function(e){
+        //e.preventDefault();
+    $("#btnsubmit").click(function(e){
+        e.preventDefault();
+        alert("Hello World");
+        // var form = document.getElementById('frmstaffprofile');
+        // var formdata = new FormData(form);
 
         
-        var punctuality = $("#punctuality").val();
-        var neatness = $("#neatness").val();
-        var politeness = $("#politeness").val();
-        var honesty = $("#honesty").val();
-        var relwithstaff = $("#relwithstaff").val();
-        var relwithothers = $("#relwithothers").val();
-        var leadership = $("#leadership").val();
-        var emotionalstability = $("#emotionalstability").val();
-        var health = $("#health").val();
-        var attitude = $("#attitude").val();
-        var attentiveness = $("#attentiveness").val();
-        var perseverance = $("#perseverance").val(); //End of junior
+        // var punctuality = $("#punctuality").val();
+        // var neatness = $("#neatness").val();
+        // var politeness = $("#politeness").val();
+        // var honesty = $("#honesty").val();
+        // var relwithstaff = $("#relwithstaff").val();
+        // var relwithothers = $("#relwithothers").val();
+        // var leadership = $("#leadership").val();
+        // var emotionalstability = $("#emotionalstability").val();
+        // var health = $("#health").val();
+        // var attitude = $("#attitude").val();
+        // var attentiveness = $("#attentiveness").val();
+        // var perseverance = $("#perseverance").val(); //End of junior
 
-        var attendance = $("#attendance").val();
-        var reliability = $("#reliability").val();
-        var selfcontrol = $("#selfcontrol").val();
-        var cooperation = $("#cooperation").val();
-        var responsibility = $("#responsibility").val();
-        var initiative = $("#initiative").val();
-        var orgability = $("#orgability").val();
-        var fluency = $("#fluency").val();
-        var games = $("#games").val();
-        var sports = $("#sports").val();
-        var drawing = $("#drawing").val();
-        var music = $("#music").val();
-        var handlingtools = $("#handlingtools").val();
-        if(punctuality=='Rate Students'  || neatness=='Rate Students' || politeness=='Rate Students' || honesty=='Rate Students' || relwithstaff=='Rate Students' || relwithothers=='Rate Students' || leadership=='Rate Students' || emotionalstability=='Rate Students' || health=='Rate Students' || attitude=='Rate Students' || attentiveness=='Rate Students' || perseverance=='Rate Students' || attendance=='Rate Students' || reliability=='Rate Students' || selfcontrol=='Rate Students' || cooperation=='Rate Students' || responsibility=='Rate Students' || initiative=='Rate Students' || orgability=='Rate Students' || fluency=='Rate Students' || games=='Rate Students' || sports=='Rate Students' || drawing=='Rate Students' || music=='Rate Students' || handlingtools=='Rate Students'){
-            alert("All fields are required");
-        }else if(punctuality== null  || neatness== null || politeness== null || honesty== null || relwithstaff== null || relwithothers== null || leadership== null || emotionalstability== null || health== null || attitude== null || attentiveness== null || perseverance== null || attendance== null || reliability== null || selfcontrol== null || cooperation== null || responsibility== null || initiative== null || orgability== null || fluency== null || games== null || sports== null || drawing== null || music== null || handlingtools== null){
-            alert("All fields are required");
-        }else{
-            var formdata = $("#assessmentform").serialize();
-            var url = siteUrl + "/setup/updateaffectivearea";             
-            $.post(url, formdata).done(function(data){
-                alert(data);
-                var classId = $("#classId").val();
-                var affectiveareatableurl = $("#affectiveareatableurl").val() + '?sentClassId=' + classId;            
-                affectivearealisttable.ajax.url(affectiveareatableurl).load();   
-                //clear fields
-                $("#punctuality").val(0);
-                $("#neatness").val(0);
-                $("#politeness").val(0);
-                $("#honesty").val(0);
-                $("#relwithstaff").val(0);
-                $("#relwithothers").val(0);
-                $("#leadership").val(0);
-                $("#emotionalstability").val(0);
-                $("#health").val(0);
-                $("#attitude").val(0);
-                $("#attentiveness").val(0);
-                $("#perseverance").val(0);
-                $("#attendance").val(0);
-                $("#reliability").val(0);
-                $("#selfcontrol").val(0);
-                $("#cooperation").val(0);
-                $("#responsibility").val(0);
-                $("#initiative").val(0);
-                $("#orgability").val(0);
-                $("#fluency").val(0);
-                $("#games").val(0);
-                $("#sports").val(0);
-                $("#drawing").val(0);
-                $("#music").val(0);
-                $("#handlingtools").val(0);            
-            });  
-        }
+        // var attendance = $("#attendance").val();
+        // var reliability = $("#reliability").val();
+        // var selfcontrol = $("#selfcontrol").val();
+        // var cooperation = $("#cooperation").val();
+        // var responsibility = $("#responsibility").val();
+        // var initiative = $("#initiative").val();
+        // var orgability = $("#orgability").val();
+        // var fluency = $("#fluency").val();
+        // var games = $("#games").val();
+        // var sports = $("#sports").val();
+        // var drawing = $("#drawing").val();
+        // var music = $("#music").val();
+        // var handlingtools = $("#handlingtools").val();
+        // if(punctuality=='Rate Students'  || neatness=='Rate Students' || politeness=='Rate Students' || honesty=='Rate Students' || relwithstaff=='Rate Students' || relwithothers=='Rate Students' || leadership=='Rate Students' || emotionalstability=='Rate Students' || health=='Rate Students' || attitude=='Rate Students' || attentiveness=='Rate Students' || perseverance=='Rate Students' || attendance=='Rate Students' || reliability=='Rate Students' || selfcontrol=='Rate Students' || cooperation=='Rate Students' || responsibility=='Rate Students' || initiative=='Rate Students' || orgability=='Rate Students' || fluency=='Rate Students' || games=='Rate Students' || sports=='Rate Students' || drawing=='Rate Students' || music=='Rate Students' || handlingtools=='Rate Students'){
+        //     alert("All fields are required");
+        // }else if(punctuality== null  || neatness== null || politeness== null || honesty== null || relwithstaff== null || relwithothers== null || leadership== null || emotionalstability== null || health== null || attitude== null || attentiveness== null || perseverance== null || attendance== null || reliability== null || selfcontrol== null || cooperation== null || responsibility== null || initiative== null || orgability== null || fluency== null || games== null || sports== null || drawing== null || music== null || handlingtools== null){
+        //     alert("All fields are required");
+        // }else{
+            // var form = document.getElementById('frmrating');
+            // var formdata = new FormData(form);
+            
+            var formdata = $("#frmrating").serialize();
+            // console.log(formdata)
+            var targeturl = siteUrl + "/setup/postaffectiveArea";             
+
+            $.ajax({
+                url: targeturl, // point to server-side controller method
+                dataType: 'text', // what to expect back from the server
+                cache: false,
+                contentType: false,
+                processData: true,
+                data: formdata,
+                type: 'post',
+                success: function (data) {
+                    console.log(data)
+                    return false;
+                    parsedData = JSON.parse(data)
+                    console.log('parsed' + parsedData.success)
+                    //alert('raw' + data.success)
+
+                    if(parsedData.success == 1){
+                        alert("Record Updated Successfully");
+                        // $("#btnsubmit").removeAttr("disabled");
+                        // $("#btnsubmit").html(btnsubmit);
+                        //console.log( "Data Loaded: " + data );
+                        //notify.update({ type: 'success', message: '<strong>Success </strong>Record saved!' });
+                        // $("#notifier").removeClass('alert').addClass('alert alert-success').html('Success: <strong>Success </strong>Record saved!')
+                        
+                        //$("#frmtest")[0].reset();
+
+                        // imps = formw.querySelectorAll('input[type="text"], select');
+                        // imps.forEach(element => {
+                        // element.value = ''
+                        // $(element).prop('selected','selected').val('').change();
+                        // });
+
+                        //$("#studentid").val('');
+                        //$("#btnsubmit").val('Submit').text(btnsubmit);
+                        // console.log('Data about to be refreshed');
+                        //gradebooktable.ajax.reload();
+
+
+                        //$('#sybjectgroup, #classgroup, #assesstype').change(function(){
+                        // console.log('Table about to refresh');
+                        // var url ='/gradebook/gradebooktable?class=' + $('#classgroup option:selected').text() + '&csrf_test_name=' + $("#refhasname").val() + '&subject=' + $('#sybjectgroup').children("option:selected").val()
+                        // gradebooktable.ajax.url(url).load();
+                        console.log('Table refreshed');
+                            //$('#table').DataTable().ajax.url(url).load();
+                           
+                        //})
+
+
+                        console.log('Data refreshed');
+
+                    }else if(data == '-1'){
+                        alert('<strong>Error </strong>Save failed!');
+                        // console.log("Invalid file format")
+                        // $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error: </strong>Save failed!'")
+                        // $("#btnsubmit").removeAttr("disabled");
+                        // $("#btnsubmit").html(btnsubmit);
+                       // console.log(data + 'Data error');
+                        //return false;
+                    
+                    }else{
+                        alert('<strong>Error </strong>Save failed!');
+                        //console.log("Invalid file format")
+                        // $("#notifier").removeClass('alert').addClass('alert alert-danger').html("'<strong>Error </strong>Save failed!'")
+                        // $("#btnsubmit").removeAttr("disabled");
+                        // $("#btnsubmit").html(btnsubmit);
+                        console.log(data + 'Data error');
+                        //return false;
+                    }
+                    
+                },
+                error: function (data) {
+                    alert("error occured: " + data);
+                    // $("#btnsubmit").removeAttr("disabled");
+                    // $("#btnsubmit").html(btnsubmit);
+                    // console.log( "error occured: " + error.message );
+                    // //notify.update({ type: 'danger', message: '<strong>Error </strong>' + error.message });
+                    // $("#notifier").removeClass('alert').addClass('alert alert-danger').html('<strong>Error </strong>' + error.message)
+                    return false
+                }
+            });
+        // }
     });
 });
 

@@ -168,72 +168,8 @@ class Gradebook extends BaseController
 							$session,
 							$term,];
 
-						//$recsaved = $pQuery->execute($id, $studentids, $assessmentgrades, $studentclass, $studentsubject, $assessmenttype, $ssession, $term);
 						$recsaved = $pQuery->_execute($sqldata1);
 						
-						// $sql1 = 'INSERT INTO menu_sub (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, session, term )
-						// VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-						// ON DUPLICATE KEY UPDATE 
-						// 	studentid=VALUES(studentid), 
-						// 	assessmentgrade=VALUES(assessmentgrade), 
-						// 	studentclass=VALUES(studentclass), 
-						// 	studentsubject=VALUES(studentsubject), 
-						// 	assessmenttype=VALUES(assessmenttype), 
-						// 	session=VALUES(session), 
-						// 	term=VALUES(term)';
-
-						// $pQuery = $gradebookmodel->prepare(function ($gradebookmodel) {
-						// 	$sql = 'INSERT INTO menu_sub (id, studentid, assessmentgrade, studentclass, studentsubject, assessmenttype, session, term )
-						// 	VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-						// 	ON DUPLICATE KEY UPDATE 
-						// 		studentid=VALUES(studentid), 
-						// 		assessmentgrade=VALUES(assessmentgrade), 
-						// 		studentclass=VALUES(studentclass), 
-						// 		studentsubject=VALUES(studentsubject), 
-						// 		assessmenttype=VALUES(assessmenttype), 
-						// 		session=VALUES(session), 
-						// 		term=VALUES(term)';
-
-						// 	return (new Query($gradebookmodel))->setQuery($sql);
-						// });
-
-
-						// ///////////////////////////
-
-						// $query = $gradebookmodel->query($sql, [
-						// 	'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
-						// 	'studentid' => $studentno[$i],
-						// 	'assessmentgrade' => $studentgrade[$i],
-						// 	'studentclass' => $classgroup, //sybjectgroup
-						// 	'studentsubject' => $subjectgroup, //sybjectgroup
-						// 	'assessmenttype'  => $assessmenttype,
-						// 	'session'  => $session,
-						// 	'term'  => $term,
-						// ]);
-
-						//$recsaved = $gradebookmodel->getResult($query );
-
-
-
-						// $recsaved = $gradebookmodel->save([
-						// 	//'username' => $this->request->getPost('username'),
-						// 	//'csrf_test_name' => $this->request->getPost('csrf_test_name'),
-						// 	//'studentid' => $studentid,
-						// 	'id'  => $studentno[$i].$subjectgroup.$classgroup.$term.$session.$assessmenttype,
-						// 	'studentid' => $studentno[$i],
-						// 	'assessmentgrade' => $studentgrade[$i],
-						// 	'studentclass' => $classgroup, //sybjectgroup
-						// 	'studentsubject' => $subjectgroup, //sybjectgroup
-						// 	'assessmenttype'  => $assessmenttype,
-						// 	'session'  => $session,
-						// 	'term'  => $term,							
-						// ]);
-
-						//$savedmessages[] = $recsaved;
-						//$failedmessages[] =  $pQuery->getQueryString();
-
-						
-
 						if($recsaved > 0){
 							//echo 1;
 							$savedid[] = $studentid[$i];
@@ -263,15 +199,7 @@ class Gradebook extends BaseController
 				}else{
 					//$message = 'Failed to save '.json_encode($failedmessages);		
 					echo json_encode(array_merge(array("success"=>0, "message"=>'Failed to save'),  $savedmessages, $failedmessages));
-				}
-
-				// studentid[], studentgrade[], classgroup, subjectgroup, refhasname, refhashcode, refreshedhash, gSession, gTerm, assessment1, hashurl, gradebooktableurl, editurl, posturl, gradebookid, csrf_test_name
-				
-				//'gradebookid', 'studentclass', 'studentsubject', 'studentid', 'assessmenttype', 'assessmentgrade', 'session', 'term', 'created_at', 'updated_at'
-
-				//STUDENTNO-SUBJECT-CLASS-TERM-SESSION-ASSESSMENTTYPE
-
-				
+				}				
 				
 			}else{
 				//$data['errors'] = $this->validation->getErrors();
@@ -286,8 +214,8 @@ class Gradebook extends BaseController
 	public function gradebooktable()
 	{
 		$session = session();
-		//$gradebookmodel = new GradebookSetup();
-		$gradebookmodel = new GradebookView();
+		$gradebookmodel = new GradebookSetup(); //for result upload
+		//$gradebookmodel = new GradebookView(); //for manual result entry
 		//$session = $this->request->getGet('session');
 		//$term  = $this->request->getGet('term');
 
@@ -313,7 +241,8 @@ class Gradebook extends BaseController
 
 			//$model->where('msgtype !=','V');
 			//$gradebookmodel->orderBy('created_at', 'ASC');	
-			$gradebookmodel->where(['class'=>trim($class), 'subjectcode'=>trim($subject)]);	
+			//$gradebookmodel->where(['class'=>trim($class), 'subjects'=>trim($subject)]);	
+			$gradebookmodel->where(['class'=>trim($class), 'subjects'=>trim($subject)]);	
 			// $gradebookmodel->where(['class'=>trim($class)]);	
 			$query = $gradebookmodel->get();
 			$result = $query->getResult();
